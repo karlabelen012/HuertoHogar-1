@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>HuertoHogar - Carrito</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+  <!-- Estilos -->
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <style>
+    body { font-family:'Montserrat', sans-serif; margin:0; background:#F7F7F7; }
+    header { background:#eee; padding:10px 20px; display:flex; justify-content:space-between; align-items:center; }
+    header nav a { margin:0 10px; text-decoration:none; color:#333; font-weight:600; }
+    header .cart { font-weight:600; }
+    main { max-width:1200px; margin:20px auto; padding:0 20px; display:flex; gap:20px; }
+    h2 { margin-bottom:20px; }
+    
+    /* Columnas */
+    .carrito { flex:2; }
+    .resumen { flex:1; background:#fff; padding:20px; border:1px solid #ccc; border-radius:8px; height:fit-content; }
+
+    /* Producto */
+    .producto { display:flex; align-items:center; background:#fff; border:1px solid #ddd; margin-bottom:15px; padding:10px; border-radius:6px; }
+    .producto img { width:80px; height:80px; background:#ddd; margin-right:15px; border-radius:6px; }
+    .producto-info { flex:1; }
+    .producto-nombre { font-weight:600; margin:0; }
+    .producto-desc { font-size:14px; color:#666; margin:5px 0; }
+    .producto-precio { font-weight:700; margin:0 15px; }
+    
+    /* Cantidad */
+    .cantidad { display:flex; align-items:center; }
+    .cantidad button { width:28px; height:28px; border:1px solid #ccc; background:#fff; cursor:pointer; }
+    .cantidad input { width:40px; text-align:center; border:1px solid #ccc; height:28px; margin:0 5px; }
+
+    /* Resumen */
+    .resumen h3 { margin:0 0 15px; }
+    .resumen p { font-size:18px; font-weight:700; }
+    .resumen input { width:100%; padding:8px; margin:10px 0; border:1px solid #ccc; border-radius:4px; }
+    .resumen button { width:100%; padding:12px; font-size:16px; font-weight:700; border:none; border-radius:4px; cursor:pointer; }
+    .btn-aplicar { background:#ccc; color:#333; margin-top:5px; }
+    .btn-pagar { background:#2E8B57; color:#fff; margin-top:10px; }
+  </style>
+</head>
+<body>
+
+  <!-- ==================== HEADER ==================== -->
+  <header class="header">
+    <div class="container navbar">
+      <!-- Logo + Marca -->
+      <a href="index.html" class="brand" aria-label="HuertoHogar - Inicio">
+        <img src="../assets/image/logo.png" alt="Logo HuertoHogar">
+        <h1>HuertoHogar</h1>
+      </a>
+      
+      <!-- 🔹 Bloque Iniciar sesión / Registrarse -->
+      <div style="margin-right:auto;margin-left:20px;">
+        <a href="login.html" style="color:#2E8B57;font-weight:600;margin-right:10px;text-decoration:none;">Iniciar sesión</a> |
+        <a href="registro.html" style="color:#2E8B57;font-weight:600;margin-left:10px;text-decoration:none;">Registrarse</a>
+      </div>
+
+      <!-- Menú de navegación -->
+      <nav class="nav-links" role="navigation" aria-label="Menú principal">
+        <a href="index.html">Inicio</a>
+        <a href="nosotros.html">Nosotros</a>
+        <a href="contactos.html">Contacto</a>
+        <a href="perfilCliente.html">Mi perfil</a>
+        <a href="carrito.html" class="btn" title="Ver carrito">
+          Carrito 
+          <span id="cartCount" style="background:#fff;color:#2E8B57;border-radius:8px;padding:2px 6px;margin-left:6px">0</span>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ==================== MAIN ==================== -->
+  <main>
+    <!-- Lista productos -->
+    <section class="carrito">
+      <h2>Mi carrito de compras</h2>
+      <!-- Aquí JS generará los productos -->
+    </section>
+
+    <!-- Resumen -->
+    <aside class="resumen">
+      <h3>TOTAL:</h3>
+      <p>$ 0</p>
+      <input type="text" placeholder="Ingrese el cupón de descuento">
+      <button class="btn-aplicar">APLICAR</button>
+      <button class="btn-pagar">PAGAR</button>
+    </aside>
+  </main>
+   <!-- ==================== FOOTER ==================== -->
+      <footer class="footer" role="contentinfo" style="background:#2E8B57;color:#fff;padding:40px 0 20px 0;margin-top:40px;">
+        <div class="container" style="max-width:1200px;margin:auto;">
+          <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-start;gap:32px;border-bottom:1px solid #fff2; padding-bottom:24px;">
+            <!-- Proyecto y redes -->
+            <div style="flex:1;min-width:220px;">
+              <h2 style="margin:0 0 8px 0;font-family:'Playfair Display',serif;">HuertoHogar</h2>
+              <p style="margin:0 0 8px 0;font-weight:600;">&copy; <span id="yearFoot"></span> Proyecto Evaluación 1</p>
+              <p style="margin:0 0 6px 0;font-size:0.95em;">Síguenos en redes sociales:</p>
+              <div style="display:flex;gap:10px;">
+                <a href="https://instagram.com/" target="_blank" title="Instagram">
+                  <img src="../assets/image/instagram.png" alt="Instagram" style="height:24px;">
+                </a>
+                <a href="https://wa.me/" target="_blank" title="WhatsApp">
+                  <img src="../assets/image/social.png" alt="WhatsApp" style="height:24px;">
+                </a>
+                <a href="https://facebook.com/" target="_blank" title="Facebook">
+                  <img src="../assets/image/facebook.png" alt="Facebook" style="height:24px;">
+                </a>
+              </div>
+            </div>
+            <!-- Suscripción -->
+            <div style="flex:1;min-width:220px;">
+              <form id="subscribeForm" style="display:flex;align-items:center;gap:8px;">
+                <label for="emailSub" class="sr-only">Ingresa tu correo</label>
+                <input type="email" id="emailSub" name="emailSub" placeholder="Ingresa tu correo" required 
+                      style="padding:8px 10px;border:none;border-radius:6px;outline:none;min-width:180px;font-family:'Montserrat',sans-serif;">
+                <button type="submit" class="btn" 
+                        style="background:#fff;color:#2E8B57;font-weight:600;border:none;padding:8px 14px;border-radius:6px;cursor:pointer;">
+                  Suscribirse
+                </button>
+              </form>
+            </div>
+            <!-- Métodos de pago -->
+            <div style="flex:1;min-width:180px;">
+              <span style="font-size:0.95em;margin-bottom:6px;display:block;">Pagos seguros:</span>
+              <div style="display:flex;gap:10px;">
+                <img src="../assets/image/visa.png" alt="Visa" style="height:28px;">
+                <img src="../assets/image/master card.png" alt="Mastercard" style="height:28px;">
+                <img src="../assets/image/paypal.png" alt="Webpay" style="height:28px;">
+              </div>
+            </div>
+          </div>
+          <!-- Links y contacto extra -->
+          <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-start;gap:32px;margin-top:32px;">
+            <div style="flex:1;min-width:180px;">
+              <h4 style="margin-bottom:8px;">¿Por qué elegirnos?</h4>
+              <ul style="margin:0;padding-left:18px;color:#fff9;">
+                <li>Productos locales y frescos.</li>
+                <li>Prácticas agrícolas sostenibles.</li>
+                <li>Entregas seguras a tu puerta.</li>
+              </ul>
+            </div>
+            <div style="flex:1;min-width:180px;">
+              <h4 style="margin-bottom:8px;">Información</h4>
+              <ul style="margin:0;padding-left:18px;color:#fff9;">
+                <li><a href="nosotros.html" style="color:#fff;text-decoration:underline;">Nosotros</a></li>
+                <li><a href="contactos.html" style="color:#fff;text-decoration:underline;">Contacto</a></li>
+                <li><a href="#" style="color:#fff;text-decoration:underline;">Política de privacidad</a></li>
+                <li><a href="#" style="color:#fff;text-decoration:underline;">Términos y condiciones</a></li>
+              </ul>
+            </div>
+            <div style="flex:1;min-width:180px;">
+              <h4 style="margin-bottom:8px;">Contacto</h4>
+              <p style="margin:0;">Email: contacto@huertohogar.cl</p>
+              <p style="margin:0;">Teléfono: +56 9 1234 5678</p>
+              <p style="margin:0;">Dirección: Santiago, Chile</p>
+            </div>
+          </div>
+        </div>
+      </footer>
+  
+
+  <!-- ==================== SCRIPT ==================== -->
+  <script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const carritoContainer = document.querySelector(".carrito");
+    const totalBox = document.querySelector(".resumen p");
+    let carrito = JSON.parse(localStorage.getItem("huerto_carrito")) || [];
+
+    function renderCarrito() {
+      carritoContainer.innerHTML = "<h2>Mi carrito de compras</h2>";
+      let total = 0;
+
+      carrito.forEach((item, index) => {
+        const subtotal = item.precio * item.cantidad;
+        total += subtotal;
+
+        const div = document.createElement("div");
+        div.classList.add("producto");
+        div.innerHTML = `
+          <img src="../assets/image/${item.img}" alt="${item.nombre}">
+          <div class="producto-info">
+            <p class="producto-nombre">${item.nombre}</p>
+            <p class="producto-desc">Subtotal: $${subtotal.toLocaleString("es-CL")}</p>
+          </div>
+          <p class="producto-precio">$${item.precio.toLocaleString("es-CL")}</p>
+          <div class="cantidad">
+            <button class="decrementar" data-index="${index}">-</button>
+            <input type="number" value="${item.cantidad}" min="1" data-index="${index}">
+            <button class="incrementar" data-index="${index}">+</button>
+          </div>
+        `;
+        carritoContainer.appendChild(div);
+      });
+
+      totalBox.textContent = "$ " + total.toLocaleString("es-CL");
+      localStorage.setItem("huerto_carrito", JSON.stringify(carrito));
+    }
+
+    // Eventos para cantidad
+    carritoContainer.addEventListener("click", e => {
+      if (e.target.classList.contains("incrementar")) {
+        const index = e.target.dataset.index;
+        carrito[index].cantidad++;
+        renderCarrito();
+      }
+      if (e.target.classList.contains("decrementar")) {
+        const index = e.target.dataset.index;
+        if (carrito[index].cantidad > 1) carrito[index].cantidad--;
+        renderCarrito();
+      }
+    });
+
+    carritoContainer.addEventListener("input", e => {
+      if (e.target.type === "number") {
+        const index = e.target.dataset.index;
+        carrito[index].cantidad = parseInt(e.target.value) || 1;
+        renderCarrito();
+      }
+    });
+
+    renderCarrito();
+  });
+  </script>
+
+</body>
+</html>
+

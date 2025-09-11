@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>HuertoHogar - Administrador</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {display:flex;min-height:100vh;margin:0;font-family:'Montserrat',sans-serif;}
+    aside {width:220px;background:#2E8B57;color:#fff;padding:20px;}
+    aside h2 {margin-top:0;font-size:18px;}
+    aside nav a {
+      display:block;color:#fff;text-decoration:none;margin:8px 0;padding:6px;border-radius:4px;
+    }
+    aside nav a:hover, aside nav a.active {background:#256d46;}
+    main {flex:1;padding:20px;background:#f7f7f7;}
+    header {border-bottom:1px solid #ccc;padding-bottom:10px;margin-bottom:20px;}
+    .card {background:#fff;padding:16px;margin:12px 0;border-radius:8px;box-shadow:0 2px 6px #0001;}
+    table {width:100%;border-collapse:collapse;}
+    th, td {padding:8px;border:1px solid #ddd;text-align:left;}
+    section {display:none;} /* todas ocultas por defecto */
+    section.active {display:block;} /* solo la activa se muestra */
+  </style>
+</head>
+<body>
+
+  <!-- Menú lateral -->
+  <aside>
+    <h2>Admin HuertoHogar</h2>
+    <nav>
+      <a href="#" data-section="inicio" class="active">🏠 Inicio</a>
+      <a href="#" data-section="productos">🍎 Productos</a>
+      <a href="#" data-section="usuarios">👤 Usuarios</a>
+      <a href="#" data-section="pedidos">📦 Pedidos</a>
+      <a href="index.html">↩ Volver a tienda</a>
+    </nav>
+  </aside>
+
+  <!-- Contenido principal -->
+  <main>
+    <header>
+      <h1>Panel de Administración</h1>
+      <p>Gestiona tu tienda desde este panel.</p>
+    </header>
+
+    <!-- Inicio -->
+    <section id="inicio" class="active">
+      <div class="card">
+        <h3>📊 Resumen rápido</h3>
+        <ul>
+          <li>Total de productos: <strong>7</strong></li>
+          <li>Total de usuarios registrados: <strong>12</strong></li>
+          <li>Pedidos en curso: <strong>5</strong></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Productos -->
+    <section id="productos">
+      <h2>Gestión de Productos</h2>
+      <div class="card">
+        <h3>Listado de productos</h3>
+        <table>
+          <thead>
+            <tr><th>Código</th><th>Nombre</th><th>Precio</th><th>Stock</th><th>Acciones</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>FR001</td><td>Manzana Fuji</td><td>$1200</td><td>150</td>
+              <td><button>Editar</button> <button>Eliminar</button></td>
+            </tr>
+            <tr>
+              <td>FR002</td><td>Naranja Valencia</td><td>$1000</td><td>200</td>
+              <td><button>Editar</button> <button>Eliminar</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="card">
+        <h3>➕ Nuevo producto</h3>
+        <form id="formProducto">
+          <label>Código: <input type="text" required minlength="3"></label><br><br>
+          <label>Nombre: <input type="text" required maxlength="100"></label><br><br>
+          <label>Precio: <input type="number" min="0" step="0.01" required></label><br><br>
+          <label>Stock: <input type="number" min="0" required></label><br><br>
+          <label>Categoría: 
+            <select required>
+              <option value="">--Seleccionar--</option>
+              <option>Frutas</option>
+              <option>Verduras</option>
+              <option>Orgánicos</option>
+            </select>
+          </label><br><br>
+          <label>Descripción: <textarea maxlength="500"></textarea></label><br><br>
+          <button type="submit">Guardar</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Usuarios -->
+    <section id="usuarios">
+      <h2>Gestión de Usuarios</h2>
+      <div class="card">
+        <h3>Listado de usuarios</h3>
+        <table>
+          <thead>
+            <tr><th>RUN</th><th>Nombre</th><th>Correo</th><th>Rol</th><th>Acciones</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>19011022K</td><td>Juan Pérez</td><td>juan@gmail.com</td><td>Cliente</td>
+              <td><button>Editar</button> <button>Eliminar</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="card">
+        <h3>➕ Nuevo usuario</h3>
+        <form id="formUsuario">
+          <label>RUN: <input type="text" required minlength="7" maxlength="9" placeholder="19011022K"></label><br><br>
+          <label>Nombre: <input type="text" required maxlength="50"></label><br><br>
+          <label>Apellidos: <input type="text" required maxlength="100"></label><br><br>
+          <label>Correo: <input type="email" required maxlength="100" placeholder="ejemplo@duoc.cl"></label><br><br>
+          <label>Rol: 
+            <select required>
+              <option>Administrador</option>
+              <option>Cliente</option>
+              <option>Vendedor</option>
+            </select>
+          </label><br><br>
+          <label>Dirección: <input type="text" required maxlength="300"></label><br><br>
+          <button type="submit">Guardar</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Pedidos -->
+    <section id="pedidos">
+      <h2>Gestión de Pedidos</h2>
+      <div class="card">
+        <h3>Listado de pedidos</h3>
+        <table>
+          <thead>
+            <tr><th>ID Pedido</th><th>Cliente</th><th>Estado</th><th>Total</th><th>Acciones</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>001</td><td>Juan Pérez</td><td>En preparación</td><td>$5.700</td>
+              <td><button>Ver detalle</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    // navegación entre secciones
+    const links = document.querySelectorAll("aside nav a[data-section]");
+    const sections = document.querySelectorAll("main section");
+
+    links.forEach(link => {
+      link.addEventListener("click", e => {
+        e.preventDefault();
+        const target = link.getAttribute("data-section");
+
+        // quitar activo a todo
+        links.forEach(l => l.classList.remove("active"));
+        sections.forEach(s => s.classList.remove("active"));
+
+        // activar sección clickeada
+        link.classList.add("active");
+        document.getElementById(target).classList.add("active");
+      });
+    });
+  </script>
+</body>
+</html>
