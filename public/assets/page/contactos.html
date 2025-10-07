@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>HuertoHogar - Contacto</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+  <!-- Estilos -->
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+
+  <!-- ==================== TOP BAR ==================== -->
+  <div style="background:#2E8B57;color:#fff;padding:6px 20px;text-align:right;font-size:14px;">
+    <a href="login.html" style="color:#fff;font-weight:600;margin-right:10px;text-decoration:none;">Iniciar sesión</a> |
+    <a href="registro.html" style="color:#fff;font-weight:600;margin-left:10px;text-decoration:none;">Registrarse</a>
+  </div>
+
+  <!-- ==================== HEADER ==================== -->
+  <header class="header">
+    <div class="container navbar">
+      <!-- Logo + Marca -->
+      <a href="index.html" class="brand" aria-label="HuertoHogar - Inicio">
+        <img src="../assets/image/logo.png" alt="Logo HuertoHogar">
+        <h1>HuertoHogar</h1>
+      </a>
+      <!-- Menú -->
+      <nav class="nav-links">
+        <a href="index.html">Inicio</a>
+        <a href="nosotros.html">Nosotros</a>
+        <a href="contactos.html" class="active">Contacto</a>
+        <a href="blogs.html">Blogs</a>
+        <a href="perfilCliente.html">Mi perfil</a>
+        <a href="carrito.html" class="btn">Carrito <span id="cartCount">0</span></a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ==================== MAIN ==================== -->
+  <main class="container" style="max-width:600px;margin-top:30px;">
+    <h2 style="color:#8B4513;font-family:'Playfair Display',serif;margin-bottom:16px;">Contacto</h2>
+
+    <form id="contactForm" class="form" novalidate style="display:flex;flex-direction:column;gap:16px;">
+      <div class="field">
+        <label for="nombre">Nombre</label>
+        <input id="nombre" name="nombre" type="text" maxlength="100" required placeholder="Tu nombre completo">
+      </div>
+
+      <div class="field">
+        <label for="email">Correo</label>
+        <input id="email" name="email" type="email" maxlength="100" required placeholder="tucorreo@dominio.com">
+        <small>Solo se permiten: @duoc.cl, @profesor.duoc.cl, @gmail.com</small>
+      </div>
+
+      <div class="field">
+        <label for="comentario">Comentario</label>
+        <textarea id="comentario" name="comentario" maxlength="500" required placeholder="Escribe tu mensaje..."></textarea>
+      </div>
+
+      <div style="display:flex;gap:10px;">
+        <button type="submit" class="btn">Enviar</button>
+        <button type="reset" class="btn secondary">Limpiar</button>
+        <!-- Botón volver al inicio -->
+        <a href="index.html" class="btn secondary">Volver al inicio</a>
+      </div>
+    </form>
+  </main>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="footer" role="contentinfo" style="background:#2E8B57;color:#fff;padding:40px 0 20px 0;margin-top:40px;">
+    <div class="container" style="max-width:1200px;margin:auto;">
+      <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-start;gap:32px;border-bottom:1px solid #fff2; padding-bottom:24px;">
+        <!-- Proyecto y redes -->
+        <div style="flex:1;min-width:220px;">
+          <h2 style="margin:0 0 8px 0;font-family:'Playfair Display',serif;">HuertoHogar</h2>
+          <p style="margin:0 0 8px 0;font-weight:600;">&copy; <span id="yearFoot"></span> Proyecto Evaluación 1</p>
+          <p style="margin:0 0 6px 0;font-size:0.95em;">Síguenos en redes sociales:</p>
+          <div style="display:flex;gap:10px;">
+            <a href="https://instagram.com/" target="_blank" title="Instagram">
+              <img src="../assets/image/instagram.png" alt="Instagram" style="height:24px;">
+            </a>
+            <a href="https://wa.me/" target="_blank" title="WhatsApp">
+              <img src="../assets/image/social.png" alt="WhatsApp" style="height:24px;">
+            </a>
+            <a href="https://facebook.com/" target="_blank" title="Facebook">
+              <img src="../assets/image/facebook.png" alt="Facebook" style="height:24px;">
+            </a>
+          </div>
+        </div>
+        <!-- Suscripción -->
+        <div style="flex:1;min-width:220px;">
+          <form id="subscribeForm" style="display:flex;align-items:center;gap:8px;">
+            <label for="emailSub" class="sr-only">Ingresa tu correo</label>
+            <input type="email" id="emailSub" name="emailSub" placeholder="Ingresa tu correo" required 
+                  style="padding:8px 10px;border:none;border-radius:6px;outline:none;min-width:180px;font-family:'Montserrat',sans-serif;">
+            <button type="submit" class="btn" 
+                    style="background:#fff;color:#2E8B57;font-weight:600;border:none;padding:8px 14px;border-radius:6px;cursor:pointer;">
+              Suscribirse
+            </button>
+          </form>
+        </div>
+        <!-- Métodos de pago -->
+        <div style="flex:1;min-width:180px;">
+          <span style="font-size:0.95em;margin-bottom:6px;display:block;">Pagos seguros:</span>
+          <div style="display:flex;gap:10px;">
+            <img src="../assets/image/visa.png" alt="Visa" style="height:28px;">
+            <img src="../assets/image/master card.png" alt="Mastercard" style="height:28px;">
+            <img src="../assets/image/paypal.png" alt="Webpay" style="height:28px;">
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==================== SCRIPTS ==================== -->
+  <script>
+    document.getElementById('yearFoot').textContent = new Date().getFullYear();
+
+    document.getElementById("contactForm").addEventListener("submit", function(e){
+      e.preventDefault();
+
+      const email = document.getElementById("email").value.trim();
+      const comentario = document.getElementById("comentario").value.trim();
+      const validDomains = ["@duoc.cl", "@profesor.duoc.cl", "@gmail.com"];
+
+      // Validar dominio
+      const isValidDomain = validDomains.some(dom => email.endsWith(dom));
+      if (!isValidDomain) {
+        alert("Correo inválido. Solo se aceptan correos @duoc.cl, @profesor.duoc.cl o @gmail.com");
+        return;
+      }
+
+      if (comentario.length === 0 || comentario.length > 500) {
+        alert("El comentario es obligatorio y debe tener menos de 500 caracteres.");
+        return;
+      }
+
+      alert("Mensaje enviado con éxito ✅");
+      e.target.reset();
+    });
+  </script>
+  <script src="../assets/js/script.js"></script>
+</body>
+</html>
