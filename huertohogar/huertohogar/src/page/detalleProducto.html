@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <title>Huerto Hogar —  Detalle Producto </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+   <!-- Fuentes locales -->
+  <link rel="stylesheet" href="../assets/font/font.css">
+
+  <!-- Tipografías del contexto -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap (Eval. 2: diseño responsivo) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Estilos propios (puedes ajustar colores, pero mantén la paleta del contexto) -->
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/productos.css">
+
+  <!-- JS (todo externo, nada embebido) -->
+  <script type="module" src="../assets/js/script.js" defer></script>
+  <script type="module" src="../assets/js/data.js" defer></script>
+  <script type="module" src="../assets/js/ui.js" defer></script>
+  <script type="module" src="../assets/js/cart.js" defer></script>
+  <script type="module" src="../assets/js/productos.js" defer></script>
+</head>
+
+<body>
+
+   <!-- ======= TOPBAR: logo + buscador + botones + carrito ======= -->
+  <header class="border-bottom">
+    <div class="bg-white">
+      <div class="container py-2">
+        <div class="row align-items-center g-2">
+          
+          <!-- Logo a la izquierda -->
+            <div class="col-6 col-md-2 d-flex align-items-center">
+              <a href="./index.html" class="d-inline-flex align-items-center text-decoration-none">
+                <img src="../assets/image/logo.png" alt="Huerto Hogar" class="me-2" style="width:auto;height:55px;object-fit:contain;">
+              </a>
+            </div>
+
+          <!-- Buscador centrado -->
+          <div class="col-12 col-md-6 d-flex justify-content-md-center">
+            <form class="d-flex w-100" style="max-width: 420px;" action="./productos.html">
+              <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Buscar" name="q">
+              <button class="btn btn-outline-success" type="submit">Buscar</button>
+            </form>
+          </div>
+
+          <!-- Botones a la derecha -->
+          <div class="col-6 col-md-4 d-flex justify-content-end align-items-center gap-2">
+            <a class="btn btn-outline-primary btn-sm" href="./login.html">Iniciar Sesión</a>
+            <a class="btn btn-primary btn-sm" href="./registro.html">Crear Cuenta</a>
+            <!-- Carrito en pastilla verde con monto -->
+            <a class="btn btn-success btn-sm d-flex align-items-center" href="./carrito.html">
+              <span class="me-1">🛒</span>
+              Carrito <span class="ms-1" id="cartAmount">$0</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ======= NAVBAR: Home activo + categorías ▼ + resto ======= -->
+    <nav class="navbar navbar-expand-lg bg-white">
+      <div class="container">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div id="mainNav" class="collapse navbar-collapse">
+          <ul class="navbar-nav mx-auto">
+            <li class="nav-item"><a class="nav-link active fw-semibold" aria-current="page" href="./index.html">Home</a></li>
+
+            <!-- Categorías (dropdown) -->
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="./categorias.html" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Categorías
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="./categorias.html?c=Frutas Frescas">Frutas Frescas</a></li>
+                <li><a class="dropdown-item" href="./categorias.html?c=Verduras Orgánicas">Verduras Orgánicas</a></li>
+                <li><a class="dropdown-item" href="./categorias.html?c=Productos Orgánicos">Productos Orgánicos</a></li>
+                <li><a class="dropdown-item" href="./categorias.html?c=Lácteos">Lácteos</a></li>
+              </ul>
+            </li>
+
+            <li class="nav-item"><a class="nav-link" href="./ofertas.html">Ofertas</a></li>
+            <li class="nav-item"><a class="nav-link" href="./nosotros.html">Nosotros</a></li>
+            <li class="nav-item"><a class="nav-link" href="./blogs.html">Blog</a></li>
+            <li class="nav-item"><a class="nav-link" href="./contactos.html">Contacto</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <main class="container py-5" style="background:url('../assets/image/textura-papel-blanco_1194-5416.jpg'); background-size:cover; background-attachment:fixed; border-radius:12px;">
+
+    <!-- Hero principal -->
+    <!-- MIGAS DE PAN -->
+    <nav aria-label="breadcrumb" class="mb-4">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="index.html">Inicio</a></li>
+        <li class="breadcrumb-item"><a href="productos.html">Productos</a></li>
+        <li class="breadcrumb-item active" aria-current="page" id="nombreBreadcrumb">Detalle</li>
+      </ol>
+    </nav>
+
+    <div class="row align-items-start g-5">
+      <!-- IMAGEN -->
+      <div class="col-lg-6 text-center">
+        <img id="imgPrincipal" src="" alt="Producto" class="img-principal mb-3">
+        <div class="miniaturas">
+          <img id="mini1" src="" alt="Miniatura 1">
+          <div style="width:80px;height:80px;border:1px solid #ddd;border-radius:8px;"></div>
+          <div style="width:80px;height:80px;border:1px solid #ddd;border-radius:8px;"></div>
+        </div>
+      </div>
+
+      <!-- INFO -->
+      <div class="col-lg-6">
+        <h2 id="nombreProducto"></h2>
+        <p id="precioProducto"></p>
+        <p id="descripcionProducto"></p>
+
+        <ul class="list-unstyled mb-4">
+          <li><strong>Origen:</strong> <span id="origenProducto"></span></li>
+          <li><strong>Prácticas sostenibles:</strong> <span id="sostenibleProducto"></span></li>
+          <li><strong>Receta sugerida:</strong> <span id="recetaProducto"></span></li>
+          <li><strong>Stock disponible:</strong> <span id="stockProducto"></span></li>
+        </ul>
+
+        <div class="d-flex align-items-center gap-3 mb-4">
+          <label for="cantidad" class="fw-semibold">Cantidad:</label>
+          <input type="number" id="cantidad" class="form-control w-auto" min="1" value="1" style="width:80px;">
+        </div>
+
+        <button id="btnAgregar" class="btn btn-success w-100 py-2">Añadir al carrito</button>
+      </div>
+    </div>
+
+    <!-- PRODUCTOS RELACIONADOS -->
+    <section class="mt-5">
+      <h4 class="mb-4" style="font-family:'Playfair Display',serif;color:#2E8B57;">Productos relacionados</h4>
+      <div id="relacionados"></div>
+    </section>
+  </main>
+
+  
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-left">
+          <h2>HuertoHogar</h2>
+          <div class="foot-links">
+            <a href="index.html">Inicio</a> |
+            <a href="productos.html">Productos</a> |
+            <a href="nosotros.html">Nosotros</a> |
+            <a href="contactos.html">Contacto</a>
+          </div>
+        </div>
+
+        <div class="footer-right">
+          <p>¡Mantente en contacto! Únete a nuestro boletín.</p>
+          <form id="subscribeForm" class="subscribe-form">
+            <input type="email" id="emailSub" name="emailSub" placeholder="Ingresa tu correo" required>
+            <button type="submit">Suscribirse</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div class="footer-column contacto">
+          <h3>Contacto</h3>
+          <p>Email: <a href="mailto:contacto@huertohogar.cl">contacto@huertohogar.cl</a></p>
+          <p>Teléfono: <a href="tel:+56912345678">+56 9 1234 5678</a></p>
+        </div>
+
+<div class="footer-column redes">
+  <h3>Síguenos en redes sociales:</h3>
+  <div class="social-icons">
+    <!-- Instagram -->
+    <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">
+      <img src="../assets/image/instagram.png" alt="Instagram">
+    </a>
+
+    <!-- WhatsApp (abrirá chat directo con número ejemplo) -->
+    <a href="https://wa.me/56912345678" target="_blank" rel="noopener noreferrer">
+      <img src="../assets/image/whatsapp.png" alt="WhatsApp">
+    </a>
+
+    <!-- Facebook -->
+    <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">
+      <img src="../assets/image/facebook.png" alt="Facebook">
+    </a>
+  </div>
+</div>
+
+
+        <div class="footer-column pagos">
+          <h3>Pagos seguros:</h3>
+          <div class="pay-icons">
+            <img src="../assets/image/visa.png" alt="Visa">
+            <img src="../assets/image/master card.png" alt="MasterCard">
+            <img src="../assets/image/paypal.png" alt="PayPal">
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-logo">
+        <img src="../assets/image/logo.png" alt="Logo HuertoHogar">
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- SCRIPT DETALLE -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const params = new URLSearchParams(window.location.search);
+      const id = params.get("id");
+      if (!id) return;
+
+      const productos = [
+        { id: "FR001", nombre: "Manzanas Fuji", precio: 1200, stock: "150 kg", img: "../assets/image/manzanafuji.png", desc: "Manzanas Fuji crujientes y dulces, cultivadas en el Valle del Maule. Perfectas para meriendas saludables o como ingrediente en postres.", origen: "Valle del Maule, Chile", sostenible: "Agricultura local sin pesticidas", receta: "Tarta de manzana casera", cat: "Frutas Frescas", rel: "FR002" },
+        { id: "FR002", nombre: "Naranjas Valencia", precio: 1000, stock: "200 kg", img: "../assets/image/naranja.png", desc: "Jugosas y ricas en vitamina C, ideales para zumos frescos y refrescantes.", origen: "Región de Coquimbo, Chile", sostenible: "Cultivo responsable y riego eficiente", receta: "Jugo natural de naranja", cat: "Frutas Frescas", rel: "FR001" },
+        { id: "FR003", nombre: "Plátanos Cavendish", precio: 800, stock: "250 kg", img: "../assets/image/platano.png", desc: "Plátanos maduros y dulces, perfectos para el desayuno o como snack energético.", origen: "Ecuador", sostenible: "Comercio justo y cultivo sostenible", receta: "Pan de plátano saludable", cat: "Frutas Frescas", rel: "FR001" },
+        { id: "VR001", nombre: "Zanahorias Orgánicas", precio: 900, stock: "100 kg", img: "../assets/image/zanahoria.png", desc: "Zanahorias crujientes cultivadas sin pesticidas, fuente de vitamina A y fibra.", origen: "Región de O’Higgins, Chile", sostenible: "Certificación orgánica nacional", receta: "Crema de zanahoria natural", cat: "Verduras Orgánicas", rel: "VR002" },
+        { id: "VR002", nombre: "Espinacas Frescas", precio: 700, stock: "80 bolsas", img: "../assets/image/espinaca.png", desc: "Espinacas frescas y nutritivas, perfectas para ensaladas y batidos verdes.", origen: "Región del Maule, Chile", sostenible: "Cultivo libre de pesticidas", receta: "Tortilla verde con espinacas", cat: "Verduras Orgánicas", rel: "VR003" },
+        { id: "VR003", nombre: "Pimientos Tricolores", precio: 1500, stock: "120 kg", img: "../assets/image/pimientos.png", desc: "Pimientos rojos, amarillos y verdes, ideales para platos coloridos y saludables.", origen: "Región del Biobío, Chile", sostenible: "Agricultura limpia y sin transgénicos", receta: "Salteado de pimientos al wok", cat: "Verduras Orgánicas", rel: "VR001" },
+        { id: "PO001", nombre: "Miel Orgánica", precio: 5000, stock: "50 frascos", img: "../assets/image/miel.png", desc: "Miel pura y orgánica producida por apicultores locales, rica en antioxidantes.", origen: "Región del Maule, Chile", sostenible: "Apicultura natural y sin químicos", receta: "Té con miel y jengibre", cat: "Productos Orgánicos", rel: "PO003" },
+        { id: "PO003", nombre: "Quinua Orgánica", precio: 4200, stock: "100 bolsas", img: "../assets/image/frutas.png", desc: "Grano andino rico en proteínas, ideal para una alimentación saludable.", origen: "Altiplano chileno", sostenible: "Producción artesanal comunitaria", receta: "Ensalada de quinua", cat: "Productos Orgánicos", rel: "PO001" },
+        { id: "PL001", nombre: "Leche Entera", precio: 1100, stock: "60 litros", img: "../assets/image/leche.png", desc: "Leche entera fresca de granjas locales, rica en calcio y sabor natural.", origen: "Granjas locales, Región Metropolitana", sostenible: "Producción responsable y pasteurización limpia", receta: "Batido de plátano con leche", cat: "Productos Lácteos", rel: "PO001" }
+      ];
+
+      const producto = productos.find(p => p.id === id);
+      if (!producto) return;
+
+      document.getElementById("imgPrincipal").src = producto.img;
+      document.getElementById("mini1").src = producto.img;
+      document.getElementById("nombreProducto").textContent = producto.nombre;
+      document.getElementById("precioProducto").textContent = `$${producto.precio.toLocaleString("es-CL")} CLP`;
+      document.getElementById("descripcionProducto").textContent = producto.desc;
+      document.getElementById("stockProducto").textContent = producto.stock;
+      document.getElementById("origenProducto").textContent = producto.origen;
+      document.getElementById("sostenibleProducto").textContent = producto.sostenible;
+      document.getElementById("recetaProducto").textContent = producto.receta;
+
+      // Producto relacionado
+      const rel = productos.find(p => p.id === producto.rel);
+      if (rel) {
+        document.getElementById("relacionados").innerHTML = `
+          <a href="detalleProducto.html?id=${rel.id}" class="text-decoration-none text-dark">
+            <div class="card">
+              <img src="${rel.img}" class="card-img-top" alt="${rel.nombre}" style="height:180px;object-fit:contain;">
+              <div class="card-body text-center">
+                <h6 class="card-title">${rel.nombre}</h6>
+                <p class="text-success fw-semibold">$${rel.precio.toLocaleString("es-CL")}</p>
+              </div>
+            </div>
+          </a>
+        `;
+      }
+
+      // Botón añadir
+      document.getElementById("btnAgregar").addEventListener("click", () => {
+        alert(`✅ ${producto.nombre} añadido al carrito.`);
+      });
+    });
+  </script>
+
+  <script type="module" src="../assets/js/detalleProducto.js"></script>
+
+</body>
+</html>

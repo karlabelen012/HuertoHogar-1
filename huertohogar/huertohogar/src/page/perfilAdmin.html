@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>HuertoHogar – Admin</title>
+
+  <!-- Fuentes locales -->
+  <link rel="stylesheet" href="../assets/fonts/font.css">
+
+  <!-- Bootstrap + Icons + Chart.js -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+
+  <!-- Estilos del proyecto -->
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+
+<body class="hh-admin">
+  <!-- ===== Sidebar ===== -->
+  <aside class="hh-sidebar">
+    <div class="hh-brand">
+      <img src="../assets/image/logo.png" alt="HuertoHogar" class="hh-logo">
+      <div class="hh-brandtext">
+        <strong>HuertoHogar</strong><span>Admin</span>
+      </div>
+    </div>
+
+    <nav class="hh-nav">
+      <button class="hh-link active" data-section="dashboard"><i class="bi bi-grid-3x3-gap-fill"></i><span>Dashboard</span></button>
+      <button class="hh-link" data-section="productos"><i class="bi bi-basket3"></i><span>Productos</span></button>
+      <button class="hh-link" data-section="usuarios"><i class="bi bi-people"></i><span>Usuarios</span></button>
+      <button class="hh-link" data-section="pedidos"><i class="bi bi-box-seam"></i><span>Pedidos</span></button>
+      <button class="hh-link" data-section="reportes"><i class="bi bi-clipboard-data"></i><span>Reportes</span></button>
+      <button class="hh-link" data-section="empleados"><i class="bi bi-person-gear"></i><span>Empleados</span></button>
+      <button class="hh-link" data-section="clientes"><i class="bi bi-person-check"></i><span>Clientes</span></button>
+    </nav>
+
+    <div class="hh-nav hh-nav-bottom">
+      <button class="hh-link" data-section="settings"><i class="bi bi-gear"></i><span>Settings</span></button>
+      <button class="hh-link" data-section="profile"><i class="bi bi-person-circle"></i><span>Profile</span></button>
+      <button class="hh-link" data-section="search"><i class="bi bi-search"></i><span>Search</span></button>
+      <button class="hh-link" data-section="help"><i class="bi bi-question-circle"></i><span>Help</span></button>
+      <div class="hh-profile-mini"><i class="bi bi-person-fill"></i> <span>Profile</span></div>
+    </div>
+  </aside>
+
+  <!-- ===== Main ===== -->
+  <main class="hh-main">
+    <!-- Topbar -->
+    <header class="hh-topbar">
+      <h1 class="hh-title" id="hh-title">Dashboard</h1>
+
+      <!-- Campana de notificaciones -->
+      <div class="hh-notifs dropdown">
+        <button class="btn btn-light position-relative" id="btnBell" data-bs-toggle="dropdown" aria-expanded="false">
+          <i class="bi bi-bell"></i>
+          <span id="badgeNotifs" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger d-none">0</span>
+        </button>
+        <ul class="dropdown-menu dropdown-menu-end hh-dropdown" id="listNotifs">
+          <!-- items por JS -->
+        </ul>
+      </div>
+    </header>
+
+    <!-- ====== Dashboard ====== -->
+    <section id="dashboard" class="hh-section active">
+      <div class="row g-3">
+        <div class="col-12 col-lg-4"><div class="hh-card"><h5>Total Productos</h5><p class="hh-kpi" id="kpiProductos">0</p></div></div>
+        <div class="col-12 col-lg-4"><div class="hh-card"><h5>Usuarios Registrados</h5><p class="hh-kpi" id="kpiUsuarios">0</p></div></div>
+        <div class="col-12 col-lg-4"><div class="hh-card"><h5>Pedidos en curso</h5><p class="hh-kpi" id="kpiPedidos">0</p></div></div>
+      </div>
+      <div class="row g-3 mt-1">
+        <div class="col-12 col-lg-6"><div class="hh-card"><canvas id="chartVentas"></canvas></div></div>
+        <div class="col-12 col-lg-6"><div class="hh-card"><canvas id="chartPedidos"></canvas></div></div>
+      </div>
+    </section>
+
+    <!-- ====== Productos (placeholder para futuro CRUD) ====== -->
+    <section id="productos" class="hh-section">
+      <div class="hh-card" style="min-height:520px;">
+        <h4 class="mb-3">Productos</h4>
+        <p class="text-muted mb-2">Mantenedor de productos (lista/crear/editar) listo para conectar a <code>localStorage</code> y mockup Fig. 10–11.</p>
+        <ul class="mb-0">
+          <li>Listado con stock, precio, categoría.</li>
+          <li>Botones: Nuevo, Editar, Eliminar (pendiente de conexión).</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ====== Usuarios ====== -->
+    <section id="usuarios" class="hh-section">
+      <div class="d-flex align-items-center justify-content-between mb-2">
+        <h2 class="hh-section-title">Usuarios</h2>
+        <button id="btnNuevoUsuario" class="btn btn-dark"><i class="bi bi-plus-lg me-1"></i>NUEVO USUARIO</button>
+      </div>
+      <div class="mb-2 small text-muted">All Sales Orders ▾</div>
+
+      <div class="hh-tablewrap">
+        <table class="table table-sm table-striped hh-table" id="tablaUsuarios">
+          <thead><tr><th>Fecha</th><th>RUN</th><th>Nombre</th><th>Correo</th><th>Rol</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <div class="hh-paginate">
+        <button class="hh-page" data-page="first">«</button>
+        <button class="hh-page" data-page="prev">‹</button>
+        <div id="hh-page-numbers" class="hh-page-numbers"></div>
+        <button class="hh-page" data-page="next">›</button>
+        <button class="hh-page" data-page="last">»</button>
+      </div>
+
+      <!-- Form Nuevo Usuario -->
+      <div id="panelNuevoUsuario" class="hh-card mt-4 d-none">
+        <h3 class="mb-3">NUEVO USUARIO</h3>
+        <form id="formUsuario" novalidate>
+          <div class="row g-3">
+            <div class="col-12"><label class="form-label">NOMBRE COMPLETO</label><input class="form-control" id="uNombre" maxlength="150" required></div>
+            <div class="col-12 col-md-6"><label class="form-label">CORREO</label><input type="email" class="form-control" id="uCorreo" maxlength="100" required placeholder="ejemplo@duoc.cl"></div>
+            <div class="col-12 col-md-6"><label class="form-label">CONFIRMAR CORREO</label><input type="email" class="form-control" id="uCorreo2" maxlength="100" required></div>
+            <div class="col-12 col-md-6"><label class="form-label">CONTRASEÑA</label><input type="password" class="form-control" id="uPass" minlength="4" maxlength="10" required></div>
+            <div class="col-12 col-md-6"><label class="form-label">CONFIRMAR CONTRASEÑA</label><input type="password" class="form-control" id="uPass2" minlength="4" maxlength="10" required></div>
+            <div class="col-12 col-md-6"><label class="form-label">RUN (sin puntos ni guion, ej: 19011022K)</label><input class="form-control" id="uRun" minlength="7" maxlength="9" required></div>
+            <div class="col-12 col-md-6"><label class="form-label">TELÉFONO (opcional)</label><input class="form-control" id="uFono" maxlength="20"></div>
+            <div class="col-12 col-md-6"><label class="form-label">Región</label><select id="uRegion" class="form-select" required><option value="">— Seleccione región —</option></select></div>
+            <div class="col-12 col-md-6"><label class="form-label">Comuna</label><select id="uComuna" class="form-select" required disabled><option value="">— Seleccione comuna —</option></select></div>
+            <div class="col-12"><label class="form-label">Dirección</label><input class="form-control" id="uDireccion" maxlength="300" required></div>
+          </div>
+          <div class="text-center mt-4"><button class="btn btn-dark" type="submit">REGISTRAR</button></div>
+        </form>
+      </div>
+    </section>
+
+    <!-- ====== Pedidos ====== -->
+    <section id="pedidos" class="hh-section">
+      <div class="d-flex align-items-center justify-content-between mb-2">
+        <h2 class="hh-section-title">Pedidos</h2>
+        <div class="d-flex gap-2">
+          <select id="filtroEstado" class="form-select form-select-sm" style="width:200px">
+            <option value="TODOS">Todos los estados</option>
+            <option value="En preparación">En preparación</option>
+            <option value="Entregado">Entregado</option>
+            <option value="Cancelado">Cancelado</option>
+          </select>
+          <button id="btnNuevoPedido" class="btn btn-dark btn-sm"><i class="bi bi-plus-lg me-1"></i>NUEVO PEDIDO</button>
+        </div>
+      </div>
+      <div class="hh-tablewrap">
+        <table class="table table-sm hh-table" id="tablaPedidos">
+          <thead><tr><th>ID</th><th>Cliente</th><th>Fecha</th><th>Estado</th><th>Total</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ====== Reportes (Chart.js) ====== -->
+    <section id="reportes" class="hh-section">
+      <div class="row g-3">
+        <div class="col-12 col-lg-4"><div class="hh-card"><h6>Ventas del mes</h6><p class="hh-kpi" id="repVentasMes">$0</p></div></div>
+        <div class="col-12 col-lg-4"><div class="hh-card"><h6>Pedidos completados</h6><p class="hh-kpi" id="repPedidosOk">0</p></div></div>
+        <div class="col-12 col-lg-4"><div class="hh-card"><h6>Usuarios nuevos</h6><p class="hh-kpi" id="repUsuariosNuevos">0</p></div></div>
+      </div>
+      <div class="row g-3 mt-1">
+        <div class="col-12 col-lg-6"><div class="hh-card"><canvas id="chartUsuarios"></canvas></div></div>
+        <div class="col-12 col-lg-6"><div class="hh-card"><canvas id="chartVentasLine"></canvas></div></div>
+      </div>
+    </section>
+
+    <!-- ====== Empleados ====== -->
+    <section id="empleados" class="hh-section">
+      <div class="d-flex align-items-center justify-content-between mb-2">
+        <h2 class="hh-section-title">Empleados</h2>
+        <button class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#modalEmpleado"><i class="bi bi-plus-lg me-1"></i>NUEVO EMPLEADO</button>
+      </div>
+      <div class="hh-tablewrap">
+        <table class="table table-sm hh-table" id="tablaEmpleados">
+          <thead><tr><th>Nombre</th><th>Cargo</th><th>Correo</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ====== Clientes (placeholder) ====== -->
+    <section id="clientes" class="hh-section"><div class="hh-card" style="min-height:520px;"><h4>Clientes</h4><p class="text-muted">Módulo listo para conectar a la misma fuente de “Usuarios” filtrando rol = Cliente.</p></div></section>
+
+<!-- ====== Settings ====== -->
+<section id="settings" class="hh-section">
+  <div class="hh-card" style="max-width:860px">
+    <h3 class="mb-3">Configuración del Administrador</h3>
+
+    <!-- Perfil actual -->
+    <div class="mb-4">
+      <p><strong>Nombre:</strong> <span id="confNombre"></span></p>
+      <p><strong>Correo:</strong> <span id="confCorreo"></span></p>
+      <p><strong>Rol:</strong> <span id="confRol"></span></p>
+    </div>
+
+    <!-- Cambiar contraseña -->
+    <form id="formSettingsPass" class="mb-4">
+      <div class="row g-3">
+        <div class="col-12 col-md-6">
+          <label class="form-label">Nueva contraseña</label>
+          <input type="password" class="form-control" id="confPass1" minlength="6" required>
+        </div>
+        <div class="col-12 col-md-6">
+          <label class="form-label">Confirmar nueva contraseña</label>
+          <input type="password" class="form-control" id="confPass2" minlength="6" required>
+        </div>
+      </div>
+      <div class="mt-3">
+        <button class="btn btn-dark" type="submit"><i class="bi bi-key me-1"></i>Actualizar contraseña</button>
+      </div>
+    </form>
+
+    <!-- Cerrar sesión -->
+    <div class="border-top pt-3">
+      <h5>Cerrar sesión</h5>
+      <p class="text-muted mb-2">
+        Finaliza tu sesión de administrador y vuelve al sitio principal.
+      </p>
+      <a href="../page/index.html" id="btnCerrarSesion" class="btn btn-outline-danger">
+        <i class="bi bi-box-arrow-right me-1"></i> Cerrar sesión
+      </a>
+    </div>
+
+    </div>
+  </div>
+</section>
+
+    <!-- ====== Profile ====== -->
+    <section id="profile" class="hh-section">
+      <div class="hh-card" style="max-width:720px">
+        <h3 class="mb-2">Perfil</h3>
+        <p class="mb-1"><strong>Nombre:</strong> <span id="pNombre"></span></p>
+        <p class="mb-1"><strong>Correo:</strong> <span id="pCorreo"></span></p>
+        <p class="mb-3"><strong>Rol:</strong> <span id="pRol"></span></p>
+        <button class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#modalPass"><i class="bi bi-key me-1"></i>Cambiar contraseña</button>
+      </div>
+    </section>
+
+    <!-- ====== Search / Help (placeholders) ====== -->
+    <section id="search" class="hh-section"><div class="hh-card" style="min-height:320px;"><h4>Búsqueda</h4><p class="text-muted">Componente de búsqueda interna (pendiente de conexión).</p></div></section>
+    <section id="help" class="hh-section"><div class="hh-card" style="min-height:320px;"><h4>Ayuda</h4><p class="text-muted">Contacto, preguntas frecuentes y manual de usuario.</p></div></section>
+  </main>
+
+  <!-- ===== Modales ===== -->
+  <!-- Modal Empleado -->
+  <div class="modal fade" id="modalEmpleado" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog"><div class="modal-content">
+      <div class="modal-header"><h5 class="modal-title">Nuevo Empleado</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+      <form id="formEmpleado">
+        <div class="modal-body">
+          <div class="mb-2"><label class="form-label">Nombre</label><input class="form-control" id="eNombre" required></div>
+          <div class="mb-2"><label class="form-label">Cargo</label><input class="form-control" id="eCargo" required></div>
+          <div class="mb-0"><label class="form-label">Correo</label><input type="email" class="form-control" id="eCorreo" required></div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-dark" type="submit">Guardar</button>
+        </div>
+      </form>
+    </div></div>
+  </div>
+
+  <!-- Modal Cambiar Pass -->
+  <div class="modal fade" id="modalPass" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog"><div class="modal-content">
+      <div class="modal-header"><h5 class="modal-title">Cambiar contraseña</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+      <form id="formPass">
+        <div class="modal-body">
+          <div class="mb-2"><label class="form-label">Contraseña nueva</label><input type="password" class="form-control" id="nuevaPass" minlength="6" required></div>
+          <div class="mb-0"><label class="form-label">Confirmar</label><input type="password" class="form-control" id="nuevaPass2" minlength="6" required></div>
+        </div>
+        <div class="modal-footer"><button class="btn btn-dark" type="submit">Actualizar</button></div>
+      </form>
+    </div></div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../assets/js/script.js"></script>
+</body>
+</html>

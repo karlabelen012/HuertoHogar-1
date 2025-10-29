@@ -1,0 +1,515 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <title>Huerto Hogar — Inicio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+   <!-- Fuentes locales -->
+  <link rel="stylesheet" href="../assets/font/font.css">
+
+  <!-- Tipografías del contexto -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap (Eval. 2: diseño responsivo) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Estilos propios (puedes ajustar colores, pero mantén la paleta del contexto) -->
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/productos.css">
+
+  <!-- JS (todo externo, nada embebido) -->
+  <script type="module" src="../assets/js/script.js" defer></script>
+  <script type="module" src="../assets/js/data.js" defer></script>
+  <script type="module" src="../assets/js/ui.js" defer></script>
+  <script type="module" src="../assets/js/cart.js" defer></script>
+  <script type="module" src="../assets/js/productos.js" defer></script>
+</head>
+
+<body>
+
+   <!-- ======= TOPBAR: logo + buscador + botones + carrito ======= -->
+  <header class="border-bottom">
+    <div class="bg-white">
+      <div class="container py-2">
+        <div class="row align-items-center g-2">
+          
+          <!-- Logo a la izquierda -->
+            <div class="col-6 col-md-2 d-flex align-items-center">
+              <a href="./index.html" class="d-inline-flex align-items-center text-decoration-none">
+                <img src="../assets/image/logo.png" alt="Huerto Hogar" class="me-2" style="width:auto;height:55px;object-fit:contain;">
+              </a>
+            </div>
+
+          <!-- Buscador centrado -->
+          <div class="col-12 col-md-6 d-flex justify-content-md-center">
+            <form class="d-flex w-100" style="max-width: 420px;" action="./productos.html">
+              <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Buscar" name="q">
+              <button class="btn btn-outline-success" type="submit">Buscar</button>
+            </form>
+          </div>
+
+          <!-- Botones a la derecha -->
+          <div class="col-6 col-md-4 d-flex justify-content-end align-items-center gap-2">
+            <a class="btn btn-outline-primary btn-sm" href="./login.html">Iniciar Sesión</a>
+            <a class="btn btn-primary btn-sm" href="./registro.html">Crear Cuenta</a>
+            <!-- Carrito en pastilla verde con monto -->
+            <a class="btn btn-success btn-sm d-flex align-items-center" href="./carrito.html">
+              <span class="me-1">🛒</span>
+              Carrito <span class="ms-1" id="cartAmount">$0</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ======= NAVBAR: Home activo + categorías ▼ + resto ======= -->
+    <nav class="navbar navbar-expand-lg bg-white">
+      <div class="container">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div id="mainNav" class="collapse navbar-collapse">
+          <ul class="navbar-nav mx-auto">
+            <li class="nav-item"><a class="nav-link active fw-semibold" aria-current="page" href="./index.html">Home</a></li>
+
+              <!-- Categorías: link + flecha (split dropdown) -->
+              <li class="nav-item dropdown d-flex align-items-center nav-categories">
+                <!-- Texto: navega a categorias.html -->
+                <a class="nav-link" href="./productos.html">Productos</a>
+
+                <!-- Flecha: abre el menú -->
+                <a class="nav-link dropdown-toggle dropdown-toggle-split px-1"
+                  href="#" id="catToggle" role="button"
+                  data-bs-toggle="dropdown" aria-expanded="false">
+                  <span class="visually-hidden">Abrir subcategorías</span>
+                </a>
+
+  <!-- Subcategorías -->
+  <ul class="dropdown-menu" aria-labelledby="catToggle">
+    <li><a class="dropdown-item" href="./categorias.html?c=Frutas%20Frescas">Frutas Frescas</a></li>
+    <li><a class="dropdown-item" href="./categorias.html?c=Verduras%20Org%C3%A1nicas">Verduras Orgánicas</a></li>
+    <li><a class="dropdown-item" href="./categorias.html?c=Productos%20Org%C3%A1nicos">Productos Orgánicos</a></li>
+    <li><a class="dropdown-item" href="./categorias.html?c=L%C3%A1cteos">Lácteos</a></li>
+  </ul>
+</li>
+
+
+            <li class="nav-item"><a class="nav-link" href="./ofertas.html">Ofertas</a></li>
+            <li class="nav-item"><a class="nav-link" href="./nosotros.html">Nosotros</a></li>
+            <li class="nav-item"><a class="nav-link" href="./blogs.html">Blog</a></li>
+            <li class="nav-item"><a class="nav-link" href="./contactos.html">Contacto</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Carrusel 1200 x 300 -->
+    <section class="py-0">
+      <div id="homeCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+          <button type="button" data-bs-target="#homeCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+          <button type="button" data-bs-target="#homeCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+          <button type="button" data-bs-target="#homeCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="../assets/image/home3.png" class="d-block w-100" width="1200" height="300" alt="Lanzamiento 1">
+            <div class="carousel-caption d-none d-md-block">
+              <h5>Nuevos Lanzamientos</h5>
+              <p>Descubre las últimas novedades de la tienda.</p>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img src="../assets/image/home2.png" class="d-block w-100" width="1200" height="300" alt="Lanzamiento 2">
+            <div class="carousel-caption d-none d-md-block">
+              <h5>Productos Orgánicos</h5>
+              <p>Calidad certificada directamente del productor.</p>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img src="../assets/image/home1.png" class="d-block w-100" width="1200" height="300" alt="Lanzamiento 3">
+            <div class="carousel-caption d-none d-md-block">
+              <h5>Despacho a Domicilio</h5>
+              <p>Compra fácil y recibe en tu casa.</p>
+            </div>
+          </div>
+        </div>
+
+        <button class="carousel-control-prev" type="button" data-bs-target="#homeCarousel" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Anterior</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#homeCarousel" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Siguiente</span>
+        </button>
+      </div>
+    </section>
+
+
+  <!-- ======= MAIN: Carrusel 1200x300 y Categorías 400x200 (exacto) ======= -->
+    <main class="container py-5" style="background:url('../assets/image/textura-papel-blanco_1194-5416.jpg'); background-size:cover; background-attachment:fixed; border-radius:12px;">
+    
+    <!-- Categorías 400 x 200 (bajo el carrusel) -->
+    <section class="py-4">
+      <div class="container">
+        <h2 class="text-center mb-3">Categorías</h2>
+        <div class="row g-3 justify-content-center">
+          <div class="col-12 col-sm-6 col-lg-3">
+            <a href="./categorias.html?c=Frutas Frescas" class="card h-100 text-decoration-none">
+              <img src="../assets/image/categoriafruta.png" class="card-img-top" width="400" height="200" alt="Frutas Frescas">
+              <div class="card-body text-center"><h3 class="h6 m-0">Frutas Frescas</h3></div>
+            </a>
+          </div>
+          <div class="col-12 col-sm-6 col-lg-3">
+            <a href="./categorias.html?c=Verduras Orgánicas" class="card h-100 text-decoration-none">
+              <img src="../assets/image/categoriaverduras.png" class="card-img-top" width="400" height="200" alt="Verduras Orgánicas">
+              <div class="card-body text-center"><h3 class="h6 m-0">Verduras Orgánicas</h3></div>
+            </a>
+          </div>
+          <div class="col-12 col-sm-6 col-lg-3">
+            <a href="./categorias.html?c=Productos Orgánicos" class="card h-100 text-decoration-none">
+              <img src="../assets/image/categoriaOrganicos.png" class="card-img-top" width="400" height="200" alt="Productos Orgánicos">
+              <div class="card-body text-center"><h3 class="h6 m-0">Productos Orgánicos</h3></div>
+            </a>
+          </div>
+          <div class="col-12 col-sm-6 col-lg-3">
+            <a href="./categorias.html?c=Lácteos" class="card h-100 text-decoration-none">
+              <img src="../assets/image/categorialacteos.png" class="card-img-top" width="400" height="200" alt="Lácteos">
+              <div class="card-body text-center"><h3 class="h6 m-0">Lácteos</h3></div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+     <!-- ===== POR QUÉ ELEGIRNOS ===== -->
+<section id="porque-elegirnos" class="py-5 bg-white border-top">
+  <div class="container text-center">
+    <h2 class="mb-4">¿Por qué elegir Huerto Hogar?</h2>
+    <p class="text-muted mb-5">
+      En Huerto Hogar creemos en la frescura, la sostenibilidad y la conexión directa entre el campo y tu hogar.
+      Nuestros productos reflejan el compromiso con la naturaleza, la salud y la comunidad local.
+    </p>
+
+    <div class="row g-4">
+      <div class="col-12 col-md-4">
+        <img src="../assets/image/frescuaraCalidad.png" alt="Frescura garantizada" width="80" class="mb-3">
+        <h3 class="h5 fw-semibold">Frescura Garantizada</h3>
+        <p class="text-muted">
+          Productos recién cosechados de agricultores locales, seleccionados para que lleguen con su sabor y nutrientes intactos.
+        </p>
+      </div>
+
+      <div class="col-12 col-md-4">
+        <img src="../assets/image/compromisoSostenible.png" alt="Agricultura sostenible" width="80" class="mb-3">
+        <h3 class="h5 fw-semibold">Compromiso Sostenible</h3>
+        <p class="text-muted">
+          Promovemos prácticas agrícolas responsables y reducimos la huella de carbono apoyando el consumo local y orgánico.
+        </p>
+      </div>
+
+      <div class="col-12 col-md-4">
+        <img src="../assets/image/calidadCertificada.png" alt="Calidad certificada" width="80" class="mb-3">
+        <h3 class="h5 fw-semibold">Calidad Certificada</h3>
+        <p class="text-muted">
+          Cada producto cumple con los más altos estándares de calidad. Nuestra meta es ofrecerte confianza, sabor y bienestar en cada compra.
+        </p>
+      </div>
+    </div>
+
+    <div class="row g-4 mt-4">
+      <div class="col-12 col-md-4">
+        <img src="../assets/image/atencionCercana.png" alt="Atención al cliente" width="80" class="mb-3">
+        <h3 class="h5 fw-semibold">Atención Cercana</h3>
+        <p class="text-muted">
+          Un servicio personalizado con entrega directa a domicilio, pensado para tu comodidad y tranquilidad.
+        </p>
+      </div>
+
+      <div class="col-12 col-md-4">
+        <img src="../assets/image/vidaSaludable.png" alt="Vida saludable" width="80" class="mb-3">
+        <h3 class="h5 fw-semibold">Vida Saludable</h3>
+        <p class="text-muted">
+          Impulsamos una alimentación equilibrada y consciente, con productos naturales que favorecen tu bienestar diario.
+        </p>
+      </div>
+
+      <div class="col-12 col-md-4">
+        <img src="../assets/image/apoyoProtectoresLocales.png" alt="Apoyo a productores" width="80" class="mb-3">
+        <h3 class="h5 fw-semibold">Apoyo a Productores Locales</h3>
+        <p class="text-muted">
+          Cada compra contribuye al crecimiento de familias agricultoras chilenas, fortaleciendo la economía regional.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+    <section id="resenas" class="py-5 bg-light border-top">
+      <div class="container">
+        <h2 class="text-center mb-4">Reseñas</h2>
+
+        <div id="reviewsCarousel" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-inner">
+
+            <!-- Slide 1 -->
+            <div class="carousel-item active">
+              <div class="row g-3">
+                
+                <!-- Reseña 1 -->
+                <article class="col-12 col-md-4">
+                  <div class="card h-100 shadow-sm border-0">
+                    <div class="card-body">
+                      <div class="d-flex align-items-center mb-2">
+                        <img class="avatar-review me-2" src="../assets/image/mujer.png" alt="Foto de Karla H." loading="lazy">
+                        <div>
+                          <h3 class="h6 m-0">Karla H.</h3>
+                          <small class="text-muted">Compra verificada • 12/10/2025</small>
+                        </div>
+                      </div>
+                      <p class="mb-2" aria-label="5 de 5 estrellas"><span class="text-warning">★★★★★</span></p>
+                      <p class="mb-0">“Llegó todo fresco y a tiempo. La miel está increíble y el reparto muy amable.”</p>
+                    </div>
+                  </div>
+                </article>
+
+                <!-- Reseña 2 -->
+                <article class="col-12 col-md-4">
+                  <div class="card h-100 shadow-sm border-0">
+                    <div class="card-body">
+                      <div class="d-flex align-items-center mb-2">
+                        <img class="avatar-review me-2" src="../assets/image/perfil.png" alt="Foto de Matías R." loading="lazy">
+                        <div>
+                          <h3 class="h6 m-0">Matías R.</h3>
+                          <small class="text-muted">Compra verificada • 05/10/2025</small>
+                        </div>
+                      </div>
+                      <p class="mb-2" aria-label="4 de 5 estrellas"><span class="text-warning">★★★★☆</span></p>
+                      <p class="mb-0">“Verduras muy frescas. Podrían sumar más métodos de pago, por lo demás, todo ok.”</p>
+                    </div>
+                  </div>
+                </article>
+
+                <!-- Reseña 3 -->
+                <article class="col-12 col-md-4">
+                  <div class="card h-100 shadow-sm border-0">
+                    <div class="card-body">
+                      <div class="d-flex align-items-center mb-2">
+                        <img class="avatar-review me-2" src="../assets/image/usuario.png"h" alt="Foto de Constanza A." loading="lazy">
+                        <div>
+                          <h3 class="h6 m-0">Constanza A.</h3>
+                          <small class="text-muted">Compra verificada • 28/09/2025</small>
+                        </div>
+                      </div>
+                      <p class="mb-2" aria-label="5 de 5 estrellas"><span class="text-warning">★★★★★</span></p>
+                      <p class="mb-0">“Excelente calidad. Repetiré la compra de queso de cabra, 100% recomendado.”</p>
+                    </div>
+                  </div>
+                </article>
+
+              </div>
+            </div>
+
+            <!-- Slide 2 -->
+            <div class="carousel-item">
+              <div class="row g-3">
+                <!-- Reseña 4 -->
+                <article class="col-12 col-md-4">
+                  <div class="card h-100 shadow-sm border-0">
+                    <div class="card-body">
+                      <div class="d-flex align-items-center mb-2">
+                        <img class="avatar-review me-2" src="../assets/image/usuario-de-perfil.png"h" alt="Foto de Diego P." loading="lazy">
+                        <div>
+                          <h3 class="h6 m-0">Diego P.</h3>
+                          <small class="text-muted">Compra verificada • 21/09/2025</small>
+                        </div>
+                      </div>
+                      <p class="mb-2" aria-label="5 de 5 estrellas"><span class="text-warning">★★★★★</span></p>
+                      <p class="mb-0">“Catálogo claro y fácil de usar. El despacho fue puntual.”</p>
+                    </div>
+                  </div>
+                </article>
+
+                <!-- Reseña 5 -->
+                <article class="col-12 col-md-4">
+                  <div class="card h-100 shadow-sm border-0">
+                    <div class="card-body">
+                      <div class="d-flex align-items-center mb-2">
+                        <img class="avatar-review me-2" src="../assets/image/mujer.png" alt="Foto de Fernanda L." loading="lazy">
+                        <div>
+                          <h3 class="h6 m-0">Fernanda L.</h3>
+                          <small class="text-muted">Compra verificada • 15/09/2025</small>
+                        </div>
+                      </div>
+                      <p class="mb-2" aria-label="4 de 5 estrellas"><span class="text-warning">★★★★☆</span></p>
+                      <p class="mb-0">“Las frutas llegaron perfectas. Agregaría más opciones sin lactosa.”</p>
+                    </div>
+                  </div>
+                </article>
+
+                <!-- Reseña 6 -->
+                <article class="col-12 col-md-4">
+                  <div class="card h-100 shadow-sm border-0">
+                    <div class="card-body">
+                      <div class="d-flex align-items-center mb-2">
+                        <img class="avatar-review me-2" src="../assets/image/perfil.png" alt="Foto de Javier S." loading="lazy">
+                        <div>
+                          <h3 class="h6 m-0">Javier S.</h3>
+                          <small class="text-muted">Compra verificada • 10/09/2025</small>
+                        </div>
+                      </div>
+                      <p class="mb-2" aria-label="5 de 5 estrellas"><span class="text-warning">★★★★★</span></p>
+                      <p class="mb-0">“Buena atención y precios. Muy recomendable.”</p>
+                    </div>
+                  </div>
+                </article>
+              </div>
+            </div>
+          </div>
+
+          <!-- Controles -->
+          <button class="carousel-control-prev" type="button" data-bs-target="#reviewsCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Anterior</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#reviewsCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Siguiente</span>
+          </button>
+        </div>
+
+</main>
+
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-left">
+          <h2>HuertoHogar</h2>
+          <div class="foot-links">
+            <a href="index.html">Inicio</a> |
+            <a href="productos.html">Productos</a> |
+            <a href="nosotros.html">Nosotros</a> |
+            <a href="contactos.html">Contacto</a>
+          </div>
+        </div>
+
+        <div class="footer-right">
+          <p>¡Mantente en contacto! Únete a nuestro boletín.</p>
+          <form id="subscribeForm" class="subscribe-form">
+            <input type="email" id="emailSub" name="emailSub" placeholder="Ingresa tu correo" required>
+            <button type="submit">Suscribirse</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div class="footer-column contacto">
+          <h3>Contacto</h3>
+          <p>Email: <a href="mailto:contacto@huertohogar.cl">contacto@huertohogar.cl</a></p>
+          <p>Teléfono: <a href="tel:+56912345678">+56 9 1234 5678</a></p>
+        </div>
+
+<div class="footer-column redes">
+  <h3>Síguenos en redes sociales:</h3>
+  <div class="social-icons">
+    <!-- Instagram -->
+    <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">
+      <img src="../assets/image/instagram.png" alt="Instagram">
+    </a>
+
+    <!-- WhatsApp (abrirá chat directo con número ejemplo) -->
+    <a href="https://wa.me/56912345678" target="_blank" rel="noopener noreferrer">
+      <img src="../assets/image/whatsapp.png" alt="WhatsApp">
+    </a>
+
+    <!-- Facebook -->
+    <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">
+      <img src="../assets/image/facebook.png" alt="Facebook">
+    </a>
+  </div>
+</div>
+
+
+        <div class="footer-column pagos">
+          <h3>Pagos seguros:</h3>
+          <div class="pay-icons">
+            <img src="../assets/image/visa.png" alt="Visa">
+            <img src="../assets/image/master card.png" alt="MasterCard">
+            <img src="../assets/image/paypal.png" alt="PayPal">
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-logo">
+        <img src="../assets/image/logo.png" alt="Logo HuertoHogar">
+      </div>
+    </div>
+  </footer>
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="footer mt-5">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-left">
+          <h2>HuertoHogar</h2>
+          <div class="foot-links">
+            <a href="index.html">Inicio</a> |
+            <a href="productos.html">Productos</a> |
+            <a href="nosotros.html">Nosotros</a> |
+            <a href="contactos.html">Contacto</a>
+          </div>
+        </div>
+
+        <div class="footer-right">
+          <p>¡Mantente en contacto! Únete a nuestro boletín.</p>
+          <form id="subscribeForm" class="subscribe-form">
+            <input type="email" id="emailSub" name="emailSub" placeholder="Ingresa tu correo" required>
+            <button type="submit">Suscribirse</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div class="footer-column contacto">
+          <h3>Contacto</h3>
+          <p>Email: <a href="mailto:contacto@huertohogar.cl">contacto@huertohogar.cl</a></p>
+          <p>Teléfono: <a href="tel:+56912345678">+56 9 1234 5678</a></p>
+        </div>
+
+        <div class="footer-column redes">
+          <h3>Síguenos en redes sociales:</h3>
+          <div class="social-icons">
+            <a href="https://www.instagram.com" target="_blank"><img src="../assets/image/instagram.png" alt="Instagram"></a>
+            <a href="https://wa.me/56912345678" target="_blank"><img src="../assets/image/whatsapp.png" alt="WhatsApp"></a>
+            <a href="https://www.facebook.com" target="_blank"><img src="../assets/image/facebook.png" alt="Facebook"></a>
+          </div>
+        </div>
+
+        <div class="footer-column pagos">
+          <h3>Pagos seguros:</h3>
+          <div class="pay-icons">
+            <img src="../assets/image/visa.png" alt="Visa">
+            <img src="../assets/image/master card.png" alt="MasterCard">
+            <img src="../assets/image/paypal.png" alt="PayPal">
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-logo">
+        <img src="../assets/image/logo.png" alt="Logo HuertoHogar">
+      </div>
+    </div>
+  </footer>
+</html>
