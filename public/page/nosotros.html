@@ -1,302 +1,282 @@
 <!doctype html>
 <html lang="es">
-  <head>
-    <meta charset="utf-8" />
-    <title>Huerto Hogar — Nosotros </title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+<head>
+  <meta charset="utf-8" />
+  <title>Huerto Hogar — Nosotros </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <!-- Tipografías del contexto -->
-    <link rel="stylesheet" href="../assets/font/font.css">
+   <!-- Fuentes locales -->
+  <link rel="stylesheet" href="../assets/font/font.css">
 
-    <!-- Bootstrap (Eval. 2: diseño responsivo) -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Tipografías del contexto -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
 
-    <!-- Estilos propios (puedes ajustar colores, pero mantén la paleta del contexto) -->
-    <link rel="stylesheet" href="../assets/css/style.css">
-    <link rel="stylesheet" href="../assets/css/productos.css">
-    <link rel="stylesheet" href="../assets/css/blogs.css">
-    <link rel="stylesheet" href="../assets/css/autth.css">
-    <link rel="stylesheet" href="../assets/css/admin.css">
-    
-    <!-- JS (todo externo, nada embebido) -->
-    <script type="module" src="../assets/js/script.js" defer></script>
-    <script type="module" src="../assets/js/data.js" defer></script>
-    <script type="module" src="../assets/js/ui.js" defer></script>
-    <script type="module" src="../assets/js/cart.js" defer></script>
-    <script type="module" src="../assets/js/productos.js" defer></script>
-  </head>
+  <!-- Bootstrap (Eval. 2: diseño responsivo) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
-  <body>
+  <!-- Estilos propios (puedes ajustar colores, pero mantén la paleta del contexto) -->
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/productos.css">
 
-    <!-- ======= TOPBAR: logo + buscador + botones + carrito ======= -->
-    <header class="border-bottom">
-      <div class="bg-white">
-        <div class="container py-2">
-          <div class="row align-items-center g-2">
-            
-            <!-- Logo a la izquierda -->
-              <div class="col-6 col-md-2 d-flex align-items-center">
-                <a href="./index.html" class="d-inline-flex align-items-center text-decoration-none">
-                  <img src="../assets/image/logo.png" alt="Huerto Hogar" class="me-2" style="width:auto;height:55px;object-fit:contain;">
-                </a>
-              </div>
+  <!-- JS (todo externo, nada embebido) -->
+  <script type="module" src="../assets/js/script.js" defer></script>
+  <script type="module" src="../assets/js/data.js" defer></script>
+  <script type="module" src="../assets/js/ui.js" defer></script>
+  <script type="module" src="../assets/js/cart.js" defer></script>
+  <script type="module" src="../assets/js/productos.js" defer></script>
+</head>
 
-            <!-- Buscador centrado -->
-            <div class="col-12 col-md-6 d-flex justify-content-md-center">
-              <form class="d-flex w-100" style="max-width: 420px;" action="./productos.html">
-                <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Buscar" name="q">
-                <button class="btn btn-outline-success" type="submit">Buscar</button>
-              </form>
-            </div>
+<body>
 
-            <!-- Botones a la derecha -->
-            <div class="col-6 col-md-4 d-flex justify-content-end align-items-center gap-2">
-              <a class="btn btn-outline-primary btn-sm" href="./login.html">Iniciar Sesión</a>
-              <a class="btn btn-primary btn-sm" href="./registro.html">Crear Cuenta</a>
-              <!-- Carrito en pastilla verde con monto -->
-              <a class="btn btn-success btn-sm d-flex align-items-center" href="./carrito.html">
-                <span class="me-1">🛒</span>
-                Carrito <span class="ms-1" id="cartAmount">$0</span>
+   <!-- ======= TOPBAR: logo + buscador + botones + carrito ======= -->
+  <header class="border-bottom">
+    <div class="bg-white">
+      <div class="container py-2">
+        <div class="row align-items-center g-2">
+          
+          <!-- Logo a la izquierda -->
+            <div class="col-6 col-md-2 d-flex align-items-center">
+              <a href="./index.html" class="d-inline-flex align-items-center text-decoration-none">
+                <img src="../assets/image/logo.png" alt="Huerto Hogar" class="me-2" style="width:auto;height:55px;object-fit:contain;">
               </a>
             </div>
-          </div>
-        </div>
-      </div>
 
-      <!-- ======= NAVBAR: Home activo + categorías ▼ + resto ======= -->
-      <nav class="navbar navbar-expand-lg bg-white">
-        <div class="container">
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div id="mainNav" class="collapse navbar-collapse">
-            <ul class="navbar-nav mx-auto">
-              <li class="nav-item"><a class="nav-link active fw-semibold" aria-current="page" href="./index.html">Home</a></li>
-
-                <!-- Categorías: link + flecha (split dropdown) -->
-                <li class="nav-item dropdown d-flex align-items-center nav-categories">
-                  <!-- Texto: navega a categorias.html -->
-                  <a class="nav-link" href="./productos.html">Productos</a>
-
-                  <!-- Flecha: abre el menú -->
-                  <a class="nav-link dropdown-toggle dropdown-toggle-split px-1"
-                    href="#" id="catToggle" role="button"
-                    data-bs-toggle="dropdown" aria-expanded="false">
-                    <span class="visually-hidden">Abrir subcategorías</span>
-                  </a>
-
-    <!-- Subcategorías -->
-    <ul class="dropdown-menu" aria-labelledby="catToggle">
-      <li><a class="dropdown-item" href="./categorias.html?c=Frutas%20Frescas">Frutas Frescas</a></li>
-      <li><a class="dropdown-item" href="./categorias.html?c=Verduras%20Org%C3%A1nicas">Verduras Orgánicas</a></li>
-      <li><a class="dropdown-item" href="./categorias.html?c=Productos%20Org%C3%A1nicos">Productos Orgánicos</a></li>
-      <li><a class="dropdown-item" href="./categorias.html?c=L%C3%A1cteos">Lácteos</a></li>
-    </ul>
-  </li>
-
-
-              <li class="nav-item"><a class="nav-link" href="./ofertas.html">Ofertas</a></li>
-              <li class="nav-item"><a class="nav-link" href="./nosotros.html">Nosotros</a></li>
-              <li class="nav-item"><a class="nav-link" href="./blogs.html">Blog</a></li>
-              <li class="nav-item"><a class="nav-link" href="./contactos.html">Contacto</a></li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-    </header>
-
-  <main class="container py-5" style="background:url('../assets/image/textura-papel-blanco_1194-5416.jpg'); background-size:cover; background-attachment:fixed; border-radius:12px;">
-
-
-    <!-- ==================== ENUNCIADO ==================== -->
-    <section class="text-center mb-5">
-      <h2 class="fw-bold" style="color:#8B4513;font-family:'Playfair Display',serif;">Enunciado</h2>
-      <p class="mt-3" style="color:#444;max-width:900px;margin:auto;font-size:1.1em;line-height:1.7;">
-        HuertoHogar es una tienda online dedicada a llevar la frescura y calidad de los productos del campo 
-        directamente a la puerta de nuestros clientes en Chile. Con más de <strong>6 años de experiencia</strong>, operamos 
-        en más de <strong>9 puntos a lo largo del país</strong>, incluyendo ciudades clave como <strong>Santiago, Puerto Montt, 
-        Villarica, Nacimiento, Viña del Mar, Valparaíso y Concepción</strong>. Nuestra misión es conectar a las 
-        familias chilenas con el campo, promoviendo un estilo de vida saludable y sostenible.
-      </p>
-    </section>
-
-    <!-- ==================== MISIÓN / VISIÓN ==================== -->
-    <section class="row text-center g-4 mb-5">
-      <div class="col-md-4">
-        <div class="card h-100 shadow-sm border-0" data-bs-toggle="animation" style="border-radius:12px;">
-          <div class="card-body">
-            <h3 style="color:#2E8B57;font-family:'Playfair Display',serif;">🌱 Misión</h3>
-            <p class="mt-3" style="color:#555;line-height:1.7;">
-              Nuestra misión es proporcionar productos frescos y de calidad directamente desde el campo hasta 
-              la puerta de nuestros clientes, garantizando la frescura y el sabor en cada entrega. Nos 
-              comprometemos a fomentar una conexión más cercana entre los consumidores y los agricultores 
-              locales, apoyando prácticas agrícolas sostenibles y promoviendo una alimentación saludable en 
-              todos los hogares chilenos. 
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-4">
-        <div class="card h-100 shadow-sm border-0" style="border-radius:12px;">
-          <div class="card-body">
-            <h3 style="color:#2E8B57;font-family:'Playfair Display',serif;">🌍 Visión</h3>
-            <p class="mt-3" style="color:#555;line-height:1.7;">
-              Nuestra visión es ser la tienda online líder en la distribución de productos frescos y naturales en 
-              Chile, reconocida por nuestra calidad excepcional, servicio al cliente y compromiso con la 
-              sostenibilidad. Aspiramos a expandir nuestra presencia a nivel nacional e internacional, 
-              estableciendo un nuevo estándar en la distribución de productos agrícolas directos del productor al 
-              consumidor. 
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-4">
-        <div class="card h-100 shadow-sm border-0" style="border-radius:12px;">
-          <div class="card-body">
-            <h3 style="color:#2E8B57;font-family:'Playfair Display',serif;">🌾 Propósito</h3>
-            <p class="mt-3" style="color:#555;line-height:1.7;">
-              Nuestro propósito es fortalecer el vínculo entre los hogares chilenos y la tierra, asegurando que 
-              cada familia tenga acceso a productos sanos, frescos y de origen transparente. Trabajamos para 
-              impulsar la economía local y un futuro más verde y responsable.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ==================== EQUIPO ==================== -->
-    <section class="text-center mb-5">
-      <h3 style="color:#2E8B57;font-family:'Playfair Display',serif;">👩‍🌾 Nuestro Equipo</h3>
-      <img src="../assets/image/grupal.png" alt="Equipo HuertoHogar" class="img-fluid mt-3 rounded shadow" style="max-width:90%;">
-      <p class="mt-3" style="color:#555;max-width:700px;margin:auto;">
-        El corazón de HuertoHogar está en nuestro equipo y en las familias que día a día confían en nosotros.
-      </p>
-    </section>
-
-    <!-- ==================== RECETAS SUGERIDAS ==================== -->
-    <section class="mb-5">
-      <h3 style="color:#2E8B57;font-family:'Playfair Display',serif;">🍲 Recetas sugeridas</h3>
-      <ul style="margin-top:16px;color:#555;line-height:1.8;font-size:1.05em;list-style-type:'🍃 ';">
-        <li>
-          <a href="https://youtu.be/ZHIVo3i6qNw?si=u2GJIAslK62VooWJ" target="_blank" style="color:#2E8B57;text-decoration:none;font-weight:600;">
-            Ensalada fresca de espinacas y manzana Fuji.
-          </a>
-        </li>
-        <li>
-          <a href="https://youtu.be/JMi9rU7bAwE?si=VoY7zvino3mefn_A" target="_blank" style="color:#2E8B57;text-decoration:none;font-weight:600;">
-            Jugo natural de naranja Valencia con zanahoria.
-          </a>
-        </li>
-        <li>
-          <a href="https://youtu.be/Sg9qkDadApg?si=b-A_3dHtu5N57Fme" target="_blank" style="color:#2E8B57;text-decoration:none;font-weight:600;">
-            Salteado de pimientos tricolores con quinoa orgánica.
-          </a>
-        </li>
-        <li>
-          <a href="https://youtu.be/DhoBDVpiv2U?si=9sSwTpfoq6hF9t2a" target="_blank" style="color:#2E8B57;text-decoration:none;font-weight:600;">
-            Postre casero con miel orgánica y plátanos maduros.
-          </a>
-        </li>
-      </ul>
-    </section>
-
-
-  </main>
-
-
-  <!-- Footer -->
-    <footer class="footer">
-      <div class="container">
-        <div class="footer-top">
-          <div class="footer-left">
-            <h2>HuertoHogar</h2>
-            <div class="foot-links">
-              <a href="index.html">Inicio</a> |
-              <a href="productos.html">Productos</a> |
-              <a href="nosotros.html">Nosotros</a> |
-              <a href="contactos.html">Contacto</a>
-            </div>
-          </div>
-
-          <div class="footer-right">
-            <p>¡Mantente en contacto! Únete a nuestro boletín.</p>
-            <form id="subscribeForm" class="subscribe-form">
-              <input type="email" id="emailSub" name="emailSub" placeholder="Ingresa tu correo" required>
-              <button type="submit">Suscribirse</button>
+          <!-- Buscador centrado -->
+          <div class="col-12 col-md-6 d-flex justify-content-md-center">
+            <form class="d-flex w-100" style="max-width: 420px;" action="./productos.html">
+              <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Buscar" name="q">
+              <button class="btn btn-outline-success" type="submit">Buscar</button>
             </form>
           </div>
-        </div>
 
-        <div class="footer-bottom">
-          <div class="footer-column contacto">
-            <h3>Contacto</h3>
-            <p>Email: <a href="mailto:contacto@huertohogar.cl">contacto@huertohogar.cl</a></p>
-            <p>Teléfono: <a href="tel:+56912345678">+56 9 1234 5678</a></p>
+          <!-- Botones a la derecha -->
+          <div class="col-6 col-md-4 d-flex justify-content-end align-items-center gap-2">
+            <a class="btn btn-outline-primary btn-sm" href="./login.html">Iniciar Sesión</a>
+            <a class="btn btn-primary btn-sm" href="./registro.html">Crear Cuenta</a>
+            <!-- Carrito en pastilla verde con monto -->
+            <a class="btn btn-success btn-sm d-flex align-items-center" href="./carrito.html">
+              <span class="me-1">🛒</span>
+              Carrito <span class="ms-1" id="cartAmount">$0</span>
+            </a>
           </div>
-
-  <div class="footer-column redes">
-    <h3>Síguenos en redes sociales:</h3>
-    <div class="social-icons">
-      <!-- Instagram -->
-      <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">
-        <img src="../assets/image/instagram.png" alt="Instagram">
-      </a>
-
-      <!-- WhatsApp (abrirá chat directo con número ejemplo) -->
-      <a href="https://wa.me/56912345678" target="_blank" rel="noopener noreferrer">
-        <img src="../assets/image/whatsapp.png" alt="WhatsApp">
-      </a>
-
-      <!-- Facebook -->
-      <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">
-        <img src="../assets/image/facebook.png" alt="Facebook">
-      </a>
-    </div>
-  </div>
-
-
-          <div class="footer-column pagos">
-            <h3>Pagos seguros:</h3>
-            <div class="pay-icons">
-              <img src="../assets/image/visa.png" alt="Visa">
-              <img src="../assets/image/master card.png" alt="MasterCard">
-              <img src="../assets/image/paypal.png" alt="PayPal">
-            </div>
-          </div>
-        </div>
-
-        <div class="footer-logo">
-          <img src="../assets/image/logo.png" alt="Logo HuertoHogar">
         </div>
       </div>
-    </footer>
+    </div>
 
-    <script>
-      document.getElementById('yearFoot').textContent = new Date().getFullYear();
-    </script>
+    <!-- ======= NAVBAR: Home activo + categorías ▼ + resto ======= -->
+    <nav class="navbar navbar-expand-lg bg-white">
+      <div class="container">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div id="mainNav" class="collapse navbar-collapse">
+          <ul class="navbar-nav mx-auto">
+            <li class="nav-item"><a class="nav-link active fw-semibold" aria-current="page" href="./index.html">Home</a></li>
 
-      <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+              <!-- Categorías: link + flecha (split dropdown) -->
+              <li class="nav-item dropdown d-flex align-items-center nav-categories">
+                <!-- Texto: navega a categorias.html -->
+                <a class="nav-link" href="./productos.html">Productos</a>
 
-    <!-- Agregar script -->
-    <script src="../assets/js/registro.js"></script>
-    <script src="../assets/js/script.js"></script>
-    <script src="../assets/js/validators.js"></script>
-    <script src="../assets/js/ui.js"></script>
-    <script src="../assets/js/stronge.js"></script>
-    <script src="../assets/js/productos.js"></script>
-    <script src="../assets/js/login.js"></script>
-    <script src="../assets/js/detalleProducto.js"></script>
-    <script src="../assets/js/data.js"></script>
-    <script src="../assets/js/contacto.js"></script>
-    <script src="../assets/js/checkout.js"></script>
-    <script src="../assets/js/categorias.js"></script>
-    <script src="../assets/js/cart.js"></script>
-    <script src="../assets/js/auth.js"></script>
-    <script src="../assets/js/admin.js"></script>
-    <script src="../assets/js/admin_user.js"></script>
+                <!-- Flecha: abre el menú -->
+                <a class="nav-link dropdown-toggle dropdown-toggle-split px-1"
+                  href="#" id="catToggle" role="button"
+                  data-bs-toggle="dropdown" aria-expanded="false">
+                  <span class="visually-hidden">Abrir subcategorías</span>
+                </a>
 
-  </body>
+  <!-- Subcategorías -->
+  <ul class="dropdown-menu" aria-labelledby="catToggle">
+    <li><a class="dropdown-item" href="./categorias.html?c=Frutas%20Frescas">Frutas Frescas</a></li>
+    <li><a class="dropdown-item" href="./categorias.html?c=Verduras%20Org%C3%A1nicas">Verduras Orgánicas</a></li>
+    <li><a class="dropdown-item" href="./categorias.html?c=Productos%20Org%C3%A1nicos">Productos Orgánicos</a></li>
+    <li><a class="dropdown-item" href="./categorias.html?c=L%C3%A1cteos">Lácteos</a></li>
+  </ul>
+</li>
+
+
+            <li class="nav-item"><a class="nav-link" href="./ofertas.html">Ofertas</a></li>
+            <li class="nav-item"><a class="nav-link" href="./nosotros.html">Nosotros</a></li>
+            <li class="nav-item"><a class="nav-link" href="./blogs.html">Blog</a></li>
+            <li class="nav-item"><a class="nav-link" href="./contactos.html">Contacto</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+<main class="container py-5" style="background:url('../assets/image/textura-papel-blanco_1194-5416.jpg'); background-size:cover; background-attachment:fixed; border-radius:12px;">
+
+
+  <!-- ==================== ENUNCIADO ==================== -->
+  <section class="text-center mb-5">
+    <h2 class="fw-bold" style="color:#8B4513;font-family:'Playfair Display',serif;">Enunciado</h2>
+    <p class="mt-3" style="color:#444;max-width:900px;margin:auto;font-size:1.1em;line-height:1.7;">
+      HuertoHogar es una tienda online dedicada a llevar la frescura y calidad de los productos del campo 
+      directamente a la puerta de nuestros clientes en Chile. Con más de <strong>6 años de experiencia</strong>, operamos 
+      en más de <strong>9 puntos a lo largo del país</strong>, incluyendo ciudades clave como <strong>Santiago, Puerto Montt, 
+      Villarica, Nacimiento, Viña del Mar, Valparaíso y Concepción</strong>. Nuestra misión es conectar a las 
+      familias chilenas con el campo, promoviendo un estilo de vida saludable y sostenible.
+    </p>
+  </section>
+
+  <!-- ==================== MISIÓN / VISIÓN ==================== -->
+  <section class="row text-center g-4 mb-5">
+    <div class="col-md-4">
+      <div class="card h-100 shadow-sm border-0" data-bs-toggle="animation" style="border-radius:12px;">
+        <div class="card-body">
+          <h3 style="color:#2E8B57;font-family:'Playfair Display',serif;">🌱 Misión</h3>
+          <p class="mt-3" style="color:#555;line-height:1.7;">
+            Nuestra misión es proporcionar productos frescos y de calidad directamente desde el campo hasta 
+            la puerta de nuestros clientes, garantizando la frescura y el sabor en cada entrega. Nos 
+            comprometemos a fomentar una conexión más cercana entre los consumidores y los agricultores 
+            locales, apoyando prácticas agrícolas sostenibles y promoviendo una alimentación saludable en 
+            todos los hogares chilenos. 
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card h-100 shadow-sm border-0" style="border-radius:12px;">
+        <div class="card-body">
+          <h3 style="color:#2E8B57;font-family:'Playfair Display',serif;">🌍 Visión</h3>
+          <p class="mt-3" style="color:#555;line-height:1.7;">
+            Nuestra visión es ser la tienda online líder en la distribución de productos frescos y naturales en 
+            Chile, reconocida por nuestra calidad excepcional, servicio al cliente y compromiso con la 
+            sostenibilidad. Aspiramos a expandir nuestra presencia a nivel nacional e internacional, 
+            estableciendo un nuevo estándar en la distribución de productos agrícolas directos del productor al 
+            consumidor. 
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card h-100 shadow-sm border-0" style="border-radius:12px;">
+        <div class="card-body">
+          <h3 style="color:#2E8B57;font-family:'Playfair Display',serif;">🌾 Propósito</h3>
+          <p class="mt-3" style="color:#555;line-height:1.7;">
+            Nuestro propósito es fortalecer el vínculo entre los hogares chilenos y la tierra, asegurando que 
+            cada familia tenga acceso a productos sanos, frescos y de origen transparente. Trabajamos para 
+            impulsar la economía local y un futuro más verde y responsable.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== EQUIPO ==================== -->
+  <section class="text-center mb-5">
+    <h3 style="color:#2E8B57;font-family:'Playfair Display',serif;">👩‍🌾 Nuestro Equipo</h3>
+    <img src="../assets/image/grupal.png" alt="Equipo HuertoHogar" class="img-fluid mt-3 rounded shadow" style="max-width:90%;">
+    <p class="mt-3" style="color:#555;max-width:700px;margin:auto;">
+      El corazón de HuertoHogar está en nuestro equipo y en las familias que día a día confían en nosotros.
+    </p>
+  </section>
+
+  <!-- ==================== RECETAS SUGERIDAS ==================== -->
+  <section class="mb-5">
+    <h3 style="color:#2E8B57;font-family:'Playfair Display',serif;">🍲 Recetas sugeridas</h3>
+    <ul style="margin-top:16px;color:#555;line-height:1.8;font-size:1.05em;list-style-type:'🍃 ';">
+      <li>
+        <a href="https://youtu.be/ZHIVo3i6qNw?si=u2GJIAslK62VooWJ" target="_blank" style="color:#2E8B57;text-decoration:none;font-weight:600;">
+          Ensalada fresca de espinacas y manzana Fuji.
+        </a>
+      </li>
+      <li>
+        <a href="https://youtu.be/JMi9rU7bAwE?si=VoY7zvino3mefn_A" target="_blank" style="color:#2E8B57;text-decoration:none;font-weight:600;">
+          Jugo natural de naranja Valencia con zanahoria.
+        </a>
+      </li>
+      <li>
+        <a href="https://youtu.be/Sg9qkDadApg?si=b-A_3dHtu5N57Fme" target="_blank" style="color:#2E8B57;text-decoration:none;font-weight:600;">
+          Salteado de pimientos tricolores con quinoa orgánica.
+        </a>
+      </li>
+      <li>
+        <a href="https://youtu.be/DhoBDVpiv2U?si=9sSwTpfoq6hF9t2a" target="_blank" style="color:#2E8B57;text-decoration:none;font-weight:600;">
+          Postre casero con miel orgánica y plátanos maduros.
+        </a>
+      </li>
+    </ul>
+  </section>
+
+
+</main>
+
+
+<!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-left">
+          <h2>HuertoHogar</h2>
+          <div class="foot-links">
+            <a href="index.html">Inicio</a> |
+            <a href="productos.html">Productos</a> |
+            <a href="nosotros.html">Nosotros</a> |
+            <a href="contactos.html">Contacto</a>
+          </div>
+        </div>
+
+        <div class="footer-right">
+          <p>¡Mantente en contacto! Únete a nuestro boletín.</p>
+          <form id="subscribeForm" class="subscribe-form">
+            <input type="email" id="emailSub" name="emailSub" placeholder="Ingresa tu correo" required>
+            <button type="submit">Suscribirse</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div class="footer-column contacto">
+          <h3>Contacto</h3>
+          <p>Email: <a href="mailto:contacto@huertohogar.cl">contacto@huertohogar.cl</a></p>
+          <p>Teléfono: <a href="tel:+56912345678">+56 9 1234 5678</a></p>
+        </div>
+
+<div class="footer-column redes">
+  <h3>Síguenos en redes sociales:</h3>
+  <div class="social-icons">
+    <!-- Instagram -->
+    <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">
+      <img src="../assets/image/instagram.png" alt="Instagram">
+    </a>
+
+    <!-- WhatsApp (abrirá chat directo con número ejemplo) -->
+    <a href="https://wa.me/56912345678" target="_blank" rel="noopener noreferrer">
+      <img src="../assets/image/whatsapp.png" alt="WhatsApp">
+    </a>
+
+    <!-- Facebook -->
+    <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">
+      <img src="../assets/image/facebook.png" alt="Facebook">
+    </a>
+  </div>
+</div>
+
+
+        <div class="footer-column pagos">
+          <h3>Pagos seguros:</h3>
+          <div class="pay-icons">
+            <img src="../assets/image/visa.png" alt="Visa">
+            <img src="../assets/image/master card.png" alt="MasterCard">
+            <img src="../assets/image/paypal.png" alt="PayPal">
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-logo">
+        <img src="../assets/image/logo.png" alt="Logo HuertoHogar">
+      </div>
+    </div>
+  </footer>
+  <!-- ==================== SCRIPTS ==================== -->
+  <script>
+    document.getElementById('yearFoot').textContent = new Date().getFullYear();
+  </script>
+  <script src="../assets/js/script.js"></script>
+</body>
 </html>

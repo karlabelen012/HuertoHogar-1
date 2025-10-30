@@ -1,221 +1,203 @@
 <!doctype html>
 <html lang="es">
-  <head>
-    <meta charset="utf-8" />
-    <title>Huerto Hogar — Login</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+<head>
+  <meta charset="utf-8" />
+  <title>Huerto Hogar — Login</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <!-- Tipografías del contexto -->
-    <link rel="stylesheet" href="../assets/font/font.css">
+   <!-- Fuentes locales -->
+  <link rel="stylesheet" href="../assets/font/font.css">
 
-    <!-- Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Tipografías del contexto -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
 
-    <script type="module" src="../assets/js/validators.js"></script>
-    <script type="module" src="../assets/js/script.js"></script>
-    <script type="module" src="../assets/js/login.js"></script>
+  <!-- Bootstrap (Eval. 2: diseño responsivo) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <link rel="stylesheet" href="../assets/css/style.css">
-    <link rel="stylesheet" href="../assets/css/productos.css">
-    <link rel="stylesheet" href="../assets/css/blogs.css">
-    <link rel="stylesheet" href="../assets/css/autth.css">
-    <link rel="stylesheet" href="../assets/css/admin.css">
+  <!-- Estilos propios (puedes ajustar colores, pero mantén la paleta del contexto) -->
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/productos.css">
+
+  <!-- JS (todo externo, nada embebido) -->
+  <script type="module" src="../assets/js/script.js" defer></script>
+  <script type="module" src="../assets/js/data.js" defer></script>
+  <script type="module" src="../assets/js/ui.js" defer></script>
+  <script type="module" src="../assets/js/cart.js" defer></script>
+  <script type="module" src="../assets/js/productos.js" defer></script>
 </head>
-  
-  <body>
 
-    <!-- ======= TOPBAR: logo + buscador + botones + carrito ======= -->
-    <header class="border-bottom">
-      <div class="bg-white">
-        <div class="container py-2">
-          <div class="row align-items-center g-2">
-            
-            <!-- Logo a la izquierda -->
-              <div class="col-6 col-md-2 d-flex align-items-center">
-                <a href="./index.html" class="d-inline-flex align-items-center text-decoration-none">
-                  <img src="../assets/image/logo.png" alt="Huerto Hogar" class="me-2" style="width:auto;height:55px;object-fit:contain;">
-                </a>
-              </div>
+<body>
 
-            <!-- Buscador centrado -->
-            <div class="col-12 col-md-6 d-flex justify-content-md-center">
-              <form class="d-flex w-100" style="max-width: 420px;" action="./productos.html">
-                <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Buscar" name="q">
-                <button class="btn btn-outline-success" type="submit">Buscar</button>
-              </form>
-            </div>
-
-            <!-- Botones a la derecha -->
-            <div class="col-6 col-md-4 d-flex justify-content-end align-items-center gap-2">
-              <a class="btn btn-outline-primary btn-sm" href="./login.html">Iniciar Sesión</a>
-              <a class="btn btn-primary btn-sm" href="./registro.html">Crear Cuenta</a>
-              <!-- Carrito en pastilla verde con monto -->
-              <a class="btn btn-success btn-sm d-flex align-items-center" href="./carrito.html">
-                <span class="me-1">🛒</span>
-                Carrito <span class="ms-1" id="cartAmount">$0</span>
+   <!-- ======= TOPBAR: logo + buscador + botones + carrito ======= -->
+  <header class="border-bottom">
+    <div class="bg-white">
+      <div class="container py-2">
+        <div class="row align-items-center g-2">
+          
+          <!-- Logo a la izquierda -->
+            <div class="col-6 col-md-2 d-flex align-items-center">
+              <a href="./index.html" class="d-inline-flex align-items-center text-decoration-none">
+                <img src="../assets/image/logo.png" alt="Huerto Hogar" class="me-2" style="width:auto;height:55px;object-fit:contain;">
               </a>
             </div>
-          </div>
-        </div>
-      </div>
 
-      <!-- ======= NAVBAR: Home activo + categorías ▼ + resto ======= -->
-      <nav class="navbar navbar-expand-lg bg-white">
-        <div class="container">
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div id="mainNav" class="collapse navbar-collapse">
-            <ul class="navbar-nav mx-auto">
-              <li class="nav-item"><a class="nav-link active fw-semibold" aria-current="page" href="./index.html">Home</a></li>
-
-              <!-- Categorías (dropdown) -->
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="./productos.html" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Productos
-                </a>
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="./categorias.html?c=Frutas Frescas">Frutas Frescas</a></li>
-                  <li><a class="dropdown-item" href="./categorias.html?c=Verduras Orgánicas">Verduras Orgánicas</a></li>
-                  <li><a class="dropdown-item" href="./categorias.html?c=Productos Orgánicos">Productos Orgánicos</a></li>
-                  <li><a class="dropdown-item" href="./categorias.html?c=Lácteos">Lácteos</a></li>
-                </ul>
-              </li>
-
-              <li class="nav-item"><a class="nav-link" href="./ofertas.html">Ofertas</a></li>
-              <li class="nav-item"><a class="nav-link" href="./nosotros.html">Nosotros</a></li>
-              <li class="nav-item"><a class="nav-link" href="./blogs.html">Blog</a></li>
-              <li class="nav-item"><a class="nav-link" href="./contactos.html">Contacto</a></li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-    </header>
-
-    <!-- ==================== FORMULARIO DE LOGIN (mockup exacto con textura) ==================== -->
-      <main class="container py-5 login-container">
-
-        <!-- HEADER DE LOGIN: Logo e identidad visual -->
-        <section class="login-header">
-          <!-- Logo de la empresa centrado -->
-          <img src="../assets/image/logo.png" alt="Logo HuertoHogar">
-          <!-- Nombre de la empresa como título -->
-          <h1>HuertoHogar</h1>
-        </section>
-
-        <!-- FORMULARIO: Contenedor principal del formulario -->
-        <div class="login-box">
-          <!-- Barra superior del formulario -->
-          <div class="login-header-bar">
-            <h2>INICIO DE SESIÓN</h2>
-          </div>
-
-          <!-- Formulario de login con validación -->
-          <form id="loginForm" class="login-form">
-            <!-- Campo de correo electrónico -->
-            <label for="email">CORREO</label>
-            <input 
-              type="email" 
-              id="email" 
-              name="email" 
-              required 
-              placeholder="Ej: usuario@gmail.com"
-            >
-
-            <!-- Campo de contraseña -->
-            <label for="password">CONTRASEÑA</label>
-            <input 
-              type="password" 
-              id="password" 
-              name="password" 
-              required 
-              placeholder="********"
-            >
-
-            <!-- Botón de submit -->
-            <button type="submit">Iniciar sesión</button>
-          </form>
-        </div>
-
-        <!-- ENLACES ADICIONALES: Registro y recuperación -->
-        <p class="login-extra">
-          <!-- Enlace a registro para nuevos usuarios -->
-          ¿No tienes cuenta?
-          <a href="registro.html">Regístrate aquí</a><br>
-          <!-- Enlace para recuperar contraseña -->
-          ¿Olvidaste tu contraseña?
-          <a href="#">Recupérala</a>
-      </p>
-    </main>
-
-    <!-- ==================== FOOTER ==================== -->
-    <footer class="footer">
-      <div class="container">
-        <div class="footer-top">
-          <div class="footer-left">
-            <h2>HuertoHogar</h2>
-            <div class="foot-links">
-              <a href="index.html">Inicio</a> |
-              <a href="productos.html">Productos</a> |
-              <a href="nosotros.html">Nosotros</a> |
-              <a href="contactos.html">Contacto</a>
-            </div>
-          </div>
-
-          <div class="footer-right">
-            <p>¡Mantente en contacto! Únete a nuestro boletín.</p>
-            <form id="subscribeForm" class="subscribe-form">
-              <input type="email" id="emailSub" name="emailSub" placeholder="Ingresa tu correo" required>
-              <button type="submit">Suscribirse</button>
+          <!-- Buscador centrado -->
+          <div class="col-12 col-md-6 d-flex justify-content-md-center">
+            <form class="d-flex w-100" style="max-width: 420px;" action="./productos.html">
+              <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Buscar" name="q">
+              <button class="btn btn-outline-success" type="submit">Buscar</button>
             </form>
           </div>
-        </div>
 
-        <div class="footer-bottom">
-          <div class="footer-column contacto">
-            <h3>Contacto</h3>
-            <p>Email: <a href="mailto:contacto@huertohogar.cl">contacto@huertohogar.cl</a></p>
-            <p>Teléfono: <a href="tel:+56912345678">+56 9 1234 5678</a></p>
+          <!-- Botones a la derecha -->
+          <div class="col-6 col-md-4 d-flex justify-content-end align-items-center gap-2">
+            <a class="btn btn-outline-primary btn-sm" href="./login.html">Iniciar Sesión</a>
+            <a class="btn btn-primary btn-sm" href="./registro.html">Crear Cuenta</a>
+            <!-- Carrito en pastilla verde con monto -->
+            <a class="btn btn-success btn-sm d-flex align-items-center" href="./carrito.html">
+              <span class="me-1">🛒</span>
+              Carrito <span class="ms-1" id="cartAmount">$0</span>
+            </a>
           </div>
-
-          <div class="footer-column redes">
-            <h3>Síguenos en redes sociales:</h3>
-            <div class="social-icons">
-              <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">
-                <img src="../assets/image/instagram.png" alt="Instagram">
-              </a>
-              <a href="https://wa.me/56912345678" target="_blank" rel="noopener noreferrer">
-                <img src="../assets/image/whatsapp.png" alt="WhatsApp">
-              </a>
-              <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">
-                <img src="../assets/image/facebook.png" alt="Facebook">
-              </a>
-            </div>
-          </div>
-
-          <div class="footer-column pagos">
-            <h3>Pagos seguros:</h3>
-            <div class="pay-icons">
-              <img src="../assets/image/visa.png" alt="Visa">
-              <img src="../assets/image/master card.png" alt="MasterCard">
-              <img src="../assets/image/paypal.png" alt="PayPal">
-            </div>
-          </div>
-        </div>
-
-        <div class="footer-logo">
-          <img src="../assets/image/logo.png" alt="Logo HuertoHogar">
         </div>
       </div>
-    </footer>
+    </div>
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- ======= NAVBAR: Home activo + categorías ▼ + resto ======= -->
+    <nav class="navbar navbar-expand-lg bg-white">
+      <div class="container">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div id="mainNav" class="collapse navbar-collapse">
+          <ul class="navbar-nav mx-auto">
+            <li class="nav-item"><a class="nav-link active fw-semibold" aria-current="page" href="./index.html">Home</a></li>
 
-    <!-- Agregar script -->
-    <script type="module" src="../assets/js/validators.js"></script>
-    <script type="module" src="../assets/js/script.js"></script>
-    <script type="module" src="../assets/js/login.js"></script>
-    
-  </body>
+            <!-- Categorías (dropdown) -->
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="./categorias.html" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Categorías
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="./categorias.html?c=Frutas Frescas">Frutas Frescas</a></li>
+                <li><a class="dropdown-item" href="./categorias.html?c=Verduras Orgánicas">Verduras Orgánicas</a></li>
+                <li><a class="dropdown-item" href="./categorias.html?c=Productos Orgánicos">Productos Orgánicos</a></li>
+                <li><a class="dropdown-item" href="./categorias.html?c=Lácteos">Lácteos</a></li>
+              </ul>
+            </li>
+
+            <li class="nav-item"><a class="nav-link" href="./ofertas.html">Ofertas</a></li>
+            <li class="nav-item"><a class="nav-link" href="./nosotros.html">Nosotros</a></li>
+            <li class="nav-item"><a class="nav-link" href="./blogs.html">Blog</a></li>
+            <li class="nav-item"><a class="nav-link" href="./contactos.html">Contacto</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+<!-- ==================== FORMULARIO DE LOGIN (mockup exacto con textura) ==================== -->
+<main class="container py-5 login-container">
+
+  <!-- Logo y nombre de empresa -->
+  <section class="login-header">
+    <img src="../assets/image/logo.png" alt="Logo HuertoHogar">
+    <h1>HuertoHogar</h1>
+  </section>
+
+  <!-- Cuadro del formulario -->
+  <div class="login-box">
+    <div class="login-header-bar">
+      <h2>INICIO DE SESIÓN</h2>
+    </div>
+
+    <form id="loginForm" class="login-form">
+      <label for="email">CORREO</label>
+      <input type="email" id="email" name="email" required placeholder="Ej: usuario@gmail.com">
+
+      <label for="password">CONTRASEÑA</label>
+      <input type="password" id="password" name="password" required placeholder="********">
+
+      <button type="submit">Iniciar sesión</button>
+    </form>
+  </div>
+
+  <!-- Enlaces inferiores -->
+  <p class="login-extra">
+    ¿No tienes cuenta?
+    <a href="registro.html">Regístrate aquí</a><br>
+    ¿Olvidaste tu contraseña?
+    <a href="#">Recupérala</a>
+  </p>
+</main>
+
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-left">
+          <h2>HuertoHogar</h2>
+          <div class="foot-links">
+            <a href="index.html">Inicio</a> |
+            <a href="productos.html">Productos</a> |
+            <a href="nosotros.html">Nosotros</a> |
+            <a href="contactos.html">Contacto</a>
+          </div>
+        </div>
+
+        <div class="footer-right">
+          <p>¡Mantente en contacto! Únete a nuestro boletín.</p>
+          <form id="subscribeForm" class="subscribe-form">
+            <input type="email" id="emailSub" name="emailSub" placeholder="Ingresa tu correo" required>
+            <button type="submit">Suscribirse</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div class="footer-column contacto">
+          <h3>Contacto</h3>
+          <p>Email: <a href="mailto:contacto@huertohogar.cl">contacto@huertohogar.cl</a></p>
+          <p>Teléfono: <a href="tel:+56912345678">+56 9 1234 5678</a></p>
+        </div>
+
+        <div class="footer-column redes">
+          <h3>Síguenos en redes sociales:</h3>
+          <div class="social-icons">
+            <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">
+              <img src="../assets/image/instagram.png" alt="Instagram">
+            </a>
+            <a href="https://wa.me/56912345678" target="_blank" rel="noopener noreferrer">
+              <img src="../assets/image/whatsapp.png" alt="WhatsApp">
+            </a>
+            <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">
+              <img src="../assets/image/facebook.png" alt="Facebook">
+            </a>
+          </div>
+        </div>
+
+        <div class="footer-column pagos">
+          <h3>Pagos seguros:</h3>
+          <div class="pay-icons">
+            <img src="../assets/image/visa.png" alt="Visa">
+            <img src="../assets/image/master card.png" alt="MasterCard">
+            <img src="../assets/image/paypal.png" alt="PayPal">
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-logo">
+        <img src="../assets/image/logo.png" alt="Logo HuertoHogar">
+      </div>
+    </div>
+  </footer>
+
+  <link rel="stylesheet" href="../assets/css/responsive.css">
+
+
+  <script src="../assets/js/script.js"></script>
+
+</body>
 </html>

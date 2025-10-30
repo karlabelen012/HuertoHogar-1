@@ -1,13 +1,10 @@
-// ======================================================
-// data.js  → datos base de Huerto Hogar
-// ======================================================
-
 export const CATEGORIAS = [
-  { id: 'Frutas Frescas',     img: '../assets/image/categoriafruta.png' },
+  { id: 'Frutas Frescas', img: '../assets/image/categoriafruta.png' },
   { id: 'Verduras Orgánicas', img: '../assets/image/categoriaverduras.png' },
-  { id: 'Productos Orgánicos',img: '../assets/image/categoriaOrganicos.png' },
-  { id: 'Lácteos',            img: '../assets/image/categorialacteos.png' }
+  { id: 'Productos Orgánicos', img: '../assets/image/categoriaOrganicos.png' },
+  { id: 'Lácteos', img: '../assets/image/categorialacteos.png' }
 ];
+
 
 export const PRODUCTOS = [
   // Frutas
@@ -27,11 +24,4 @@ export const PRODUCTOS = [
 
   // Lácteos
   { id:'PL001', nombre:'Leche Entera 1L',     precio:1100, categoria:'Lácteos',             img:'../assets/image/leche.png' },
-  { id:'PL002', nombre:'Yogurt Artesanal',    precio:500,  categoria:'Lácteos',             img:'../assets/image/yougurt.png' }
-];
-
-// (opcional) regiones / comunas si después quieres autocompletar
-export const REGIONES = [
-  { id: 'RM', nombre: 'Región Metropolitana', comunas: ['Maipú','Puente Alto','Santiago','La Florida'] },
-  { id: 'V',  nombre: 'Valparaíso',           comunas: ['Viña del Mar','Valparaíso','Quilpué'] }
 ];

@@ -7,8 +7,11 @@ const RouterConfig = () => (
   <Router>
     <Switch>
       <Route exact path="/" component={Home} />
-      <Route path="/perfil-cliente" component={PerfilCliente} />
+      <Route path="/contacto" component={Contacto} />
+      <Route path="/nosotros" component={Nosotros} />
+      <Route path="/carrito" component={Carrito} />
       <Route path="/perfil-admin" component={PerfilAdmin} />
+      <Route path="/perfil-cliente" component={PerfilCliente} />
     </Switch>
   </Router>
 );

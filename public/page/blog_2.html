@@ -1,149 +1,175 @@
 <!doctype html>
 <html lang="es">
-  <head>
-    <meta charset="utf-8" />
-    <title>Huerto Hogar — Blog 2</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+<head>
+  <meta charset="utf-8" />
+  <title>Huerto Hogar — Blog 2</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <link rel="stylesheet" href="../assets/font/font.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/css/style.css">
-    <link rel="stylesheet" href="../assets/css/blogs.css">
-  </head>
+   <!-- Fuentes locales -->
+  <link rel="stylesheet" href="../assets/font/font.css">
 
-  <body>
+  <!-- Tipografías del contexto -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
 
-    <!-- HEADER igual -->
-    <header class="border-bottom"> ... (idéntico al anterior) ... </header>
+  <!-- Bootstrap (Eval. 2: diseño responsivo) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <main class="container py-5"
-          style="background:url('../assets/image/textura-papel-blanco_1194-5416.jpg');
-                 background-size:cover; background-attachment:fixed; border-radius:12px;">
+  <!-- Estilos propios (puedes ajustar colores, pero mantén la paleta del contexto) -->
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/productos.css">
 
-      <div class="text-center mb-5 fade-up">
-        <h2 class="fw-bold" style="color:#8B4513;">Del Campo a Tu Mesa: El Camino de la Frescura</h2>
-        <p class="text-muted">El viaje que siguen nuestros productos, desde los campos locales hasta tu hogar.</p>
-      </div>
+  <!-- JS (todo externo, nada embebido) -->
+  <script type="module" src="../assets/js/script.js" defer></script>
+  <script type="module" src="../assets/js/data.js" defer></script>
+  <script type="module" src="../assets/js/ui.js" defer></script>
+  <script type="module" src="../assets/js/cart.js" defer></script>
+  <script type="module" src="../assets/js/productos.js" defer></script>
+</head>
 
-      <div class="row align-items-center mb-5 fade-up">
-        <div class="col-md-6">
-          <img src="../assets/image/Alimentaciónsaludable.jpeg" alt="Campo fresco" class="img-fluid rounded shadow">
-        </div>
-        <div class="col-md-6">
-          <h4 class="fw-semibold" style="color:#8B4513;">El viaje de la frescura</h4>
-          <p>
-            Cada producto de <strong>HuertoHogar</strong> tiene una historia. Desde la siembra hasta la entrega, 
-            cuidamos cada etapa para asegurar que los alimentos lleguen con su sabor y valor nutricional intactos.
-          </p>
-          <p>
-            Trabajamos junto a agricultores locales que aplican prácticas sostenibles, evitando químicos dañinos y 
-            priorizando el respeto por la tierra y los ecosistemas.
-          </p>
-        </div>
-      </div>
+<body>
 
-      <div class="row g-5 fade-up">
-        <div class="col-lg-6">
-          <div class="p-4 bg-light border rounded">
-            <h5 class="fw-bold" style="color:#8B4513;">Transparencia y confianza</h5>
-            <p>
-              Los clientes pueden rastrear el origen de cada producto. Nuestro sistema de trazabilidad garantiza 
-              calidad y seguridad alimentaria, fortaleciendo la relación entre el productor y el consumidor.
-            </p>
-          </div>
-        </div>
-        <div class="col-lg-6">
-          <h4 class="fw-semibold" style="color:#8B4513;">Compromiso con el medio ambiente</h4>
-          <p>
-            Al reducir intermediarios y optimizar rutas de entrega, HuertoHogar disminuye su huella de carbono 
-            y apoya el consumo responsable. Cada compra es un aporte a un modelo de economía más justo y verde.
-          </p>
-        </div>
-      </div>
-
-      <div class="text-center mt-5 fade-up">
-        <a href="blogs.html" class="btn" style="background:#8B4513;color:#fff;">← Volver al Blog</a>
-      </div>
-    </main>
-
-    <!-- ==================== FOOTER HUERTO HOGAR ==================== -->
-    <footer class="footer mt-5">
-      <div class="container">
-        
-        <!-- Sección superior -->
-        <div class="footer-top">
-          <!-- Columna izquierda -->
-          <div class="footer-left">
-            <h2>HuertoHogar</h2>
-            <div class="foot-links">
-              <a href="./index.html">Inicio</a> |
-              <a href="./productos.html">Productos</a> |
-              <a href="./nosotros.html">Nosotros</a> |
-              <a href="./blogs.html">Blog</a> |
-              <a href="./contactos.html">Contacto</a>
+   <!-- ======= TOPBAR: logo + buscador + botones + carrito ======= -->
+  <header class="border-bottom">
+    <div class="bg-white">
+      <div class="container py-2">
+        <div class="row align-items-center g-2">
+          
+          <!-- Logo a la izquierda -->
+            <div class="col-6 col-md-2 d-flex align-items-center">
+              <a href="./index.html" class="d-inline-flex align-items-center text-decoration-none">
+                <img src="../assets/image/logo.png" alt="Huerto Hogar" class="me-2" style="width:auto;height:55px;object-fit:contain;">
+              </a>
             </div>
-          </div>
 
-          <!-- Columna derecha: suscripción -->
-          <div class="footer-right">
-            <p>🌿 ¡Mantente en contacto! Únete a nuestro boletín.</p>
-            <form id="subscribeForm" class="subscribe-form">
-              <input type="email" id="emailSub" name="emailSub" placeholder="Ingresa tu correo" required>
-              <button type="submit">Suscribirse</button>
+          <!-- Buscador centrado -->
+          <div class="col-12 col-md-6 d-flex justify-content-md-center">
+            <form class="d-flex w-100" style="max-width: 420px;" action="./productos.html">
+              <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Buscar" name="q">
+              <button class="btn btn-outline-success" type="submit">Buscar</button>
             </form>
           </div>
-        </div>
 
-        <!-- Sección intermedia -->
-        <div class="footer-bottom">
-          <!-- Contacto -->
-          <div class="footer-column contacto">
-            <h3>Contacto</h3>
-            <p>Email: <a href="mailto:contacto@huertohogar.cl">contacto@huertohogar.cl</a></p>
-            <p>Teléfono: <a href="tel:+56912345678">+56 9 1234 5678</a></p>
-          </div>
-
-          <!-- Redes -->
-          <div class="footer-column redes">
-            <h3>Síguenos en redes sociales:</h3>
-            <div class="social-icons">
-              <a href="https://www.instagram.com" target="_blank"><img src="../assets/image/instagram.png" alt="Instagram"></a>
-              <a href="https://wa.me/56912345678" target="_blank"><img src="../assets/image/whatsapp.png" alt="WhatsApp"></a>
-              <a href="https://www.facebook.com" target="_blank"><img src="../assets/image/facebook.png" alt="Facebook"></a>
-            </div>
-          </div>
-
-          <!-- Pagos -->
-          <div class="footer-column pagos">
-            <h3>Pagos seguros:</h3>
-            <div class="pay-icons">
-              <img src="../assets/image/visa.png" alt="Visa">
-              <img src="../assets/image/master card.png" alt="MasterCard">
-              <img src="../assets/image/paypal.png" alt="PayPal">
-            </div>
+          <!-- Botones a la derecha -->
+          <div class="col-6 col-md-4 d-flex justify-content-end align-items-center gap-2">
+            <a class="btn btn-outline-primary btn-sm" href="./login.html">Iniciar Sesión</a>
+            <a class="btn btn-primary btn-sm" href="./registro.html">Crear Cuenta</a>
+            <!-- Carrito en pastilla verde con monto -->
+            <a class="btn btn-success btn-sm d-flex align-items-center" href="./carrito.html">
+              <span class="me-1">🛒</span>
+              Carrito <span class="ms-1" id="cartAmount">$0</span>
+            </a>
           </div>
         </div>
-
-        <!-- Logo inferior -->
-        <div class="footer-logo">
-          <img src="../assets/image/logo.png" alt="Logo HuertoHogar">
-        </div>
-
       </div>
-    </footer>
+    </div>
 
-    
-    <!-- Script animación -->
-    <script>
-      document.addEventListener('DOMContentLoaded', () => {
-        const els = document.querySelectorAll('.fade-up');
-        const obs = new IntersectionObserver((entries) => {
-          entries.forEach(e => {
-            if (e.isIntersecting) e.target.classList.add('show');
-          });
-        }, { threshold: 0.2 });
-        els.forEach(el => obs.observe(el));
-      });
-    </script>
-  </body>
+    <!-- ======= NAVBAR: Home activo + categorías ▼ + resto ======= -->
+    <nav class="navbar navbar-expand-lg bg-white">
+      <div class="container">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div id="mainNav" class="collapse navbar-collapse">
+          <ul class="navbar-nav mx-auto">
+            <li class="nav-item"><a class="nav-link active fw-semibold" aria-current="page" href="./index.html">Home</a></li>
+
+              <!-- Categorías: link + flecha (split dropdown) -->
+              <li class="nav-item dropdown d-flex align-items-center nav-categories">
+                <!-- Texto: navega a categorias.html -->
+                <a class="nav-link" href="./productos.html">Productos</a>
+
+                <!-- Flecha: abre el menú -->
+                <a class="nav-link dropdown-toggle dropdown-toggle-split px-1"
+                  href="#" id="catToggle" role="button"
+                  data-bs-toggle="dropdown" aria-expanded="false">
+                  <span class="visually-hidden">Abrir subcategorías</span>
+                </a>
+
+  <!-- Subcategorías -->
+  <ul class="dropdown-menu" aria-labelledby="catToggle">
+    <li><a class="dropdown-item" href="./categorias.html?c=Frutas%20Frescas">Frutas Frescas</a></li>
+    <li><a class="dropdown-item" href="./categorias.html?c=Verduras%20Org%C3%A1nicas">Verduras Orgánicas</a></li>
+    <li><a class="dropdown-item" href="./categorias.html?c=Productos%20Org%C3%A1nicos">Productos Orgánicos</a></li>
+    <li><a class="dropdown-item" href="./categorias.html?c=L%C3%A1cteos">Lácteos</a></li>
+  </ul>
+</li>
+
+
+            <li class="nav-item"><a class="nav-link" href="./ofertas.html">Ofertas</a></li>
+            <li class="nav-item"><a class="nav-link" href="./nosotros.html">Nosotros</a></li>
+            <li class="nav-item"><a class="nav-link" href="./blogs.html">Blog</a></li>
+            <li class="nav-item"><a class="nav-link" href="./contactos.html">Contacto</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+
+  <main class="container py-5"
+        style="background:url('../assets/image/textura-papel-blanco_1194-5416.jpg');
+               background-size:cover;
+               background-attachment:fixed;
+               border-radius:12px;">
+
+    <div class="text-center mb-5 fade-up">
+      <h2 class="fw-bold" style="color:#8B4513;">Del Campo a Tu Mesa: El Camino de la Frescura</h2>
+      <p class="text-muted">Conoce el proceso que hace posible que los productos de HuertoHogar lleguen frescos, naturales y sostenibles hasta tu hogar.</p>
+    </div>
+
+    <div class="row align-items-center mb-5 fade-up">
+      <div class="col-md-6">
+        <img src="../assets/image/Alimentaciónsaludable.jpeg" alt="Campo fresco" class="img-fluid rounded shadow">
+      </div>
+      <div class="col-md-6">
+        <h4 class="fw-semibold" style="color:#8B4513;">El viaje de la frescura</h4>
+        <p>
+          Cada producto de <strong>HuertoHogar</strong> tiene una historia. Desde la siembra hasta la entrega, 
+          cuidamos cada etapa para asegurar que los alimentos lleguen con su sabor y valor nutricional intactos.  
+        </p>
+        <p>
+          Trabajamos junto a agricultores locales que aplican prácticas sostenibles, evitando químicos dañinos y 
+          priorizando el respeto por la tierra y los ecosistemas.
+        </p>
+      </div>
+    </div>
+
+    <div class="row g-5 fade-up">
+      <div class="col-lg-6">
+        <div class="p-4 bg-light border rounded">
+          <h5 class="fw-bold" style="color:#8B4513;">Transparencia y confianza</h5>
+          <p>
+            Los clientes pueden rastrear el origen de cada producto que compran. 
+            Nuestro sistema de trazabilidad garantiza calidad y seguridad alimentaria, 
+            fortaleciendo la relación entre el productor y el consumidor.
+          </p>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <h4 class="fw-semibold" style="color:#8B4513;">Compromiso con el medio ambiente</h4>
+        <p>
+          Al reducir intermediarios y optimizar las rutas de entrega, HuertoHogar disminuye su huella de carbono 
+          y apoya el consumo responsable. Cada compra representa un aporte a un modelo de economía más justo y verde.
+        </p>
+      </div>
+    </div>
+
+    <div class="text-center mt-5 fade-up">
+      <a href="blogs.html" class="btn" style="background:#8B4513;color:#fff;">← Volver al Blog</a>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container"><!-- igual al anterior --></div>
+  </footer>
+
+  <script>
+    const fadeEls = document.querySelectorAll('.fade-up');
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('show'); });
+    }, { threshold: 0.2 });
+    fadeEls.forEach(el => obs.observe(el));
+  </script>
+</body>
 </html>

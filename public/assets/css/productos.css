@@ -1,149 +1,45 @@
-/* ===== Productos (vista mockup) ===== */
-
-.hh-body {
-  background: #f6f3ef;
-  min-height: 100vh;
+/* Tarjeta de categoría activa */
+.card-cat.active {
+  border: 2px solid var(--verde);
+  box-shadow: 0 0 0 3px rgba(46, 139, 87, 0.15);
 }
 
-/* barra superior tipo mockup */
-.hh-topbar {
-  height: 50px;
-  background: #ffffff;
-  border-bottom: 1px solid #ddd;
+
+/* ====== OFERTAS (aislado por .ofertas-page) ====== */
+.ofertas-page { --verde:#2E8B57; --borde:#e5efe8; }
+
+.ofertas-page .section-title{
+  font-family:"Playfair Display",serif; color:var(--verde); margin-bottom:1rem;
 }
 
-.hh-appname {
-  font-weight: 600;
-  color: #2f4f4f;
+/* Hero */
+.ofertas-page .of-hero{ min-height:240px; position:relative; border:1px solid var(--borde); }
+.ofertas-page .of-hero-img{
+  position:absolute; inset:0; width:100%; height:100%;
+  object-fit:cover; filter:contrast(.95) saturate(.95);
 }
-
-.hh-breadcrumb a {
-  color: #777;
-  font-size: 0.9rem;
-  text-decoration: none;
-  margin-right: 4px;
+.ofertas-page .of-hero-overlay{ position:absolute; inset:0;
+  background:linear-gradient(120deg, rgba(46,139,87,.55), rgba(0,0,0,.15));
 }
+.ofertas-page .of-hero-content{ position:relative; z-index:2; color:#fff; padding:2.25rem; }
 
-.hh-breadcrumb a.active {
-  font-weight: 600;
-  color: #2e8b57;
+/* Chips */
+.ofertas-page .of-chip{
+  display:inline-block; padding:.5rem .9rem; border-radius:999px;
+  background:#f1f5f3; color:#2E8B57; font-weight:600; font-size:.9rem;
+  border:1px solid var(--borde); text-decoration:none;
 }
+.ofertas-page .of-chip:hover{ background:#e5efe8; color:#236846; }
 
-.hh-cart-btn {
-  background: #2e8b57;
-  color: #fff;
-  padding: 4px 14px;
-  border-radius: 16px;
-  text-decoration: none;
-  font-size: 0.9rem;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-}
+/* Tarjetas grandes/mini */
+.ofertas-page .of-card .of-card-media img{ width:100%; height:100%; object-fit:cover; }
+.ofertas-page .of-card .card-body{ padding:1rem 1.25rem 1.25rem; }
 
-.hh-cart-badge {
-  background: #fff;
-  color: #2e8b57;
-  border-radius: 999px;
-  padding: 0 6px;
-  font-weight: 600;
-  font-size: 0.75rem;
-}
+.ofertas-page .of-mini img{ width:100%; height:100%; object-fit:cover; }
+.ofertas-page .of-mini .card-body{ padding:.75rem; }
 
-.hh-title-products {
-  font-family: "Playfair Display", serif;
-  letter-spacing: 0.08em;
-  color: #2f4f4f;
-  text-transform: uppercase;
-}
-
-/* grilla igual a mockup: 4 columnas desktop, 3 tablet, 2 mobile */
-.hh-products-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
-  gap: 18px;
-}
-
-/* card de producto */
-.hh-product-card {
-  background: #fff;
-  border: 1px solid #dfdfdf;
-  border-radius: 10px;
-  padding: 14px 12px 12px;
-  text-align: center;
-  position: relative;
-  transition: transform 0.15s ease-in-out;
-  cursor: pointer;
-  min-height: 240px;
-}
-
-.hh-product-card:hover {
-  transform: translateY(-3px);
-}
-
-.hh-product-img {
-  width: 100%;
-  max-height: 105px;
-  object-fit: contain;
-  margin-bottom: 10px;
-}
-
-.hh-product-name {
-  font-weight: 600;
-  font-size: 0.95rem;
-  color: #333;
-  margin-bottom: 4px;
-}
-
-.hh-product-price {
-  font-weight: 700;
-  color: #2e8b57;
-  margin-bottom: 8px;
-}
-
-.hh-product-btn {
-  background: #2e8b57;
-  color: #fff;
-  border: none;
-  border-radius: 6px;
-  padding: 4px 10px;
-  font-size: 0.8rem;
-  font-weight: 500;
-  width: 100%;
-}
-
-.hh-product-meta {
-  font-size: 0.7rem;
-  color: #7a7a7a;
-  margin-bottom: 3px;
-}
-
-/* iconito favorito arriba a la derecha (opcional) */
-.hh-fav-btn {
-  position: absolute;
-  top: 6px;
-  right: 8px;
-  background: #fff;
-  border: 1px solid #ddd;
-  width: 26px;
-  height: 26px;
-  border-radius: 50%;
-  font-size: 0.75rem;
-  display: grid;
-  place-items: center;
-  cursor: pointer;
-}
-
-/* footer */
-.hh-footer {
-  background: transparent;
-  color: #888;
-  font-size: 0.8rem;
-  margin-top: 30px;
-}
-
-@media (max-width: 576px) {
-  .hh-products-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
+/* CTA */
+.ofertas-page .of-cta{
+  background:linear-gradient(135deg, #2E8B57, #1d7a46);
+  border:1px solid rgba(255,255,255,.2);
 }

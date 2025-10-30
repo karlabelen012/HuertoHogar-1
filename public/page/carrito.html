@@ -1,257 +1,308 @@
 <!doctype html>
 <html lang="es">
-  <head>
-    <meta charset="utf-8" />
-    <title>Huerto Hogar — Carrito </title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+<head>
+  <meta charset="utf-8" />
+  <title>Huerto Hogar — Carrito </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <!-- Fuentes locales -->
-    <link rel="stylesheet" href="../assets/font/font.css">
+   <!-- Fuentes locales -->
+  <link rel="stylesheet" href="../assets/font/font.css">
 
-    <!-- Tipografías del contexto -->
-    <link rel="stylesheet" href="../assets/font/font.css">
+  <!-- Tipografías del contexto -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
 
-    <!-- Bootstrap (Eval. 2: diseño responsivo) -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap (Eval. 2: diseño responsivo) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
-      <!-- Estilos propios (puedes ajustar colores, pero mantén la paleta del contexto) -->
-    <link rel="stylesheet" href="../assets/css/style.css">
-    <link rel="stylesheet" href="../assets/css/productos.css">
-    <link rel="stylesheet" href="../assets/css/blogs.css">
-    <link rel="stylesheet" href="../assets/css/autth.css">
-    <link rel="stylesheet" href="../assets/css/admin.css">
-    
+  <!-- Estilos propios (puedes ajustar colores, pero mantén la paleta del contexto) -->
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/productos.css">
 
-  </head>
+  <!-- JS (todo externo, nada embebido) -->
+  <script type="module" src="../assets/js/script.js" defer></script>
+  <script type="module" src="../assets/js/data.js" defer></script>
+  <script type="module" src="../assets/js/ui.js" defer></script>
+  <script type="module" src="../assets/js/cart.js" defer></script>
+  <script type="module" src="../assets/js/productos.js" defer></script>
+</head>
 
-  <body>
+<body>
 
-    <!-- ======= TOPBAR: logo + buscador + botones + carrito ======= -->
-    <header class="border-bottom">
-      <div class="bg-white">
-        <div class="container py-2">
-          <div class="row align-items-center g-2">
-            
-            <!-- Logo a la izquierda -->
-              <div class="col-6 col-md-2 d-flex align-items-center">
-                <a href="./index.html" class="d-inline-flex align-items-center text-decoration-none">
-                  <img src="../assets/image/logo.png" alt="Huerto Hogar" class="me-2" style="width:auto;height:55px;object-fit:contain;">
-                </a>
-              </div>
-
-            <!-- Buscador centrado -->
-            <div class="col-12 col-md-6 d-flex justify-content-md-center">
-              <form class="d-flex w-100" style="max-width: 420px;" action="./productos.html">
-                <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Buscar" name="q">
-                <button class="btn btn-outline-success" type="submit">Buscar</button>
-              </form>
-            </div>
-
-            <!-- Botones a la derecha -->
-            <div class="col-6 col-md-4 d-flex justify-content-end align-items-center gap-2">
-              <a class="btn btn-outline-primary btn-sm" href="./login.html">Iniciar Sesión</a>
-              <a class="btn btn-primary btn-sm" href="./registro.html">Crear Cuenta</a>
-              <!-- Carrito en pastilla verde con monto -->
-              <a class="btn btn-success btn-sm d-flex align-items-center" href="./carrito.html">
-                <span class="me-1">🛒</span>
-                Carrito <span class="ms-1" id="cartAmount">$0</span>
+   <!-- ======= TOPBAR: logo + buscador + botones + carrito ======= -->
+  <header class="border-bottom">
+    <div class="bg-white">
+      <div class="container py-2">
+        <div class="row align-items-center g-2">
+          
+          <!-- Logo a la izquierda -->
+            <div class="col-6 col-md-2 d-flex align-items-center">
+              <a href="./index.html" class="d-inline-flex align-items-center text-decoration-none">
+                <img src="../assets/image/logo.png" alt="Huerto Hogar" class="me-2" style="width:auto;height:55px;object-fit:contain;">
               </a>
             </div>
-          </div>
-        </div>
-      </div>
 
-      <!-- ======= NAVBAR: Home activo + categorías ▼ + resto ======= -->
-      <nav class="navbar navbar-expand-lg bg-white">
-        <div class="container">
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div id="mainNav" class="collapse navbar-collapse">
-            <ul class="navbar-nav mx-auto">
-              <li class="nav-item"><a class="nav-link active fw-semibold" aria-current="page" href="./index.html">Home</a></li>
-
-                <!-- Categorías: link + flecha (split dropdown) -->
-                <li class="nav-item dropdown d-flex align-items-center nav-categories">
-                  <!-- Texto: navega a categorias.html -->
-                  <a class="nav-link" href="./productos.html">Productos</a>
-
-                  <!-- Flecha: abre el menú -->
-                  <a class="nav-link dropdown-toggle dropdown-toggle-split px-1"
-                    href="#" id="catToggle" role="button"
-                    data-bs-toggle="dropdown" aria-expanded="false">
-                    <span class="visually-hidden">Abrir subcategorías</span>
-                  </a>
-
-    <!-- Subcategorías -->
-    <ul class="dropdown-menu" aria-labelledby="catToggle">
-      <li><a class="dropdown-item" href="./categorias.html?c=Frutas%20Frescas">Frutas Frescas</a></li>
-      <li><a class="dropdown-item" href="./categorias.html?c=Verduras%20Org%C3%A1nicas">Verduras Orgánicas</a></li>
-      <li><a class="dropdown-item" href="./categorias.html?c=Productos%20Org%C3%A1nicos">Productos Orgánicos</a></li>
-      <li><a class="dropdown-item" href="./categorias.html?c=L%C3%A1cteos">Lácteos</a></li>
-    </ul>
-  </li>
-
-
-              <li class="nav-item"><a class="nav-link" href="./ofertas.html">Ofertas</a></li>
-              <li class="nav-item"><a class="nav-link" href="./nosotros.html">Nosotros</a></li>
-              <li class="nav-item"><a class="nav-link" href="./blogs.html">Blog</a></li>
-              <li class="nav-item"><a class="nav-link" href="./contactos.html">Contacto</a></li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-    </header>
-
-    <!-- ========================= MAIN ========================= -->
-      <main class="container my-4 carrito-page">
-
-        <!-- ====== ALERTA SUPERIOR ====== -->
-        <div class="alert alert-primary d-flex justify-content-between align-items-start gap-3 mb-4" role="alert">
-          <div>
-            <strong>¡Vista Carrito de compra!</strong>
-            <span class="ms-1">Esta vista fue diseñada para aprender y demostrar la implementación mediante JS del carrito de compra.</span>
-            <div class="small text-muted mt-1">
-              La información es obtenida mediante JS y almacenada en <strong>LocalStorage</strong>.
-            </div>
-          </div>
-
-          <div class="d-flex gap-2 align-items-center">
-            <div class="dropdown">
-              <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown">
-                Vistas
-              </button>
-              <ul class="dropdown-menu dropdown-menu-end">
-                <li><span class="dropdown-item-text text-muted">Carrito</span></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item disabled" href="#">Checkout</a></li>
-                <li><a class="dropdown-item disabled" href="#">Confirmación</a></li>
-              </ul>
-            </div>
-            <button class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
-          </div>
-        </div>
-
-        <div class="row g-4">
-
-          <!-- COLUMNA IZQUIERDA -->
-          <section class="col-lg-5">
-            <h5 class="fw-bold mb-3">Lista de productos</h5>
-            <div id="gridProductosCarrito" class="d-flex flex-wrap gap-3">
-              <!-- JS inyecta aquí las tarjetas de productos -->
-            </div>
-          </section>
-
-          <!-- COLUMNA DERECHA -->
-          <section class="col-lg-7">
-            <h5 class="fw-bold mb-3">Carrito de Compras</h5>
-
-            <div class="table-responsive">
-              <table class="table table-bordered align-middle mb-3 carrito-tabla">
-                <thead class="table-light">
-                  <tr>
-                    <th style="width:70px;">Imagen</th>
-                    <th>Nombre</th>
-                    <th class="text-end" style="width:110px;">Precio</th>
-                    <th class="text-center" style="width:160px;">Cantidad</th>
-                    <th class="text-end" style="width:120px;">Subtotal</th>
-                    <th class="text-center" style="width:110px;">Acciones</th>
-                  </tr>
-                </thead>
-                <tbody id="cartTableBody"></tbody>
-                <tfoot>
-                  <tr>
-                    <td colspan="4" class="text-end fw-semibold">Total</td>
-                    <td class="text-end">
-                      <span id="cartTotalMonto" class="badge text-bg-success fs-6">$0</span>
-                    </td>
-                    <td></td>
-                  </tr>
-                </tfoot>
-              </table>
-            </div>
-
-            <div class="d-flex justify-content-between gap-2">
-              <button id="btnVaciarCarrito" class="btn btn-secondary">Limpiar</button>
-              <button id="btnComprarAhora" class="btn btn-success">Comprar ahora</button>
-            </div>
-          </section>
-        </div>
-  </main>
-
-   <!-- ==================== SCRIPT ==================== -->
-    <footer class="footer">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../assets/js/script.js"></script>
-
-    <!-- ==================== FOOTER ==================== -->
-    <footer class="footer">
-      <div class="container">
-        <div class="footer-top">
-          <div class="footer-left">
-            <h2>HuertoHogar</h2>
-            <div class="foot-links">
-              <a href="index.html">Inicio</a> |
-              <a href="productos.html">Productos</a> |
-              <a href="nosotros.html">Nosotros</a> |
-              <a href="contactos.html">Contacto</a>
-            </div>
-          </div>
-
-          <div class="footer-right">
-            <p>¡Mantente en contacto! Únete a nuestro boletín.</p>
-            <form id="subscribeForm" class="subscribe-form">
-              <input type="email" id="emailSub" name="emailSub" placeholder="Ingresa tu correo" required>
-              <button type="submit">Suscribirse</button>
+          <!-- Buscador centrado -->
+          <div class="col-12 col-md-6 d-flex justify-content-md-center">
+            <form class="d-flex w-100" style="max-width: 420px;" action="./productos.html">
+              <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Buscar" name="q">
+              <button class="btn btn-outline-success" type="submit">Buscar</button>
             </form>
           </div>
-        </div>
 
-        <div class="footer-bottom">
-          <div class="footer-column contacto">
-            <h3>Contacto</h3>
-            <p>Email: <a href="mailto:contacto@huertohogar.cl">contacto@huertohogar.cl</a></p>
-            <p>Teléfono: <a href="tel:+56912345678">+56 9 1234 5678</a></p>
+          <!-- Botones a la derecha -->
+          <div class="col-6 col-md-4 d-flex justify-content-end align-items-center gap-2">
+            <a class="btn btn-outline-primary btn-sm" href="./login.html">Iniciar Sesión</a>
+            <a class="btn btn-primary btn-sm" href="./registro.html">Crear Cuenta</a>
+            <!-- Carrito en pastilla verde con monto -->
+            <a class="btn btn-success btn-sm d-flex align-items-center" href="./carrito.html">
+              <span class="me-1">🛒</span>
+              Carrito <span class="ms-1" id="cartAmount">$0</span>
+            </a>
           </div>
-
-          <div class="footer-column redes">
-            <h3>Síguenos en redes sociales:</h3>
-            <div class="social-icons">
-              <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">
-                <img src="../assets/image/instagram.png" alt="Instagram">
-              </a>
-              <a href="https://wa.me/56912345678" target="_blank" rel="noopener noreferrer">
-                <img src="../assets/image/whatsapp.png" alt="WhatsApp">
-              </a>
-              <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">
-                <img src="../assets/image/facebook.png" alt="Facebook">
-              </a>
-            </div>
-          </div>
-
-          <div class="footer-column pagos">
-            <h3>Pagos seguros:</h3>
-            <div class="pay-icons">
-              <img src="../assets/image/visa.png" alt="Visa">
-              <img src="../assets/image/master card.png" alt="MasterCard">
-              <img src="../assets/image/paypal.png" alt="PayPal">
-            </div>
-          </div>
-        </div>
-
-        <div class="footer-logo">
-          <img src="../assets/image/logo.png" alt="Logo HuertoHogar">
         </div>
       </div>
-    </footer>
+    </div>
 
-       <script src="../assets/js/script.js"></script>
-    <script src="../assets/js/validaciones.js"></script>
-    <script src="../assets/js/data.js"></script>
-    <script src="../assets/js/cart.js"></script>
-    <script src="../assets/js/auth.js"></script>
-    <script src="../assets/js/admin.js"></script>
-    <script type="module" src="../assets/js/ui-pages.js"></script>
+    <!-- ======= NAVBAR: Home activo + categorías ▼ + resto ======= -->
+    <nav class="navbar navbar-expand-lg bg-white">
+      <div class="container">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div id="mainNav" class="collapse navbar-collapse">
+          <ul class="navbar-nav mx-auto">
+            <li class="nav-item"><a class="nav-link active fw-semibold" aria-current="page" href="./index.html">Home</a></li>
 
-  </body>
+              <!-- Categorías: link + flecha (split dropdown) -->
+              <li class="nav-item dropdown d-flex align-items-center nav-categories">
+                <!-- Texto: navega a categorias.html -->
+                <a class="nav-link" href="./productos.html">Productos</a>
+
+                <!-- Flecha: abre el menú -->
+                <a class="nav-link dropdown-toggle dropdown-toggle-split px-1"
+                  href="#" id="catToggle" role="button"
+                  data-bs-toggle="dropdown" aria-expanded="false">
+                  <span class="visually-hidden">Abrir subcategorías</span>
+                </a>
+
+  <!-- Subcategorías -->
+  <ul class="dropdown-menu" aria-labelledby="catToggle">
+    <li><a class="dropdown-item" href="./categorias.html?c=Frutas%20Frescas">Frutas Frescas</a></li>
+    <li><a class="dropdown-item" href="./categorias.html?c=Verduras%20Org%C3%A1nicas">Verduras Orgánicas</a></li>
+    <li><a class="dropdown-item" href="./categorias.html?c=Productos%20Org%C3%A1nicos">Productos Orgánicos</a></li>
+    <li><a class="dropdown-item" href="./categorias.html?c=L%C3%A1cteos">Lácteos</a></li>
+  </ul>
+</li>
+
+
+            <li class="nav-item"><a class="nav-link" href="./ofertas.html">Ofertas</a></li>
+            <li class="nav-item"><a class="nav-link" href="./nosotros.html">Nosotros</a></li>
+            <li class="nav-item"><a class="nav-link" href="./blogs.html">Blog</a></li>
+            <li class="nav-item"><a class="nav-link" href="./contactos.html">Contacto</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+
+  <main class="container my-4">
+
+    <!-- Banner informativo DESCARTABLE -->
+    <div class="alert alert-primary alert-dismissible fade show d-flex align-items-start justify-content-between" role="alert">
+      <div>
+        <strong>¡Vista Carrito de compra!</strong>
+        <span class="ms-1">Esta vista fue diseñada para aprender y demostrar la implementación mediante JS del carrito de compra.</span>
+        <div class="small text-muted mt-1">
+          La información es obtenida mediante JS y almacenada en <strong>LocalStorage</strong>
+        </div>
+      </div>
+
+      <div class="d-flex align-items-center gap-2">
+        <!-- Botón “Vistas” a la derecha, como en el mockup -->
+        <div class="dropdown">
+          <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Vistas
+          </button>
+          <ul class="dropdown-menu dropdown-menu-end">
+            <li><span class="dropdown-item-text text-muted">Carrito</span></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item disabled" href="#">Checkout</a></li>
+            <li><a class="dropdown-item disabled" href="#">Confirmación</a></li>
+          </ul>
+        </div>
+
+        <!-- X para cerrar -->
+        <button type="button" class="btn-close ms-1" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+      </div>
+    </div>
+
+
+  <div class="row g-4">
+    <!-- ================== LISTA DE PRODUCTOS (Izquierda) ================== -->
+    <section class="col-lg-5">
+      <h5 class="mb-3 fw-bold">Lista de productos</h5>
+
+      <div id="gridProductosCarrito" class="row g-3">
+        <!--
+          Tus JS (productos.js) deben inyectar aquí tarjetas como:
+          
+          <article class="col-6">
+            <div class="card h-100">
+              <div class="ratio ratio-16x9 bg-light">
+                <img src="../assets/image/placeholder-400x200.png" class="object-fit-cover" alt="Producto">
+              </div>
+              <div class="card-body p-2">
+                <h6 class="card-title mb-1 text-truncate">Nombre del producto</h6>
+                <div class="d-flex align-items-center justify-content-between">
+                  <span class="fw-bold text-warning-emphasis">$ 4.999</span>
+                  <small class="text-muted">Stock Disponible</small>
+                </div>
+                <button class="btn btn-success btn-sm w-100 mt-2" data-add="ID_DEL_PRODUCTO">Añadir</button>
+              </div>
+            </div>
+          </article>
+        -->
+      </div>
+    </section>
+
+    <!-- ================== CARRITO (Derecha) ================== -->
+    <section class="col-lg-7">
+      <h5 class="mb-3 fw-bold">Carrito de Compras</h5>
+
+      <div class="table-responsive">
+        <table class="table align-middle table-bordered mb-3">
+          <thead class="table-light">
+            <tr>
+              <th style="width:72px">Imagen</th>
+              <th>Nombre</th>
+              <th style="width:110px" class="text-end">Precio</th>
+              <th style="width:140px" class="text-center">Cantidad</th>
+              <th style="width:120px" class="text-end">Subtotal</th>
+              <th style="width:110px" class="text-center">Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="cartTableBody">
+            <!--
+              Tus JS (cart.js) deben inyectar filas como:
+
+              <tr>
+                <td><img src="../assets/image/prod.jpg" class="rounded" alt="prod" style="width:60px;height:60px;object-fit:cover"></td>
+                <td>The Sims 4</td>
+                <td class="text-end">$ 3.999</td>
+                <td class="text-center">
+                  <div class="btn-group btn-group-sm" role="group" aria-label="Cantidad">
+                    <button class="btn btn-outline-secondary" data-dec="ID">−</button>
+                    <input type="number" class="form-control d-inline-block text-center mx-1" value="1" min="1" style="width:56px" data-qty="ID">
+                    <button class="btn btn-outline-secondary" data-inc="ID">+</button>
+                  </div>
+                </td>
+                <td class="text-end">$ 3.999</td>
+                <td class="text-center">
+                  <button class="btn btn-outline-danger btn-sm" data-del="ID">Eliminar</button>
+                </td>
+              </tr>
+            -->
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colspan="4" class="text-end fw-semibold">Total</td>
+              <td class="text-end">
+                <span id="cartTotalMonto" class="badge text-bg-success fs-6">$ 0</span>
+              </td>
+              <td></td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+
+    <!-- Acciones (abajo, como en la figura) -->
+    <div class="d-flex justify-content-between gap-2">
+      <button id="btnVaciarCarrito" class="btn btn-outline-secondary">Limpiar</button>
+      <button id="btnComprarAhora" class="btn btn-success">Comprar ahora</button>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const btnComprar = document.getElementById("btnComprarAhora");
+        if (btnComprar) {
+          btnComprar.addEventListener("click", () => {
+            // Redirige a la página de checkout
+            window.location.href = "./checkout.html";
+          });
+        }
+      });
+    </script>
+
+  <main
+
+ 
+
+  <!-- ==================== SCRIPTS ==================== -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../assets/js/script.js"></script>
+
+   <!-- ==================== FOOTER ==================== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-left">
+          <h2>HuertoHogar</h2>
+          <div class="foot-links">
+            <a href="index.html">Inicio</a> |
+            <a href="productos.html">Productos</a> |
+            <a href="nosotros.html">Nosotros</a> |
+            <a href="contactos.html">Contacto</a>
+          </div>
+        </div>
+
+        <div class="footer-right">
+          <p>¡Mantente en contacto! Únete a nuestro boletín.</p>
+          <form id="subscribeForm" class="subscribe-form">
+            <input type="email" id="emailSub" name="emailSub" placeholder="Ingresa tu correo" required>
+            <button type="submit">Suscribirse</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div class="footer-column contacto">
+          <h3>Contacto</h3>
+          <p>Email: <a href="mailto:contacto@huertohogar.cl">contacto@huertohogar.cl</a></p>
+          <p>Teléfono: <a href="tel:+56912345678">+56 9 1234 5678</a></p>
+        </div>
+
+        <div class="footer-column redes">
+          <h3>Síguenos en redes sociales:</h3>
+          <div class="social-icons">
+            <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">
+              <img src="../assets/image/instagram.png" alt="Instagram">
+            </a>
+            <a href="https://wa.me/56912345678" target="_blank" rel="noopener noreferrer">
+              <img src="../assets/image/whatsapp.png" alt="WhatsApp">
+            </a>
+            <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">
+              <img src="../assets/image/facebook.png" alt="Facebook">
+            </a>
+          </div>
+        </div>
+
+        <div class="footer-column pagos">
+          <h3>Pagos seguros:</h3>
+          <div class="pay-icons">
+            <img src="../assets/image/visa.png" alt="Visa">
+            <img src="../assets/image/master card.png" alt="MasterCard">
+            <img src="../assets/image/paypal.png" alt="PayPal">
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-logo">
+        <img src="../assets/image/logo.png" alt="Logo HuertoHogar">
+      </div>
+    </div>
+  </footer>
+
+</body>
 </html>
