@@ -1,0 +1,158 @@
+
+/* el main ya trae container de bootstrap, así que solo centramos */
+.noticias-importantes {
+  margin: 40px auto 50px;
+  max-width: 1180px;           /* mismo ancho que productos */
+}
+
+/* título verde del bloque */
+.titulo-noticias {
+  text-align: center;
+  font-family: "Playfair Display", serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #2E8B57;
+  margin-bottom: 35px;
+  letter-spacing: .3px;
+}
+
+/* ---------------- TARJETA PRINCIPAL DE BLOG ---------------- */
+.blog-caso {
+  display: grid;
+  grid-template-columns: 1.05fr .95fr;
+  gap: 0;
+  background: #f7f7f7;
+  border-radius: 10px;
+  margin-bottom: 28px;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0,0,0,.06);
+  border: 1px solid rgba(0,0,0,.03);
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+
+.blog-caso:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 24px rgba(0,0,0,.09);
+}
+
+.blog-info {
+  padding: 32px 34px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  justify-content: center;
+}
+
+.blog-titulo {
+  font-size: 1.45rem;
+  color: #2E8B57;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.blog-info p {
+  font-size: .95rem;
+  color: #333;
+  line-height: 1.65;
+  text-align: justify;
+}
+
+.blog-img {
+  background: #eaf7f0;
+}
+
+.blog-img img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+/* ---------------- BOTONES ---------------- */
+.btn-caso {
+  display: inline-block;
+  padding: 9px 22px;
+  font-size: .9rem;
+  font-weight: 600;
+  border-radius: 4px;
+  text-decoration: none;
+  color: #fff;
+  width: fit-content;
+}
+
+.btn-verde { background: #2E8B57; }
+.btn-verde:hover { background: #256f46; }
+
+.btn-cafe { background: #8B4513; }
+.btn-cafe:hover { background: #6b3410; }
+
+/* ---------------- NOTICIAS Y NOVEDADES ---------------- */
+.news {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.news .card {
+  background: rgba(255,255,255,.85);
+  border: 1px solid rgba(0,0,0,.02);
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,.04);
+}
+
+.news .card img {
+  width: 120px;
+  height: 110px;
+  object-fit: cover;
+}
+
+/* ---------------- SECCIONES DEBAJO (equipo, impacto) ---------------- */
+.section-title {
+  color: #2E8B57;
+  font-family: "Playfair Display", serif;
+  margin-bottom: 16px;
+}
+
+/* ---------------- ANIMACIÓN SUAVE ---------------- */
+.fade-up {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity .6s ease, transform .6s ease;
+}
+.fade-up.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ---------------- RESPONSIVE ---------------- */
+@media (max-width: 992px) {
+  .blog-caso {
+    grid-template-columns: 1fr;
+  }
+  .blog-img img {
+    height: 240px;
+  }
+  .blog-info {
+    text-align: center;
+  }
+  .btn-caso {
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 576px) {
+  .noticias-importantes {
+    margin-top: 24px;
+  }
+  .titulo-noticias {
+    font-size: 1.6rem;
+  }
+  .news .card {
+    flex-direction: column;
+    align-items: flex-start !important;
+  }
+  .news .card img {
+    width: 100%;
+    height: 180px;
+  }
+}

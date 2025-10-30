@@ -1,0 +1,160 @@
+/* Estilos de autenticación */
+
+/* Login y Registro - Container principal */
+.login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px 20px 60px;
+  background: url("../image/textura-papel-blanco_1194-5416.jpg") repeat center / 600px auto;
+}
+
+/* Header con logo */
+.login-header {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.login-header img {
+  width: 120px;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+.login-header h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 26px;
+  color: #2E8B57;
+  margin-bottom: 30px;
+}
+
+/* Cuadro del formulario */
+.login-box {
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  width: 480px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  overflow: hidden;
+}
+
+/* Barra superior */
+.login-header-bar {
+  background-color: #d0d0d0;
+  padding: 10px 16px;
+  border-bottom: 1px solid #c0c0c0;
+}
+
+.login-header-bar h2 {
+  margin: 0;
+  font-size: 14px;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: #333;
+}
+
+/* Formulario */
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 24px 30px 40px;
+}
+
+.login-form label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #333;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+.login-form input {
+  width: 90%;
+  padding: 10px;
+  border: 1px solid #999;
+  border-radius: 2px;
+  font-size: 14px;
+  outline: none;
+}
+
+.login-form input:focus {
+  border-color: #2E8B57;
+  box-shadow: 0 0 3px rgba(46,139,87,0.3);
+}
+
+.login-form button {
+  margin: 20px auto 0;
+  background: #2E8B57;
+  color: #fff;
+  font-weight: 600;
+  border: 1px solid #222;
+  padding: 12px 30px;
+  border-radius: 2px;
+  cursor: pointer;
+  width: 60%;
+  transition: background 0.3s ease;
+}
+
+.login-form button:hover {
+  background: #256f48;
+}
+
+/* Enlaces extra */
+.login-extra {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 14px;
+  color: #333;
+}
+
+.login-extra a {
+  color: #2E8B57;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.login-extra a:hover {
+  text-decoration: underline;
+}
+
+/* Registro */
+.register-box {
+  max-width: 600px;
+  margin: 50px auto;
+  background: #f1f1f1;
+  border: 1px solid #ccc;
+}
+
+.register-header {
+  background: #e5e5e5;
+  color: #333;
+  font-weight: 600;
+  text-align: center;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+.register-body {
+  padding: 25px;
+}
+
+/* Responsive */
+@media (max-width: 560px) {
+  .login-container {
+    padding: 36px 16px;
+    gap: 18px;
+  }
+  
+  .login-header img {
+    height: 84px;
+  }
+  
+  .login-header h1 {
+    font-size: 1.6rem;
+  }
+  
+  .login-box {
+    max-width: 100%;
+  }
+}

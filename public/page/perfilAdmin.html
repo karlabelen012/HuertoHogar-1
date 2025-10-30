@@ -1,179 +1,414 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>HuertoHogar - Administrador</title>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600;700&display=swap" rel="stylesheet">
-  <style>
-    body {display:flex;min-height:100vh;margin:0;font-family:'Montserrat',sans-serif;}
-    aside {width:220px;background:#2E8B57;color:#fff;padding:20px;}
-    aside h2 {margin-top:0;font-size:18px;}
-    aside nav a {
-      display:block;color:#fff;text-decoration:none;margin:8px 0;padding:6px;border-radius:4px;
-    }
-    aside nav a:hover, aside nav a.active {background:#256d46;}
-    main {flex:1;padding:20px;background:#f7f7f7;}
-    header {border-bottom:1px solid #ccc;padding-bottom:10px;margin-bottom:20px;}
-    .card {background:#fff;padding:16px;margin:12px 0;border-radius:8px;box-shadow:0 2px 6px #0001;}
-    table {width:100%;border-collapse:collapse;}
-    th, td {padding:8px;border:1px solid #ddd;text-align:left;}
-    section {display:none;} /* todas ocultas por defecto */
-    section.active {display:block;} /* solo la activa se muestra */
-  </style>
+  <title>Huerto Hogar — Panel Admin</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Fuentes locales -->
+  <link rel="stylesheet" href="../assets/font/font.css">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" referrerpolicy="no-referrer" />
+
+  <!-- Bootstrap (solo para tablas / inputs) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+
+  <!-- CSS del admin -->
+  <link rel="stylesheet" href="../assets/css/admin.css">
 </head>
-<body>
+<body class="hh-admin">
 
-  <!-- Menú lateral -->
-  <aside>
-    <h2>Admin HuertoHogar</h2>
-    <nav>
-      <a href="#" data-section="inicio" class="active">🏠 Inicio</a>
-      <a href="#" data-section="productos">🍎 Productos</a>
-      <a href="#" data-section="usuarios">👤 Usuarios</a>
-      <a href="#" data-section="pedidos">📦 Pedidos</a>
-      <a href="index.html">↩ Volver a tienda</a>
-    </nav>
-  </aside>
+  <!-- barra negra arriba -->
+  <header class="hh-admin-topbar">
+    <div class="hh-admin-company">Company name</div>
+  </header>
 
-  <!-- Contenido principal -->
-  <main>
-    <header>
-      <h1>Panel de Administración</h1>
-      <p>Gestiona tu tienda desde este panel.</p>
-    </header>
+  <div class="hh-admin-shell">
 
-    <!-- Inicio -->
-    <section id="inicio" class="active">
-      <div class="card">
-        <h3>📊 Resumen rápido</h3>
-        <ul>
-          <li>Total de productos: <strong>7</strong></li>
-          <li>Total de usuarios registrados: <strong>12</strong></li>
-          <li>Pedidos en curso: <strong>5</strong></li>
-        </ul>
+    <!-- SIDEBAR -->
+    <aside class="hh-admin-sidebar">
+      <nav class="hh-admin-menu" id="hhMenu">
+        <button class="hh-admin-item active" data-view="dashboard">
+          <i class="fa-solid fa-gauge"></i>
+          <span>Dashboard</span>
+        </button>
+        <button class="hh-admin-item" data-view="ordenes">
+          <i class="fa-regular fa-file-lines"></i>
+          <span>Órdenes</span>
+        </button>
+        <button class="hh-admin-item" data-view="productos">
+          <i class="fa-solid fa-cart-shopping"></i>
+          <span>Productos</span>
+        </button>
+        <button class="hh-admin-item" data-view="categorias">
+          <i class="fa-solid fa-list"></i>
+          <span>Categorías</span>
+        </button>
+        <button class="hh-admin-item" data-view="usuarios">
+          <i class="fa-solid fa-users"></i>
+          <span>Usuarios</span>
+        </button>
+        <button class="hh-admin-item" data-view="reportes">
+          <i class="fa-solid fa-chart-column"></i>
+          <span>Reportes</span>
+        </button>
+      </nav>
+
+      <div class="hh-admin-separator"></div>
+
+      <div class="hh-admin-bottom">
+        <button class="hh-admin-item" data-view="perfil">
+          <i class="fa-regular fa-user"></i>
+          <span>Perfil</span>
+        </button>
+        <a href="../index.html" class="hh-admin-bigbtn tienda">
+          <i class="fa-solid fa-store"></i>
+          Tienda
+        </a>
+        <button class="hh-admin-bigbtn cerrar" id="btnLogout">
+          <i class="fa-solid fa-right-from-bracket"></i>
+          Cerrar Sesión
+        </button>
       </div>
+    </aside>
+
+    <!-- CONTENIDO -->
+    <main class="hh-admin-content" id="hhViews">
+  <!-- ========== DASHBOARD ========== -->
+  <section class="hh-view" data-view="dashboard">
+    <div class="hh-admin-header">
+      <h2>Dashboard</h2>
+      <p>Resumen de las actividades diarias</p>
+    </div>
+
+    <div class="hh-admin-kpis">
+      <div class="hh-admin-kpi kpi-blue">
+        <div>
+          <h5>Compras</h5>
+          <div class="kpi-number" id="kpiCompras">0</div>
+          <p class="kpi-hint">Probabilidad de aumento: <strong>20%</strong></p>
+        </div>
+        <div class="kpi-icon"><i class="fa-solid fa-cart-shopping"></i></div>
+      </div>
+      <div class="hh-admin-kpi kpi-green">
+        <div>
+          <h5>Productos</h5>
+          <div class="kpi-number" id="kpiProductos">0</div>
+          <p class="kpi-hint">Inventario actual: <strong id="kpiStock">0</strong></p>
+        </div>
+        <div class="kpi-icon"><i class="fa-solid fa-box-open"></i></div>
+      </div>
+      <div class="hh-admin-kpi kpi-yellow">
+        <div>
+          <h5>Usuarios</h5>
+          <div class="kpi-number" id="kpiUsuarios">0</div>
+          <p class="kpi-hint">Nuevos usuarios este mes: <strong>0</strong></p>
+        </div>
+        <div class="kpi-icon"><i class="fa-solid fa-user-group"></i></div>
+      </div>
+    </div>
+
+    <section class="hh-admin-grid">
+      <article class="hh-admin-tile">
+        <div class="tile-icon"><i class="fa-solid fa-gauge"></i></div>
+        <h6>Dashboard</h6>
+        <p>Visión general de todas las métricas y estadísticas clave del sistema.</p>
+      </article>
+      <article class="hh-admin-tile">
+        <div class="tile-icon"><i class="fa-solid fa-file-invoice"></i></div>
+        <h6>Órdenes</h6>
+        <p>Gestión y seguimiento de todas las órdenes de compra realizadas.</p>
+      </article>
+      <article class="hh-admin-tile">
+        <div class="tile-icon"><i class="fa-solid fa-box"></i></div>
+        <h6>Productos</h6>
+        <p>Administrar inventario y detalles de los productos disponibles.</p>
+      </article>
+      <article class="hh-admin-tile">
+        <div class="tile-icon"><i class="fa-solid fa-tags"></i></div>
+        <h6>Categorías</h6>
+        <p>Organizar productos en categorías para facilitar su navegación.</p>
+      </article>
+      <article class="hh-admin-tile">
+        <div class="tile-icon"><i class="fa-solid fa-users"></i></div>
+        <h6>Usuarios</h6>
+        <p>Gestión de cuentas de usuario y sus roles dentro del sistema.</p>
+      </article>
+      <article class="hh-admin-tile">
+        <div class="tile-icon"><i class="fa-solid fa-chart-bar"></i></div>
+        <h6>Reportes</h6>
+        <p>Generación de informes detallados sobre las operaciones del sistema.</p>
+      </article>
+      <article class="hh-admin-tile">
+        <div class="tile-icon"><i class="fa-regular fa-id-badge"></i></div>
+        <h6>Perfil</h6>
+        <p>Administración de la información personal y configuraciones de cuenta.</p>
+      </article>
+      <article class="hh-admin-tile">
+        <div class="tile-icon"><i class="fa-solid fa-store"></i></div>
+        <h6>Tienda</h6>
+        <p>Visualiza tu tienda en tiempo real, visualiza los reportes de los usuarios.</p>
+      </article>
     </section>
+  </section>
 
-    <!-- Productos -->
-    <section id="productos">
-      <h2>Gestión de Productos</h2>
-      <div class="card">
-        <h3>Listado de productos</h3>
-        <table>
-          <thead>
-            <tr><th>Código</th><th>Nombre</th><th>Precio</th><th>Stock</th><th>Acciones</th></tr>
-          </thead>
-          <tbody>
+  <!-- ========== ÓRDENES ========== -->
+  <section class="hh-view d-none" data-view="ordenes">
+    <div class="hh-admin-header d-flex justify-content-between align-items-center">
+      <div>
+        <h2>Órdenes</h2>
+        <p>Gestión y seguimiento de todas las órdenes de compra realizadas.</p>
+      </div>
+      <div class="d-flex gap-2">
+        <input type="number" id="ordBuscarId" class="form-control form-control-sm" placeholder="N° pedido">
+        <button class="btn btn-dark btn-sm" id="btnBuscarOrden">Buscar</button>
+      </div>
+    </div>
+
+    <form id="formOrden" class="row g-2 mb-3">
+      <div class="col-md-3">
+        <input type="text" id="ordCliente" class="form-control" placeholder="Nombre cliente" required>
+      </div>
+      <div class="col-md-2">
+        <input type="number" min="0" id="ordTotal" class="form-control" placeholder="Total CLP" required>
+      </div>
+      <div class="col-md-2">
+        <select id="ordEstado" class="form-select">
+          <option value="Pagada">Pagada</option>
+          <option value="En preparación">En preparación</option>
+          <option value="Enviada">Enviada</option>
+          <option value="Listo para entrega">Listo para entrega</option>
+        </select>
+      </div>
+      <div class="col-md-2">
+        <button class="btn btn-primary w-100">Agregar</button>
+      </div>
+    </form>
+
+    <div class="hh-tablewrap">
+      <table class="table table-striped mb-0" id="tblOrdenes">
+        <thead>
+        <tr>
+          <th>#</th>
+          <th>Cliente</th>
+          <th>Fecha</th>
+          <th>Total</th>
+          <th>Estado</th>
+          <th></th>
+        </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ========== PRODUCTOS ========== -->
+  <section class="hh-view d-none" data-view="productos">
+    <div class="hh-admin-header">
+      <h2>Productos</h2>
+      <p>Administrar inventario y detalles de los productos disponibles.</p>
+    </div>
+
+    <form id="formProducto" class="row g-2 mb-3">
+      <div class="col-md-2">
+        <input type="text" id="prodNombre" class="form-control" placeholder="Nombre" required>
+      </div>
+      <div class="col-md-2">
+        <input type="number" min="0" id="prodPrecio" class="form-control" placeholder="Precio" required>
+      </div>
+      <div class="col-md-2">
+        <input type="number" min="0" id="prodStock" class="form-control" placeholder="Stock" value="10">
+      </div>
+      <div class="col-md-2">
+        <select id="prodCat" class="form-select" required></select>
+      </div>
+      <div class="col-md-3">
+        <input type="text" id="prodImg" class="form-control" placeholder="../assets/image/...png">
+      </div>
+      <div class="col-md-1">
+        <button class="btn btn-success w-100" title="Agregar producto">
+          <i class="fa-solid fa-plus"></i>
+        </button>
+      </div>
+    </form>
+
+    <div class="row">
+      <div class="col-lg-8">
+        <div class="hh-tablewrap">
+          <table class="table table-hover mb-0" id="tblProductos">
+            <thead>
             <tr>
-              <td>FR001</td><td>Manzana Fuji</td><td>$1200</td><td>150</td>
-              <td><button>Editar</button> <button>Eliminar</button></td>
+              <th>ID</th>
+              <th>Producto</th>
+              <th>Categoría</th>
+              <th>Precio</th>
+              <th>Stock</th>
             </tr>
-            <tr>
-              <td>FR002</td><td>Naranja Valencia</td><td>$1000</td><td>200</td>
-              <td><button>Editar</button> <button>Eliminar</button></td>
-            </tr>
-          </tbody>
-        </table>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
       </div>
-      <div class="card">
-        <h3>➕ Nuevo producto</h3>
-        <form id="formProducto">
-          <label>Código: <input type="text" required minlength="3"></label><br><br>
-          <label>Nombre: <input type="text" required maxlength="100"></label><br><br>
-          <label>Precio: <input type="number" min="0" step="0.01" required></label><br><br>
-          <label>Stock: <input type="number" min="0" required></label><br><br>
-          <label>Categoría: 
-            <select required>
-              <option value="">--Seleccionar--</option>
-              <option>Frutas</option>
-              <option>Verduras</option>
-              <option>Orgánicos</option>
-            </select>
-          </label><br><br>
-          <label>Descripción: <textarea maxlength="500"></textarea></label><br><br>
-          <button type="submit">Guardar</button>
-        </form>
+      <div class="col-lg-4">
+        <div class="hh-card" id="prodDetail" style="display:none;">
+          <h5 class="mb-2">Detalle del producto</h5>
+          <p class="text-muted mb-2" id="prodDetailId"></p>
+          <img id="prodDetailImg" src="" alt="" class="img-fluid rounded mb-2" style="max-height:140px;object-fit:contain;">
+          <p class="mb-1"><strong>Nombre:</strong> <span id="prodDetailName"></span></p>
+          <p class="mb-1"><strong>Categoría:</strong> <span id="prodDetailCat"></span></p>
+          <p class="mb-1"><strong>Precio:</strong> $<span id="prodDetailPrice"></span></p>
+          <p class="mb-1"><strong>Stock:</strong> <span id="prodDetailStock"></span></p>
+          <p class="mb-1"><strong>Unidad:</strong> <span id="prodDetailUnit">por kg</span></p>
+          <p class="mb-1"><strong>Descripción:</strong></p>
+          <p id="prodDetailDesc" class="small text-muted"></p>
+        </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- Usuarios -->
-    <section id="usuarios">
-      <h2>Gestión de Usuarios</h2>
-      <div class="card">
-        <h3>Listado de usuarios</h3>
-        <table>
-          <thead>
-            <tr><th>RUN</th><th>Nombre</th><th>Correo</th><th>Rol</th><th>Acciones</th></tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>19011022K</td><td>Juan Pérez</td><td>juan@gmail.com</td><td>Cliente</td>
-              <td><button>Editar</button> <button>Eliminar</button></td>
-            </tr>
-          </tbody>
-        </table>
+  <!-- ========== CATEGORÍAS ========== -->
+  <section class="hh-view d-none" data-view="categorias">
+    <div class="hh-admin-header">
+      <h2>Categorías</h2>
+      <p>Organizar productos en categorías para facilitar su navegación.</p>
+    </div>
+
+    <form id="formCategoria" class="row g-2 mb-3">
+      <div class="col-md-4">
+        <input type="text" id="catNombre" class="form-control" placeholder="Nombre de la categoría" required>
       </div>
-      <div class="card">
-        <h3>➕ Nuevo usuario</h3>
-        <form id="formUsuario">
-          <label>RUN: <input type="text" required minlength="7" maxlength="9" placeholder="19011022K"></label><br><br>
-          <label>Nombre: <input type="text" required maxlength="50"></label><br><br>
-          <label>Apellidos: <input type="text" required maxlength="100"></label><br><br>
-          <label>Correo: <input type="email" required maxlength="100" placeholder="ejemplo@duoc.cl"></label><br><br>
-          <label>Rol: 
-            <select required>
-              <option>Administrador</option>
-              <option>Cliente</option>
-              <option>Vendedor</option>
-            </select>
-          </label><br><br>
-          <label>Dirección: <input type="text" required maxlength="300"></label><br><br>
-          <button type="submit">Guardar</button>
-        </form>
+      <div class="col-md-5">
+        <input type="text" id="catImg" class="form-control" placeholder="../assets/image/categoria-?.png">
       </div>
-    </section>
-
-    <!-- Pedidos -->
-    <section id="pedidos">
-      <h2>Gestión de Pedidos</h2>
-      <div class="card">
-        <h3>Listado de pedidos</h3>
-        <table>
-          <thead>
-            <tr><th>ID Pedido</th><th>Cliente</th><th>Estado</th><th>Total</th><th>Acciones</th></tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>001</td><td>Juan Pérez</td><td>En preparación</td><td>$5.700</td>
-              <td><button>Ver detalle</button></td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="col-md-3">
+        <button class="btn btn-primary w-100">Agregar categoría</button>
       </div>
-    </section>
+    </form>
 
-  </main>
+    <div class="row">
+      <div class="col-lg-7">
+        <ul class="list-group" id="lstCategorias"></ul>
+      </div>
+      <div class="col-lg-5">
+        <div class="hh-card" id="catDetail" style="display:none;">
+          <h5>Detalle categoría</h5>
+          <p class="mb-1"><strong>Nombre:</strong> <span id="catDetailName"></span></p>
+          <p class="mb-1"><strong>Imagen:</strong> <span id="catDetailImg"></span></p>
+          <p class="mb-1"><strong>Descripción:</strong></p>
+          <p id="catDetailDesc" class="small text-muted"></p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <script>
-    // navegación entre secciones
-    const links = document.querySelectorAll("aside nav a[data-section]");
-    const sections = document.querySelectorAll("main section");
+  <!-- ========== USUARIOS ========== -->
+  <section class="hh-view d-none" data-view="usuarios">
+    <div class="hh-admin-header">
+      <h2>Usuarios</h2>
+      <p>Gestión de cuentas de usuario y sus roles dentro del sistema.</p>
+    </div>
 
-    links.forEach(link => {
-      link.addEventListener("click", e => {
-        e.preventDefault();
-        const target = link.getAttribute("data-section");
+    <form id="formUsuario" class="row g-2 mb-3">
+      <div class="col-md-3">
+        <input type="text" id="usrNombre" class="form-control" placeholder="Nombre" required>
+      </div>
+      <div class="col-md-3">
+        <input type="email" id="usrEmail" class="form-control" placeholder="correo@huertohogar.cl" required>
+      </div>
+      <div class="col-md-2">
+        <select id="usrRol" class="form-select">
+          <option value="admin">admin</option>
+          <option value="cliente">cliente</option>
+        </select>
+      </div>
+      <div class="col-md-2">
+        <button class="btn btn-primary w-100">Agregar</button>
+      </div>
+    </form>
 
-        // quitar activo a todo
-        links.forEach(l => l.classList.remove("active"));
-        sections.forEach(s => s.classList.remove("active"));
+    <div class="hh-tablewrap">
+      <table class="table table-borderless align-middle mb-0" id="tblUsuarios">
+        <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Correo</th>
+          <th>Rol</th>
+          <th>Último acceso</th>
+        </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </section>
 
-        // activar sección clickeada
-        link.classList.add("active");
-        document.getElementById(target).classList.add("active");
-      });
-    });
-  </script>
+  <!-- ========== REPORTES ========== -->
+  <section class="hh-view d-none" data-view="reportes">
+    <div class="hh-admin-header d-flex justify-content-between align-items-center">
+      <div>
+        <h2>Reportes</h2>
+        <p>Eventos y promociones activas de HuertoHogar.</p>
+      </div>
+      <img src="../assets/image/logo.png" alt="HuertoHogar" style="height:42px;object-fit:contain;">
+    </div>
+
+    <div class="row g-3" id="reportesEventos">
+      <!-- se llena desde JS -->
+    </div>
+  </section>
+
+  <!-- ========== PERFIL ========== -->
+  <section class="hh-view d-none" data-view="perfil">
+    <div class="hh-admin-header">
+      <h2>Perfil</h2>
+      <p>Administrador General</p>
+    </div>
+    <div class="hh-profile-card">
+      <div class="hh-profile-avatar"><i class="fa-regular fa-user"></i></div>
+      <p class="mb-1 fw-semibold" id="perfilCorreoText">admin@huertohogar.cl</p>
+      <p class="text-muted mb-3"><span class="badge bg-dark" id="perfilRol">Rol: Super Admin</span></p>
+      <p class="mb-2">Último acceso: <span id="perfilUltimoAcceso">—</span></p>
+      <button class="hh-profile-btn-danger mb-3" id="perfilCerrar">Cerrar sesión</button>
+
+      <hr class="my-4">
+
+      <h5 class="hh-profile-title mb-3">Datos del administrador</h5>
+      <form id="formPerfil">
+        <div class="hh-form-row">
+          <div class="hh-form-group">
+            <label for="perfilNombres">Nombres *</label>
+            <input type="text" id="perfilNombres" value="">
+          </div>
+          <div class="hh-form-group">
+            <label for="perfilApellidos">Apellidos *</label>
+            <input type="text" id="perfilApellidos" value="">
+          </div>
+        </div>
+        <div class="hh-form-row">
+          <div class="hh-form-group">
+            <label for="perfilCorreo">Correo *</label>
+            <input type="email" id="perfilCorreo" value="">
+          </div>
+          <div class="hh-form-group">
+            <label for="perfilTelefono">Teléfono</label>
+            <input type="text" id="perfilTelefono" value="">
+          </div>
+        </div>
+        <div class="hh-form-row">
+          <div class="hh-form-group">
+            <label for="perfilDireccion">Dirección</label>
+            <input type="text" id="perfilDireccion" value="">
+          </div>
+        </div>
+        <button class="hh-btn hh-btn-primary mt-2" type="submit">Guardar cambios</button>
+      </form>
+    </div>
+  </section>
+</main>
+
+  </div>
+
+  <!-- JS del admin -->
+  <script type="module" src="../assets/js/admin.js"></script>
 </body>
 </html>

@@ -1,242 +1,267 @@
 <!doctype html>
 <html lang="es">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>HuertoHogar - Blogs y Noticias</title>
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
-  <!-- Estilos -->
-  <link rel="stylesheet" href="../assets/css/style.css">
-</head>
-<body>
+  <head>
+    <meta charset="utf-8" />
+    <title>Huerto Hogar — Blogs y Noticias</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <!-- ==================== TOP BAR ==================== -->
-  <div style="background:#2E8B57;color:#fff;padding:6px 20px;text-align:right;font-size:14px;">
-    <a href="login.html" style="color:#fff;font-weight:600;margin-right:10px;text-decoration:none;">Iniciar sesión</a> |
-    <a href="registro.html" style="color:#fff;font-weight:600;margin-left:10px;text-decoration:none;">Registrarse</a>
-  </div>
+    <!-- Fuentes locales -->
+    <link rel="stylesheet" href="../assets/font/font.css">
 
-  <!-- ==================== HEADER ==================== -->
-  <header class="header">
-    <div class="container navbar">
-      <a href="index.html" class="brand" aria-label="HuertoHogar - Inicio">
-        <img src="../assets/image/logo.png" alt="Logo HuertoHogar">
-        <h1>HuertoHogar</h1>
-      </a>
-      <nav class="nav-links">
-        <a href="index.html">Inicio</a>
-        <a href="nosotros.html">Nosotros</a>
-        <a href="contactos.html">Contacto</a>
-        <a href="blogs.html" class="active">Blogs</a>
-        <a href="perfilCliente.html">Mi perfil</a>
-        <a href="carrito.html" class="btn">Carrito <span id="cartCount">0</span></a>
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Estilos propios -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/blogs.css">
+  </head>
+
+  <body>
+
+    <!-- ======= TOPBAR: logo + buscador + botones + carrito ======= -->
+    <header class="border-bottom">
+      <div class="bg-white">
+        <div class="container py-2">
+          <div class="row align-items-center g-2">
+            
+            <!-- Logo a la izquierda -->
+            <div class="col-6 col-md-2 d-flex align-items-center">
+              <a href="./index.html" class="d-inline-flex align-items-center text-decoration-none">
+                <img src="../assets/image/logo.png" alt="Huerto Hogar" class="me-2" style="width:auto;height:55px;object-fit:contain;">
+              </a>
+            </div>
+
+            <!-- Buscador centrado -->
+            <div class="col-12 col-md-6 d-flex justify-content-md-center">
+              <form class="d-flex w-100" style="max-width: 420px;" action="./productos.html">
+                <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Buscar" name="q">
+                <button class="btn btn-outline-success" type="submit">Buscar</button>
+              </form>
+            </div>
+
+            <!-- Botones a la derecha -->
+            <div class="col-6 col-md-4 d-flex justify-content-end align-items-center gap-2">
+              <a class="btn btn-outline-primary btn-sm" href="./login.html">Iniciar Sesión</a>
+              <a class="btn btn-primary btn-sm" href="./registro.html">Crear Cuenta</a>
+              <a class="btn btn-success btn-sm d-flex align-items-center" href="./carrito.html">
+                <span class="me-1">🛒</span>
+                Carrito <span class="ms-1" id="cartAmount">$0</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ======= NAVBAR ======= -->
+      <nav class="navbar navbar-expand-lg bg-white">
+        <div class="container">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div id="mainNav" class="collapse navbar-collapse">
+            <ul class="navbar-nav mx-auto">
+              <li class="nav-item"><a class="nav-link active fw-semibold" href="./index.html">Home</a></li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="./categorias.html" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Categorías
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="./categorias.html?c=Frutas Frescas">Frutas Frescas</a></li>
+                  <li><a class="dropdown-item" href="./categorias.html?c=Verduras Orgánicas">Verduras Orgánicas</a></li>
+                  <li><a class="dropdown-item" href="./categorias.html?c=Productos Orgánicos">Productos Orgánicos</a></li>
+                  <li><a class="dropdown-item" href="./categorias.html?c=Lácteos">Lácteos</a></li>
+                </ul>
+              </li>
+              <li class="nav-item"><a class="nav-link" href="./ofertas.html">Ofertas</a></li>
+              <li class="nav-item"><a class="nav-link" href="./nosotros.html">Nosotros</a></li>
+              <li class="nav-item"><a class="nav-link" href="./blogs.html">Blog</a></li>
+              <li class="nav-item"><a class="nav-link" href="./contactos.html">Contacto</a></li>
+            </ul>
+          </div>
+        </div>
       </nav>
-    </div>
-  </header>
+    </header>
 
-  <!-- ==================== MAIN ==================== -->
-  <main class="container" style="margin-top:30px;">
 
-    <h2 style="color:#8B4513;font-family:'Playfair Display',serif;margin-bottom:16px;">Blogs y Noticias</h2>
+    <!-- ======= CONTENIDO PRINCIPAL ======= -->
+    <main class="container py-5" 
+          style="background:url('../assets/image/textura-papel-blanco_1194-5416.jpg'); 
+                 background-size:cover; 
+                 background-attachment:fixed; 
+                 border-radius:12px;">
 
-    <!-- ==================== SECCIÓN BLOG EDUCATIVO ==================== -->
-    <section>
-      <h3 style="color:#2E8B57;">Alimentación saludable y sostenibilidad</h3>
-      <div class="grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;margin-top:16px;">
-        <article class="card blog-card" data-id="1">
-          <img src="../assets/image/huerto.jpeg" alt="Huertos urbanos">
-          <h4>Huertos urbanos en Santiago</h4>
-          <p>Cómo los huertos urbanos ayudan a una ciudad más sostenible.</p>
-          <button class="btn ver-detalle" data-id="1">Leer más</button>
-        </article>
+      <h2 class="text-center mb-4" style="color:#8B4513;font-family:'Playfair Display',serif;">Blogs y Noticias</h2>
 
-        <article class="card blog-card" data-id="2">
-          <img src="../assets/image/Alimentaciónsaludable.jpeg" alt="Alimentación saludable">
-          <h4>Beneficios de una alimentación saludable</h4>
-          <p>Descubre cómo los productos frescos mejoran tu salud y bienestar.</p>
-          <button class="btn ver-detalle" data-id="2">Leer más</button>
-        </article>
+      <!-- ==================== SECCIÓN BLOG - NOTICIAS IMPORTANTES ==================== -->
+      <section class="noticias-importantes">
+        <h2 class="titulo-noticias">NOTICIAS IMPORTANTES</h2>
 
-        <article class="card blog-card" data-id="3">
-          <img src="../assets/image/Agricultura sosteniblejpeg.jpeg" alt="Agricultura sostenible">
-          <h4>Agricultura sostenible en Chile</h4>
-          <p>El impacto positivo de apoyar a productores locales y prácticas verdes.</p>
-          <button class="btn ver-detalle" data-id="3">Leer más</button>
-        </article>
-      </div>
-    </section>
-
-    <!-- ==================== SECCIÓN NOTICIAS ==================== -->
-    <section style="margin-top:40px;">
-      <h3 style="color:#2E8B57;">Noticias y Novedades</h3>
-      <div class="news" style="display:flex;flex-direction:column;gap:20px;margin-top:16px;">
-        <article class="card" style="padding:16px;display:flex;gap:16px;align-items:center;">
-          <img src="../assets/image/nuevatienda.png" alt="Nueva tienda" style="width:120px;border-radius:8px;">
-          <div>
-            <h4>Apertura de nueva tienda en Concepción</h4>
-            <p>HuertoHogar sigue creciendo: inauguramos una nueva sucursal para estar más cerca de nuestros consumidores.</p>
+        <!-- CASO 1 -->
+        <article class="blog-caso fade-up">
+          <div class="blog-info">
+            <h3 class="blog-titulo">Agricultura Urbana: Huertos que Transforman la Ciudad</h3>
+            <p>
+              En Santiago y otras ciudades de Chile, los huertos urbanos están revolucionando la forma en que 
+              las familias acceden a alimentos frescos. Estos espacios verdes no solo aportan sostenibilidad, 
+              sino que fortalecen la conexión entre comunidad, naturaleza y bienestar.
+            </p>
+            <a href="blog_1.html" class="btn-caso btn-verde">VER CASO</a>
+          </div>
+          <div class="blog-img">
+            <img src="../assets/image/huerto.jpeg" alt="Huertos urbanos en Santiago">
           </div>
         </article>
 
-        <article class="card" style="padding:16px;display:flex;gap:16px;align-items:center;">
-          <img src="../assets/image/fidilizacion.jpeg" alt="Programa fidelización" style="width:120px;border-radius:8px;">
-          <div>
-            <h4>Nuevo programa de fidelización</h4>
-            <p>Acumula puntos por tus compras y obtén descuentos especiales como cliente frecuente.</p>
+        <!-- CASO 2 -->
+        <article class="blog-caso fade-up">
+          <div class="blog-info">
+            <h3 class="blog-titulo">Del Campo a Tu Mesa: El Camino de la Frescura</h3>
+            <p>
+              Cada producto de HuertoHogar proviene directamente de agricultores locales comprometidos con la 
+              sostenibilidad. A través de procesos ecológicos y transporte responsable, llevamos alimentos de 
+              calidad, naturales y frescos a tu hogar, promoviendo una alimentación consciente.
+            </p>
+            <a href="blog_2.html" class="btn-caso btn-cafe">VER CASO</a>
+          </div>
+          <div class="blog-img">
+            <img src="../assets/image/Alimentaciónsaludable.jpeg" alt="Alimentos frescos de HuertoHogar">
           </div>
         </article>
-      </div>
-    </section>
+      </section>
 
-    <!-- ==================== FOTO GRUPAL ==================== -->
-    <section style="margin-top:40px;text-align:center;">
-      <h3 style="color:#2E8B57;">Nuestro equipo y consumidores</h3>
-      <img src="../assets/image/foto_grupal.png" alt="Equipo HuertoHogar con consumidores" style="max-width:100%;margin-top:16px;border-radius:12px;">
-      <p style="margin-top:12px;color:#555;">Creemos en la conexión directa entre productores y consumidores, trabajando juntos por un futuro más saludable.</p>
-    </section>
 
-        <!-- ==================== IMPACTO AMBIENTAL ==================== -->
-    <section style="margin-top:40px;margin-bottom:40px;">
-      <h3 style="color:#2E8B57;font-family:'Playfair Display',serif;">🌍 Impacto Ambiental</h3>
-      <p style="color:#555;max-width:800px;margin-top:8px;">
-        Cada compra que realizas en HuertoHogar no solo significa llevar productos frescos a tu mesa, 
-        también es un aporte real al medio ambiente y a nuestra comunidad.
-      </p>
+      <!-- ==================== SECCIÓN NOTICIAS ==================== -->
+      <section class="mt-5 fade-up">
+        <h3 class="text-success">Noticias y Novedades</h3>
+        <div class="news-list mt-3">
+          <article class="news-card">
+            <img src="../assets/image/nuevatienda.png" alt="Nueva tienda">
+            <div>
+              <h4>Apertura de nueva tienda en Concepción</h4>
+              <p>
+                HuertoHogar sigue creciendo: inauguramos una nueva sucursal para estar más cerca de nuestros consumidores.
+                La nueva tienda contará con zona de productos orgánicos certificados, talleres de compostaje
+                y una huerta demostrativa.
+              </p>
+            </div>
+          </article>
 
-      <!-- Huella de Carbono -->
-      <div class="card" style="padding:20px;margin-top:16px;">
-        <h4 style="color:#8B4513;">♻️ Reducción de Huella de Carbono</h4>
-        <p style="color:#555;">
-          Al elegir productos locales, evitamos largas cadenas de transporte y reducimos significativamente 
-          las emisiones de CO₂. Por cada compra, calculamos una reducción promedio de <strong>1.2 kg de CO₂</strong> 
-          en comparación con productos importados.
+          <article class="news-card">
+            <img src="../assets/image/fidilizacion.jpeg" alt="Programa fidelización">
+            <div>
+              <h4>Nuevo programa de fidelización</h4>
+              <p>
+                Acumula puntos por tus compras y obtén descuentos especiales con nuestro programa 
+                <strong>HuertoPuntos</strong>. Premia tu preferencia por productos sustentables y locales.
+              </p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+
+      <!-- ==================== EQUIPO ==================== -->
+      <section class="mt-5 text-center fade-up">
+        <h3 class="text-success">Nuestro equipo y consumidores</h3>
+        <img src="../assets/image/grupal.png" alt="Equipo HuertoHogar con consumidores" class="img-fluid rounded mt-3">
+        <p class="mt-3 text-secondary">Creemos en la conexión directa entre productores y consumidores.</p>
+        <p class="text-secondary" style="max-width:800px;margin:0 auto;">
+          El equipo de HuertoHogar está conformado por profesionales del área agrícola, logística y tecnología, 
+          comprometidos con hacer más accesible la alimentación natural en todo Chile.
         </p>
-      </div>
+      </section>
 
-      <!-- Contribuciones a la Comunidad -->
-      <div class="card" style="padding:20px;margin-top:16px;">
-        <h4 style="color:#8B4513;">🤝 Contribuciones a la Comunidad</h4>
-        <p style="color:#555;">
-          Tus compras apoyan directamente a más de <strong>50 agricultores locales</strong>, fortaleciendo 
-          la economía regional y garantizando un comercio justo. De esta forma, juntos construimos una 
-          comunidad más sostenible y solidaria.
+
+      <!-- ==================== IMPACTO AMBIENTAL ==================== -->
+      <section class="mt-5 mb-4 fade-up">
+        <h3 class="text-success" style="font-family:'Playfair Display',serif;">Impacto Ambiental</h3>
+        <p class="text-secondary">
+          Cada compra que realizas en HuertoHogar no solo significa llevar productos frescos a tu mesa, 
+          también es un aporte real al medio ambiente y a nuestra comunidad.
         </p>
-      </div>
-    </section>
+        <div class="card p-3 mt-3">
+          <h4 style="color:#8B4513;">Reducción de Huella de Carbono</h4>
+          <p class="text-secondary">
+            Al elegir productos locales, reducimos las emisiones de CO₂. Cada compra representa una reducción promedio de 
+            <strong>1.2 kg de CO₂</strong>, equivalente a plantar más de 1.000 árboles al año.
+          </p>
+        </div>
+      </section>
+
+    </main>
 
 
-    <!-- ==================== PROGRAMAS DE FIDELIZACIÓN ==================== -->
-    <section style="margin-top:40px;">
-      <h3 style="color:#2E8B57;">Programa de fidelización</h3>
-      <ul style="margin-top:10px;color:#555;">
-        <li>🎁 Acumula puntos por cada compra.</li>
-        <li>💳 Obtén descuentos exclusivos en tus productos favoritos.</li>
-        <li>🌱 Participa en promociones especiales para clientes frecuentes.</li>
-      </ul>
-    </section>
+    <!-- ======= FOOTER ======= -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-top">
+          <div class="footer-left">
+            <h2>HuertoHogar</h2>
+            <div class="foot-links">
+              <a href="index.html">Inicio</a> |
+              <a href="productos.html">Productos</a> |
+              <a href="nosotros.html">Nosotros</a> |
+              <a href="contactos.html">Contacto</a>
+            </div>
+          </div>
 
-    <!-- ==================== REDES SOCIALES ==================== -->
-    <section style="margin-top:40px;">
-      <h3 style="color:#2E8B57;">Comparte en tus redes</h3>
-      <div style="display:flex;gap:12px;margin-top:10px;">
-        <button class="btn" onclick="window.open('https://facebook.com','_blank')">Facebook</button>
-        <button class="btn" onclick="window.open('https://twitter.com','_blank')">Twitter</button>
-        <button class="btn" onclick="window.open('https://instagram.com','_blank')">Instagram</button>
-      </div>
-    </section>
-
-    <!-- ==================== DETALLE DEL BLOG ==================== -->
-    <section id="blogDetail" style="margin-top:30px;display:none;">
-      <button id="volverBlogs" class="btn secondary" style="margin-bottom:16px;">← Volver a Blogs</button>
-      <div id="detalleContenido"></div>
-    </section>
-
-  </main>
-
-  <!-- ==================== FOOTER ==================== -->
-  <footer class="footer" role="contentinfo" style="background:#2E8B57;color:#fff;padding:40px 0 20px 0;margin-top:40px;">
-    <div class="container" style="max-width:1200px;margin:auto;">
-      <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-start;gap:32px;border-bottom:1px solid #fff2; padding-bottom:24px;">
-        <div style="flex:1;min-width:220px;">
-          <h2 style="margin:0 0 8px 0;font-family:'Playfair Display',serif;">HuertoHogar</h2>
-          <p style="margin:0 0 8px 0;font-weight:600;">&copy; <span id="yearFoot"></span> Proyecto Evaluación 1</p>
-          <p style="margin:0 0 6px 0;font-size:0.95em;">Síguenos en redes sociales:</p>
-          <div style="display:flex;gap:10px;">
-            <a href="https://instagram.com/" target="_blank"><img src="../assets/image/instagram.png" alt="Instagram" style="height:24px;"></a>
-            <a href="https://wa.me/" target="_blank"><img src="../assets/image/social.png" alt="WhatsApp" style="height:24px;"></a>
-            <a href="https://facebook.com/" target="_blank"><img src="../assets/image/facebook.png" alt="Facebook" style="height:24px;"></a>
+          <div class="footer-right">
+            <p>¡Mantente en contacto! Únete a nuestro boletín.</p>
+            <form id="subscribeForm" class="subscribe-form">
+              <input type="email" id="emailSub" name="emailSub" placeholder="Ingresa tu correo" required>
+              <button type="submit">Suscribirse</button>
+            </form>
           </div>
         </div>
-        <div style="flex:1;min-width:220px;">
-          <form id="subscribeForm" style="display:flex;align-items:center;gap:8px;">
-            <input type="email" id="emailSub" name="emailSub" placeholder="Ingresa tu correo" required 
-                  style="padding:8px 10px;border:none;border-radius:6px;outline:none;min-width:180px;font-family:'Montserrat',sans-serif;">
-            <button type="submit" class="btn" style="background:#fff;color:#2E8B57;font-weight:600;border:none;padding:8px 14px;border-radius:6px;cursor:pointer;">
-              Suscribirse
-            </button>
-          </form>
-        </div>
-        <div style="flex:1;min-width:180px;">
-          <span style="font-size:0.95em;margin-bottom:6px;display:block;">Pagos seguros:</span>
-          <div style="display:flex;gap:10px;">
-            <img src="../assets/image/visa.png" alt="Visa" style="height:28px;">
-            <img src="../assets/image/master card.png" alt="Mastercard" style="height:28px;">
-            <img src="../assets/image/paypal.png" alt="Webpay" style="height:28px;">
+
+        <div class="footer-bottom">
+          <div class="footer-column contacto">
+            <h3>Contacto</h3>
+            <p>Email: <a href="mailto:contacto@huertohogar.cl">contacto@huertohogar.cl</a></p>
+            <p>Teléfono: <a href="tel:+56912345678">+56 9 1234 5678</a></p>
+          </div>
+
+          <div class="footer-column redes">
+            <h3>Síguenos en redes sociales:</h3>
+            <div class="social-icons">
+              <a href="https://www.instagram.com" target="_blank"><img src="../assets/image/instagram.png" alt="Instagram"></a>
+              <a href="https://wa.me/56912345678" target="_blank"><img src="../assets/image/whatsapp.png" alt="WhatsApp"></a>
+              <a href="https://www.facebook.com" target="_blank"><img src="../assets/image/facebook.png" alt="Facebook"></a>
+            </div>
+          </div>
+
+          <div class="footer-column pagos">
+            <h3>Pagos seguros:</h3>
+            <div class="pay-icons">
+              <img src="../assets/image/visa.png" alt="Visa">
+              <img src="../assets/image/master card.png" alt="MasterCard">
+              <img src="../assets/image/paypal.png" alt="PayPal">
+            </div>
           </div>
         </div>
+
+        <div class="footer-logo">
+          <img src="../assets/image/logo.png" alt="Logo HuertoHogar">
+        </div>
       </div>
-    </div>
-  </footer>
+    </footer>
 
-  <!-- ==================== SCRIPTS ==================== -->
-  <script>
-    document.getElementById('yearFoot').textContent = new Date().getFullYear();
 
-    // Contenido de los blogs (detalle largo)
-    const blogsData = {
-      1: {
-        titulo: "Huertos urbanos en Santiago",
-        img: "../assets/image/blog1.png",
-        texto: "Los huertos urbanos se han convertido en una tendencia creciente en Santiago. Permiten a las comunidades producir alimentos frescos, mejorar la calidad del aire y fomentar la vida sostenible en la ciudad."
-      },
-      2: {
-        titulo: "Beneficios de una alimentación saludable",
-        img: "../assets/image/blog2.png",
-        texto: "Consumir productos frescos y naturales aporta energía, mejora la digestión y fortalece el sistema inmunológico. Una dieta saludable es clave para el bienestar físico y mental."
-      },
-      3: {
-        titulo: "Agricultura sostenible en Chile",
-        img: "../assets/image/blog3.png",
-        texto: "La agricultura sostenible apoya a los agricultores locales, reduce el impacto ambiental y garantiza alimentos de mayor calidad. Comprar local es una manera de contribuir al planeta."
-      }
-    };
+    <!-- ==================== SCRIPTS ==================== -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-    const botonesDetalle = document.querySelectorAll(".ver-detalle");
-    const blogList = document.querySelector(".grid");
-    const blogDetail = document.getElementById("blogDetail");
-    const detalleContenido = document.getElementById("detalleContenido");
-    const volverBlogs = document.getElementById("volverBlogs");
-
-    botonesDetalle.forEach(btn => {
-      btn.addEventListener("click", () => {
-        const id = btn.getAttribute("data-id");
-        const blog = blogsData[id];
-        detalleContenido.innerHTML = `
-          <h2 style="color:#8B4513;font-family:'Playfair Display',serif;">${blog.titulo}</h2>
-          <img src="${blog.img}" alt="${blog.titulo}" style="max-width:100%;margin:12px 0;">
-          <p style="color:#333;font-size:1.1em;">${blog.texto}</p>
-        `;
-        blogList.style.display = "none";
-        blogDetail.style.display = "block";
+    <!-- Efecto de animación (fade-up) -->
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const els = document.querySelectorAll('.fade-up');
+        const obs = new IntersectionObserver((entries) => {
+          entries.forEach(e => {
+            if (e.isIntersecting) e.target.classList.add('show');
+          });
+        }, { threshold: 0.2 });
+        els.forEach(el => obs.observe(el));
       });
-    });
+    </script>
 
-    volverBlogs.addEventListener("click", () => {
-      blogList.style.display = "grid";
-      blogDetail.style.display = "none";
-    });
-  </script>
-  <script src="../assets/js/script.js"></script>
-</body>
+  </body>
 </html>

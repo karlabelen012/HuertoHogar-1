@@ -1,132 +1,240 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>HuertoHogar - Detalle Producto</title>
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
-  <!-- Estilos -->
-  <link rel="stylesheet" href="../assets/css/style.css">
-</head>
-<body>
+  <head>
+    <meta charset="utf-8" />
+    <title>Huerto Hogar —  Detalle Producto </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <!-- ==================== TOP BAR ==================== -->
-  <div style="background:#2E8B57;color:#fff;padding:6px 20px;text-align:right;font-size:14px;">
-    <a href="login.html" style="color:#fff;font-weight:600;margin-right:10px;text-decoration:none;">Iniciar sesión</a> |
-    <a href="registro.html" style="color:#fff;font-weight:600;margin-left:10px;text-decoration:none;">Registrarse</a>
+    <!-- Tipografías del contexto -->
+    <link rel="stylesheet" href="../assets/font/font.css">
+
+    <!-- Bootstrap (Eval. 2: diseño responsivo) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Estilos propios (puedes ajustar colores, pero mantén la paleta del contexto) -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/productos.css">
+    <link rel="stylesheet" href="../assets/css/blogs.css">
+    <link rel="stylesheet" href="../assets/css/autth.css">
+    <link rel="stylesheet" href="../assets/css/admin.css">
+
+    <!-- JS (todo externo, nada embebido) -->
+    <script type="module" src="../assets/js/script.js" defer></script>
+    <script type="module" src="../assets/js/data.js" defer></script>
+    <script type="module" src="../assets/js/ui.js" defer></script>
+    <script type="module" src="../assets/js/cart.js" defer></script>
+    <script type="module" src="../assets/js/productos.js" defer></script>
+  </head>
+
+  <body>
+
+    <!-- ======= TOPBAR: logo + buscador + botones + carrito ======= -->
+    <header class="border-bottom">
+      <div class="bg-white">
+        <div class="container py-2">
+          <div class="row align-items-center g-2">
+            
+            <!-- Logo a la izquierda -->
+              <div class="col-6 col-md-2 d-flex align-items-center">
+                <a href="./index.html" class="d-inline-flex align-items-center text-decoration-none">
+                  <img src="../assets/image/logo.png" alt="Huerto Hogar" class="me-2" style="width:auto;height:55px;object-fit:contain;">
+                </a>
+              </div>
+
+            <!-- Buscador centrado -->
+            <div class="col-12 col-md-6 d-flex justify-content-md-center">
+              <form class="d-flex w-100" style="max-width: 420px;" action="./productos.html">
+                <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Buscar" name="q">
+                <button class="btn btn-outline-success" type="submit">Buscar</button>
+              </form>
+            </div>
+
+            <!-- Botones a la derecha -->
+            <div class="col-6 col-md-4 d-flex justify-content-end align-items-center gap-2">
+              <a class="btn btn-outline-primary btn-sm" href="./login.html">Iniciar Sesión</a>
+              <a class="btn btn-primary btn-sm" href="./registro.html">Crear Cuenta</a>
+              <!-- Carrito en pastilla verde con monto -->
+              <a class="btn btn-success btn-sm d-flex align-items-center" href="./carrito.html">
+                <span class="me-1">🛒</span>
+                Carrito <span class="ms-1" id="cartAmount">$0</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ======= NAVBAR: Home activo + categorías ▼ + resto ======= -->
+      <nav class="navbar navbar-expand-lg bg-white">
+        <div class="container">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div id="mainNav" class="collapse navbar-collapse">
+            <ul class="navbar-nav mx-auto">
+              <li class="nav-item"><a class="nav-link active fw-semibold" aria-current="page" href="./index.html">Home</a></li>
+
+              <!-- Categorías (dropdown) -->
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="./categorias.html" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Categorías
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="./categorias.html?c=Frutas Frescas">Frutas Frescas</a></li>
+                  <li><a class="dropdown-item" href="./categorias.html?c=Verduras Orgánicas">Verduras Orgánicas</a></li>
+                  <li><a class="dropdown-item" href="./categorias.html?c=Productos Orgánicos">Productos Orgánicos</a></li>
+                  <li><a class="dropdown-item" href="./categorias.html?c=Lácteos">Lácteos</a></li>
+                </ul>
+              </li>
+
+              <li class="nav-item"><a class="nav-link" href="./ofertas.html">Ofertas</a></li>
+              <li class="nav-item"><a class="nav-link" href="./nosotros.html">Nosotros</a></li>
+              <li class="nav-item"><a class="nav-link" href="./blogs.html">Blog</a></li>
+              <li class="nav-item"><a class="nav-link" href="./contactos.html">Contacto</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <main class="container py-5" style="background:url('../assets/image/textura-papel-blanco_1194-5416.jpg'); background-size:cover; background-attachment:fixed; border-radius:12px;">
+
+      <!-- Hero principal -->
+      <!-- MIGAS DE PAN -->
+      <nav aria-label="breadcrumb" class="mb-4">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html">Inicio</a></li>
+          <li class="breadcrumb-item"><a href="productos.html">Productos</a></li>
+          <li class="breadcrumb-item active" aria-current="page" id="nombreBreadcrumb">Detalle</li>
+        </ol>
+      </nav>
+
+      <div class="row align-items-start g-5">
+        <!-- IMAGEN -->
+        <div class="col-lg-6 text-center">
+          <img id="imgPrincipal" src="" alt="Producto" class="img-principal mb-3">
+          <div class="miniaturas">
+            <img id="mini1" src="" alt="Miniatura 1">
+            <div style="width:80px;height:80px;border:1px solid #ddd;border-radius:8px;"></div>
+            <div style="width:80px;height:80px;border:1px solid #ddd;border-radius:8px;"></div>
+          </div>
+        </div>
+
+        <!-- INFO -->
+        <div class="col-lg-6">
+          <h2 id="nombreProducto"></h2>
+          <p id="precioProducto"></p>
+          <p id="descripcionProducto"></p>
+
+          <ul class="list-unstyled mb-4">
+            <li><strong>Origen:</strong> <span id="origenProducto"></span></li>
+            <li><strong>Prácticas sostenibles:</strong> <span id="sostenibleProducto"></span></li>
+            <li><strong>Receta sugerida:</strong> <span id="recetaProducto"></span></li>
+            <li><strong>Stock disponible:</strong> <span id="stockProducto"></span></li>
+          </ul>
+
+          <div class="d-flex align-items-center gap-3 mb-4">
+            <label for="cantidad" class="fw-semibold">Cantidad:</label>
+            <input type="number" id="cantidad" class="form-control w-auto" min="1" value="1" style="width:80px;">
+          </div>
+
+          <button id="btnAgregar" class="btn btn-success w-100 py-2">Añadir al carrito</button>
+        </div>
+      </div>
+
+      <!-- PRODUCTOS RELACIONADOS -->
+      <section class="mt-5">
+        <h4 class="mb-4" style="font-family:'Playfair Display',serif;color:#2E8B57;">Productos relacionados</h4>
+        <div id="relacionados"></div>
+      </section>
+    </main>
+
+    
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-top">
+          <div class="footer-left">
+            <h2>HuertoHogar</h2>
+            <div class="foot-links">
+              <a href="index.html">Inicio</a> |
+              <a href="productos.html">Productos</a> |
+              <a href="nosotros.html">Nosotros</a> |
+              <a href="contactos.html">Contacto</a>
+            </div>
+          </div>
+
+          <div class="footer-right">
+            <p>¡Mantente en contacto! Únete a nuestro boletín.</p>
+            <form id="subscribeForm" class="subscribe-form">
+              <input type="email" id="emailSub" name="emailSub" placeholder="Ingresa tu correo" required>
+              <button type="submit">Suscribirse</button>
+            </form>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <div class="footer-column contacto">
+            <h3>Contacto</h3>
+            <p>Email: <a href="mailto:contacto@huertohogar.cl">contacto@huertohogar.cl</a></p>
+            <p>Teléfono: <a href="tel:+56912345678">+56 9 1234 5678</a></p>
+          </div>
+
+  <div class="footer-column redes">
+    <h3>Síguenos en redes sociales:</h3>
+    <div class="social-icons">
+      <!-- Instagram -->
+      <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">
+        <img src="../assets/image/instagram.png" alt="Instagram">
+      </a>
+
+      <!-- WhatsApp (abrirá chat directo con número ejemplo) -->
+      <a href="https://wa.me/56912345678" target="_blank" rel="noopener noreferrer">
+        <img src="../assets/image/whatsapp.png" alt="WhatsApp">
+      </a>
+
+      <!-- Facebook -->
+      <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">
+        <img src="../assets/image/facebook.png" alt="Facebook">
+      </a>
+    </div>
   </div>
 
-  <!-- ==================== HEADER ==================== -->
-  <header class="header">
-    <div class="container navbar">
-      <a href="index.html" class="brand" aria-label="HuertoHogar - Inicio">
-        <img src="../assets/image/logo.png" alt="Logo HuertoHogar">
-        <h1>HuertoHogar</h1>
-      </a>
-      <nav class="nav-links" role="navigation" aria-label="Menú principal">
-        <a href="index.html">Inicio</a>
-        <a href="nosotros.html">Nosotros</a>
-        <a href="contactos.html">Contacto</a>
-        <a href="blogs.html">Blogs</a>
-        <a href="productos.html">Productos</a>
-        <a href="perfilCliente.html">Mi perfil</a>
-        <a href="carrito.html" class="btn">Carrito 
-          <span id="cartCount" style="background:#fff;color:#2E8B57;border-radius:8px;padding:2px 6px;margin-left:6px">0</span>
-        </a>
-      </nav>
-    </div>
-  </header>
 
-  <!-- ==================== MAIN ==================== -->
-  <main class="container">
-    <h2 style="margin:20px 0;color:#8B4513;font-family:'Playfair Display',serif;text-align:center;">
-      Detalle del Producto
-    </h2>
+          <div class="footer-column pagos">
+            <h3>Pagos seguros:</h3>
+            <div class="pay-icons">
+              <img src="../assets/image/visa.png" alt="Visa">
+              <img src="../assets/image/master card.png" alt="MasterCard">
+              <img src="../assets/image/paypal.png" alt="PayPal">
+            </div>
+          </div>
+        </div>
 
-    <!-- Producto seleccionado -->
-    <div id="productDetail" class="product-detail" style="display:flex;flex-wrap:wrap;gap:20px;align-items:flex-start;justify-content:center;">
-      <div style="flex:1;min-width:250px;text-align:center;">
-        <img id="productImage" src="../assets/image/placeholder.png" alt="Producto" style="max-width:100%;border-radius:8px;">
+        <div class="footer-logo">
+          <img src="../assets/image/logo.png" alt="Logo HuertoHogar">
+        </div>
       </div>
-      <div style="flex:2;min-width:280px;">
-        <h3 id="productName">Nombre del producto</h3>
-        <p id="productDesc">Descripción detallada del producto seleccionado.</p>
-        <p><strong>Stock disponible:</strong> <span id="productStock">0</span></p>
-        <div id="productPrice" class="price" style="font-size:1.2em;font-weight:600;margin:12px 0;">$0</div>
-        <button id="addToCartBtn" class="btn">Añadir al carrito</button>
-        <a href="productos.html" class="btn secondary" style="margin-left:8px;">Volver a productos</a>
-      </div>
-    </div>
+    </footer>
 
-    <!-- Productos relacionados -->
-    <section style="margin-top:40px;">
-      <h3 style="color:#8B4513;font-family:'Playfair Display',serif;">Productos relacionados</h3>
-      <div id="relatedProducts" class="products" style="margin-top:12px;display:flex;flex-wrap:wrap;gap:20px;">
-        <!-- Se llenan por JS -->
-      </div>
-    </section>
-  </main>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-  <!-- ==================== FOOTER ==================== -->
-  <footer class="footer" role="contentinfo" style="background:#2E8B57;color:#fff;padding:40px 0 20px 0;margin-top:40px;">
-    <div class="container" style="max-width:1200px;margin:auto;">
-      <p style="text-align:center;margin:0;">&copy; <span id="yearFoot"></span> Proyecto Evaluación 1 - HuertoHogar</p>
-    </div>
-  </footer>
-
-  <!-- ==================== SCRIPT DETALLE ==================== -->
-  <script>
-    const products = [
-      {id:"FR001", name:"Manzana Fuji", price:1200, stock:150, img:"manzanafuji.png", desc:"Manzanas Fuji crujientes y dulces, cultivadas en el Valle del Maule. Perfectas para meriendas saludables o como ingrediente en postres."},
-      {id:"FR002", name:"Naranja Valencia", price:1000, stock:200, img:"naranja.png", desc:"Jugosas y ricas en vitamina C, ideales para jugos frescos y refrescantes."},
-      {id:"FR003", name:"Plátano Cavendish", price:800, stock:250, img:"platano.png", desc:"Plátanos maduros y dulces, ricos en potasio y vitaminas."},
-      {id:"VR001", name:"Zanahoria Orgánica", price:900, stock:100, img:"zanahoria.png", desc:"Zanahorias crujientes cultivadas sin pesticidas en O'Higgins. Fuente de vitamina A y fibra."},
-      {id:"VR002", name:"Espinaca Fresca", price:700, stock:80, img:"espinaca.png", desc:"Espinacas frescas y nutritivas, perfectas para ensaladas y batidos verdes."},
-      {id:"VR003", name:"Pimientos Tricolores", price:1500, stock:120, img:"pimientos.png", desc:"Pimientos rojos, amarillos y verdes, ricos en antioxidantes y vitaminas."},
-      {id:"PO001", name:"Miel Orgánica", price:5000, stock:50, img:"miel.png", desc:"Miel pura y orgánica producida por apicultores locales."}
-    ];
-
-    // Obtener ID de la URL
-    const params = new URLSearchParams(window.location.search);
-    const productId = params.get("id");
-    const product = products.find(p => p.id === productId);
-
-    if (product) {
-      document.getElementById("productName").textContent = product.name;
-      document.getElementById("productDesc").textContent = product.desc;
-      document.getElementById("productStock").textContent = product.stock + " unidades";
-      document.getElementById("productPrice").textContent = "$" + product.price;
-      document.getElementById("productImage").src = "../assets/image/" + product.img;
-
-      document.getElementById("addToCartBtn").addEventListener("click", () => {
-        alert(product.name + " añadido al carrito");
-        // Aquí enlazar con la lógica real de carrito/localStorage
-      });
-
-      // Productos relacionados (3 aleatorios diferentes del actual)
-      const related = products.filter(p => p.id !== product.id);
-      const randomRelated = related.sort(() => 0.5 - Math.random()).slice(0, 3);
-
-      const relatedContainer = document.getElementById("relatedProducts");
-      randomRelated.forEach(rp => {
-        const card = document.createElement("article");
-        card.classList.add("card");
-        card.innerHTML = `
-          <a href="detalleProducto.html?id=${rp.id}">
-            <img src="../assets/image/${rp.img}" alt="${rp.name}">
-            <h3>${rp.name}</h3>
-          </a>
-          <p>${rp.desc.substring(0,60)}...</p>
-          <div class="price">$${rp.price}</div>
-          <button class="btn add-to-cart" data-id="${rp.id}" data-name="${rp.name}" data-price="${rp.price}">Añadir</button>
-        `;
-        relatedContainer.appendChild(card);
-      });
-    }
-
-    document.getElementById("yearFoot").textContent = new Date().getFullYear();
-  </script>
-  <script src="../assets/js/script.js"></script>
-</body>
+    <!-- Agregar script -->
+    <script src="../assets/js/registro.js"></script>
+    <script src="../assets/js/script.js"></script>
+    <script src="../assets/js/validators.js"></script>
+    <script src="../assets/js/ui.js"></script>
+    <script src="../assets/js/stronge.js"></script>
+    <script src="../assets/js/productos.js"></script>
+    <script src="../assets/js/login.js"></script>
+    <script src="../assets/js/detalleProducto.js"></script>
+    <script src="../assets/js/data.js"></script>
+    <script src="../assets/js/contacto.js"></script>
+    <script src="../assets/js/checkout.js"></script>
+    <script src="../assets/js/categorias.js"></script>
+    <script src="../assets/js/cart.js"></script>
+    <script src="../assets/js/auth.js"></script>
+    <script src="../assets/js/admin.js"></script>
+    <script src="../assets/js/admin_user.js"></script> 
+    
+  </body>
 </html>

@@ -1,0 +1,149 @@
+/* ===== Productos (vista mockup) ===== */
+
+.hh-body {
+  background: #f6f3ef;
+  min-height: 100vh;
+}
+
+/* barra superior tipo mockup */
+.hh-topbar {
+  height: 50px;
+  background: #ffffff;
+  border-bottom: 1px solid #ddd;
+}
+
+.hh-appname {
+  font-weight: 600;
+  color: #2f4f4f;
+}
+
+.hh-breadcrumb a {
+  color: #777;
+  font-size: 0.9rem;
+  text-decoration: none;
+  margin-right: 4px;
+}
+
+.hh-breadcrumb a.active {
+  font-weight: 600;
+  color: #2e8b57;
+}
+
+.hh-cart-btn {
+  background: #2e8b57;
+  color: #fff;
+  padding: 4px 14px;
+  border-radius: 16px;
+  text-decoration: none;
+  font-size: 0.9rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.hh-cart-badge {
+  background: #fff;
+  color: #2e8b57;
+  border-radius: 999px;
+  padding: 0 6px;
+  font-weight: 600;
+  font-size: 0.75rem;
+}
+
+.hh-title-products {
+  font-family: "Playfair Display", serif;
+  letter-spacing: 0.08em;
+  color: #2f4f4f;
+  text-transform: uppercase;
+}
+
+/* grilla igual a mockup: 4 columnas desktop, 3 tablet, 2 mobile */
+.hh-products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 18px;
+}
+
+/* card de producto */
+.hh-product-card {
+  background: #fff;
+  border: 1px solid #dfdfdf;
+  border-radius: 10px;
+  padding: 14px 12px 12px;
+  text-align: center;
+  position: relative;
+  transition: transform 0.15s ease-in-out;
+  cursor: pointer;
+  min-height: 240px;
+}
+
+.hh-product-card:hover {
+  transform: translateY(-3px);
+}
+
+.hh-product-img {
+  width: 100%;
+  max-height: 105px;
+  object-fit: contain;
+  margin-bottom: 10px;
+}
+
+.hh-product-name {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: #333;
+  margin-bottom: 4px;
+}
+
+.hh-product-price {
+  font-weight: 700;
+  color: #2e8b57;
+  margin-bottom: 8px;
+}
+
+.hh-product-btn {
+  background: #2e8b57;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 4px 10px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  width: 100%;
+}
+
+.hh-product-meta {
+  font-size: 0.7rem;
+  color: #7a7a7a;
+  margin-bottom: 3px;
+}
+
+/* iconito favorito arriba a la derecha (opcional) */
+.hh-fav-btn {
+  position: absolute;
+  top: 6px;
+  right: 8px;
+  background: #fff;
+  border: 1px solid #ddd;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  font-size: 0.75rem;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+}
+
+/* footer */
+.hh-footer {
+  background: transparent;
+  color: #888;
+  font-size: 0.8rem;
+  margin-top: 30px;
+}
+
+@media (max-width: 576px) {
+  .hh-products-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
