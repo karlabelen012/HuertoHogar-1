@@ -1,0 +1,422 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>HuertoHogar - Inicio</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+  <!-- Estilos -->
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <style>
+    .filters {margin:15px 0;display:flex;gap:10px;flex-wrap:wrap;}
+    .filters input {padding:6px 8px;border:1px solid #ccc;border-radius:6px;}
+    .share-buttons {display:flex;gap:8px;margin-top:6px;justify-content:center;}
+    .share-buttons a img {height:20px;}
+    .reviews {margin-top:30px;padding:20px;background:#f9f9f9;border-radius:8px;}
+    .review-item {border-bottom:1px solid #ddd;padding:8px 0;}
+  </style>
+</head>
+<body>
+
+  <!-- ==================== TOP BAR (LOGIN/REGISTRO) ==================== -->
+  <div style="background:#2E8B57;color:#fff;padding:6px 20px;text-align:right;font-size:14px;">
+    <a href="login.html" style="color:#fff;font-weight:600;margin-right:10px;text-decoration:none;">Iniciar sesión</a> |
+    <a href="registro.html" style="color:#fff;font-weight:600;margin-left:10px;text-decoration:none;">Registrarse</a>
+  </div>
+
+  <!-- ==================== HEADER ==================== -->
+  <header class="header">
+    <div class="container navbar">
+      <!-- Logo + Marca -->
+      <a href="index.html" class="brand" aria-label="HuertoHogar - Inicio">
+        <img src="../assets/image/logo.png" alt="Logo HuertoHogar">
+        <h1>HuertoHogar</h1>
+      </a>
+      
+      <!-- 🔹 Bloque Iniciar sesión / Registrarse -->
+      <div style="margin-right:auto;margin-left:20px;">
+        <a href="login.html" style="color:#2E8B57;font-weight:600;margin-right:10px;text-decoration:none;">Iniciar sesión</a> |
+        <a href="registro.html" style="color:#2E8B57;font-weight:600;margin-left:10px;text-decoration:none;">Registrarse</a>
+      </div>
+
+      <!-- Menú de navegación -->
+      <nav class="nav-links" role="navigation" aria-label="Menú principal">
+        <a href="index.html">Inicio</a>
+        <a href="nosotros.html">Nosotros</a>
+        <a href="contactos.html">Contacto</a>
+        <a href="blogs.html" class="active">Blogs</a>
+        <a href="perfilCliente.html">Mi perfil</a>
+        <a href="carrito.html" class="btn" title="Ver carrito">
+          Carrito 
+          <span id="cartCount" style="background:#fff;color:#2E8B57;border-radius:8px;padding:2px 6px;margin-left:6px">0</span>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ==================== MAIN ==================== -->
+  <main class="container">
+    <!-- Hero / Portada -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-text">
+        <h2 id="hero-title">Productos frescos, directo del campo a tu hogar</h2>
+        <p>HuertoHogar conecta a las familias con productos locales y sustentables. Compra frutas y verduras frescas con entrega a domicilio.</p>
+        <a href="carrito.html" class="btn">Ver carrito</a>
+        <a href="contactos.html" class="btn secondary" style="margin-left:8px">Contáctanos</a>
+      </div>
+      <div class="hero-image">
+        <img src="../assets/image/fruta.png" alt="Frutas frescas">
+      </div>
+    </section>
+
+    <!-- Productos destacados -->
+    <section aria-labelledby="destacados">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px;">
+        <h3 id="destacados" style="color:#8B4513;font-family:'Playfair Display',serif;margin:0;">
+          Productos destacados
+        </h3>
+        <a href="productos.html" 
+          class="btn" 
+          style="background:#2E8B57;color:#fff;padding:8px 14px;border-radius:6px;font-weight:600;text-decoration:none;">
+          Ver todos
+        </a>
+      </div>
+
+
+      <div class="products" id="productsList">
+    
+    <!-- Manzana Fuji -->
+    <article class="card">
+      <img src="../assets/image/manzanafuji.png" alt="Manzanas Fuji">
+      <h3>Manzana Fuji</h3>
+      <p>Manzanas crujientes, Valle del Maule.</p>
+      <div class="price">$1.200</div>
+      <button class="btn add-to-cart" 
+              data-id="FR001" 
+              data-name="Manzana Fuji" 
+              data-price="1200" 
+              data-img="manzanafuji.png">
+        Añadir
+      </button>
+    </article>
+
+    <!-- Naranja Valencia -->
+    <article class="card">
+      <img src="../assets/image/naranja.png" alt="Naranjas Valencia">
+      <h3>Naranja Valencia</h3>
+      <p>Jugosas y ricas en vitamina C.</p>
+      <div class="price">$1.000</div>
+      <button class="btn add-to-cart" 
+              data-id="FR002" 
+              data-name="Naranja Valencia" 
+              data-price="1000" 
+              data-img="naranja.png">
+        Añadir
+      </button>
+    </article>
+
+    <!-- Plátano -->
+    <article class="card">
+      <img src="../assets/image/platano.png" alt="Plátanos">
+      <h3>Plátano</h3>
+      <p>Fuente natural de energía.</p>
+      <div class="price">$900</div>
+      <button class="btn add-to-cart" 
+              data-id="FR003" 
+              data-name="Plátano" 
+              data-price="900" 
+              data-img="platano.png">
+        Añadir
+      </button>
+    </article>
+
+    <!-- Zanahoria -->
+    <article class="card">
+      <img src="../assets/image/zanahoria.png" alt="Zanahorias">
+      <h3>Zanahoria</h3>
+      <p>Ricas en vitamina A, ideales para ensaladas.</p>
+      <div class="price">$700</div>
+      <button class="btn add-to-cart" 
+              data-id="VR001" 
+              data-name="Zanahoria" 
+              data-price="700" 
+              data-img="zanahoria.png">
+        Añadir
+      </button>
+    </article>
+
+    <!-- Espinaca -->
+    <article class="card">
+      <img src="../assets/image/espinaca.png" alt="Espinacas">
+      <h3>Espinaca fresca</h3>
+      <p>Bolsas de 500g, prácticas para batidos.</p>
+      <div class="price">$700</div>
+      <button class="btn add-to-cart" 
+              data-id="VR002" 
+              data-name="Espinaca Fresca" 
+              data-price="700" 
+              data-img="espinaca.png">
+        Añadir
+      </button>
+    </article>
+
+    <!-- Pimientos -->
+    <article class="card">
+      <img src="../assets/image/pimientos.png" alt="Pimientos">
+      <h3>Pimientos tricolor</h3>
+      <p>Rojos, verdes y amarillos, ideales para salteados.</p>
+      <div class="price">$1.500</div>
+      <button class="btn add-to-cart" 
+              data-id="VR003" 
+              data-name="Pimientos Tricolor" 
+              data-price="1500" 
+              data-img="pimientos.png">
+        Añadir
+      </button>
+    </article>
+
+    <!-- Miel -->
+    <article class="card">
+      <img src="../assets/image/miel.png" alt="Miel Natural">
+      <h3>Miel natural</h3>
+      <p>Producto artesanal, 100% natural.</p>
+      <div class="price">$3.500</div>
+      <button class="btn add-to-cart" 
+              data-id="OT001" 
+              data-name="Miel Natural" 
+              data-price="3500" 
+              data-img="miel.png">
+        Añadir
+      </button>
+    </article>
+
+  </div>
+</section>
+
+    <!-- Por qué elegirnos -->
+    <section style="margin-top:22px;">
+      <h3 style="color:#8B4513;font-family:'Playfair Display',serif">¿Por qué elegirnos?</h3>
+      <ul style="margin-top:8px;color:#666666">
+        <li>Productos locales y frescos.</li>
+        <li>Prácticas agrícolas sostenibles.</li>
+        <li>Entregas seguras a tu puerta.</li>
+      </ul>
+    </section>
+
+    <!-- ==================== RESEÑAS Y CALIFICACIONES ==================== -->
+<section class="reviews-section">
+  <h3 style="color:#8B4513;font-family:'Playfair Display',serif; margin-bottom:10px;">
+    Opiniones de nuestros clientes
+  </h3>
+  <div class="reviews-container" id="reviewsSlider">
+    <div class="review-card">
+      <p class="stars">⭐⭐⭐⭐⭐</p>
+      <p>"Las frutas siempre llegan frescas y con excelente sabor."</p>
+      <h4>- Valentina R.</h4>
+    </div>
+    <div class="review-card">
+      <p class="stars">⭐⭐⭐⭐</p>
+      <p>"Me encantó la miel orgánica, se nota que es natural."</p>
+      <h4>- Andrés M.</h4>
+    </div>
+    <div class="review-card">
+      <p class="stars">⭐⭐⭐⭐⭐</p>
+      <p>"Muy buen servicio, entrega rápida y productos de calidad."</p>
+      <h4>- Camila H.</h4>
+    </div>
+    <div class="review-card">
+      <p class="stars">⭐⭐⭐⭐</p>
+      <p>"La espinaca fresca es perfecta para mis batidos verdes."</p>
+      <h4>- Diego S.</h4>
+    </div>
+  </div>
+</section>
+
+<style>
+  .reviews-section {
+    margin-top:30px;
+    padding:20px;
+    background:#f9f9f9;
+    border-radius:12px;
+  }
+  .reviews-container {
+    display:flex;
+    gap:16px;
+    overflow-x:auto;
+    scroll-snap-type:x mandatory;
+    padding-bottom:10px;
+    scroll-behavior:smooth;
+  }
+  .review-card {
+    flex:0 0 260px;
+    background:#fff;
+    border-radius:10px;
+    padding:16px;
+    box-shadow:0 2px 6px rgba(0,0,0,0.1);
+    scroll-snap-align:start;
+    text-align:center;
+  }
+  .review-card p {
+    margin:6px 0;
+    color:#555;
+  }
+  .review-card h4 {
+    margin-top:8px;
+    color:#2E8B57;
+  }
+  .stars {
+    font-size:1.2em;
+    color:#FFD700;
+  }
+  /* Ocultar scrollbar */
+  .reviews-container::-webkit-scrollbar {
+    display:none;
+  }
+</style>
+
+<script>
+  // Slider automático
+  const slider = document.getElementById("reviewsSlider");
+  let index = 0;
+
+  function autoSlide() {
+    const cards = slider.querySelectorAll(".review-card");
+    index = (index + 1) % cards.length;
+    const scrollX = cards[index].offsetLeft;
+    slider.scrollTo({ left: scrollX, behavior: "smooth" });
+  }
+
+  setInterval(autoSlide, 5000); // cada 5 segundos
+</script>
+
+
+    <!-- ==================== FOOTER ==================== -->
+  <footer class="footer" role="contentinfo" style="background:#2E8B57;color:#fff;padding:40px 0 20px 0;margin-top:40px;">
+    <div class="container" style="max-width:1200px;margin:auto;">
+      <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-start;gap:32px;border-bottom:1px solid #fff2; padding-bottom:24px;">
+        <!-- Proyecto y redes -->
+        <div style="flex:1;min-width:220px;">
+          <h2 style="margin:0 0 8px 0;font-family:'Playfair Display',serif;">HuertoHogar</h2>
+          <p style="margin:0 0 8px 0;font-weight:600;">&copy; <span id="yearFoot"></span> Proyecto Evaluación 1</p>
+          <p style="margin:0 0 6px 0;font-size:0.95em;">Síguenos en redes sociales:</p>
+          <div style="display:flex;gap:10px;">
+            <a href="https://instagram.com/" target="_blank" title="Instagram">
+              <img src="../assets/image/instagram.png" alt="Instagram" style="height:24px;">
+            </a>
+            <a href="https://wa.me/" target="_blank" title="WhatsApp">
+              <img src="../assets/image/social.png" alt="WhatsApp" style="height:24px;">
+            </a>
+            <a href="https://facebook.com/" target="_blank" title="Facebook">
+              <img src="../assets/image/facebook.png" alt="Facebook" style="height:24px;">
+            </a>
+          </div>
+        </div>
+        <!-- Suscripción -->
+        <div style="flex:1;min-width:220px;">
+          <form id="subscribeForm" style="display:flex;align-items:center;gap:8px;">
+            <label for="emailSub" class="sr-only">Ingresa tu correo</label>
+            <input type="email" id="emailSub" name="emailSub" placeholder="Ingresa tu correo" required 
+                  style="padding:8px 10px;border:none;border-radius:6px;outline:none;min-width:180px;font-family:'Montserrat',sans-serif;">
+            <button type="submit" class="btn" 
+                    style="background:#fff;color:#2E8B57;font-weight:600;border:none;padding:8px 14px;border-radius:6px;cursor:pointer;">
+              Suscribirse
+            </button>
+          </form>
+        </div>
+        <!-- Métodos de pago -->
+        <div style="flex:1;min-width:180px;">
+          <span style="font-size:0.95em;margin-bottom:6px;display:block;">Pagos seguros:</span>
+          <div style="display:flex;gap:10px;">
+            <img src="../assets/image/visa.png" alt="Visa" style="height:28px;">
+            <img src="../assets/image/master card.png" alt="Mastercard" style="height:28px;">
+            <img src="../assets/image/paypal.png" alt="Webpay" style="height:28px;">
+          </div>
+        </div>
+      </div>
+      <!-- Links y contacto extra -->
+      <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-start;gap:32px;margin-top:32px;">
+        <div style="flex:1;min-width:180px;">
+          <h4 style="margin-bottom:8px;">¿Por qué elegirnos?</h4>
+          <ul style="margin:0;padding-left:18px;color:#fff9;">
+            <li>Productos locales y frescos.</li>
+            <li>Prácticas agrícolas sostenibles.</li>
+            <li>Entregas seguras a tu puerta.</li>
+          </ul>
+        </div>
+        <div style="flex:1;min-width:180px;">
+          <h4 style="margin-bottom:8px;">Información</h4>
+          <ul style="margin:0;padding-left:18px;color:#fff9;">
+            <li><a href="nosotros.html" style="color:#fff;text-decoration:underline;">Nosotros</a></li>
+            <li><a href="contactos.html" style="color:#fff;text-decoration:underline;">Contacto</a></li>
+            <li><a href="#" style="color:#fff;text-decoration:underline;">Política de privacidad</a></li>
+            <li><a href="#" style="color:#fff;text-decoration:underline;">Términos y condiciones</a></li>
+          </ul>
+        </div>
+        <div style="flex:1;min-width:180px;">
+          <h4 style="margin-bottom:8px;">Contacto</h4>
+          <p style="margin:0;">Email: contacto@huertohogar.cl</p>
+          <p style="margin:0;">Teléfono: +56 9 1234 5678</p>
+          <p style="margin:0;">Dirección: Santiago, Chile</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to Top -->
+  <a href="#" class="btn btn-primary border-3 border-primary rounded-circle back-to-top"><i class="fa fa-arrow-up"></i></a> 
+
+
+  <!-- Back to Top -->
+  <a href="#" class="btn btn-primary border-3 border-primary rounded-circle back-to-top"><i class="fa fa-arrow-up"></i></a> 
+
+  <script>document.getElementById('yearFoot').textContent = new Date().getFullYear();</script>
+  <script src="../assets/js/script.js"></script>
+
+  <!-- ==================== EXTRA JS ==================== -->
+  <script>
+  // 🔎 Filtros de búsqueda
+  function applyFilters() {
+    const name = document.getElementById("searchName").value.toLowerCase();
+    const min = parseInt(document.getElementById("minPrice").value) || 0;
+    const max = parseInt(document.getElementById("maxPrice").value) || Infinity;
+
+    document.querySelectorAll("#productsList .card").forEach(prod => {
+      const pname = prod.dataset.name;
+      const price = parseInt(prod.dataset.price);
+      if (pname.includes(name) && price >= min && price <= max) {
+        prod.style.display = "block";
+      } else {
+        prod.style.display = "none";
+      }
+    });
+  }
+
+  // 📝 Reseñas
+  const reviewForm = document.getElementById("reviewForm");
+  const reviewsList = document.getElementById("reviewsList");
+  let reviews = JSON.parse(localStorage.getItem("reviews")) || [];
+
+  function renderReviews() {
+    reviewsList.innerHTML = "";
+    reviews.forEach(r => {
+      const div = document.createElement("div");
+      div.classList.add("review-item");
+      div.innerHTML = `<strong>${r.name}</strong><p>${r.text}</p>`;
+      reviewsList.appendChild(div);
+    });
+  }
+  renderReviews();
+
+  reviewForm.addEventListener("submit", e => {
+    e.preventDefault();
+    const name = document.getElementById("reviewName").value;
+    const text = document.getElementById("reviewText").value;
+    reviews.push({name,text});
+    localStorage.setItem("reviews", JSON.stringify(reviews));
+    renderReviews();
+    reviewForm.reset();
+  });
+  </script>
+</body>
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>HuertoHogar - Detalle Producto</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+  <!-- Estilos -->
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+
+  <!-- ==================== TOP BAR ==================== -->
+  <div style="background:#2E8B57;color:#fff;padding:6px 20px;text-align:right;font-size:14px;">
+    <a href="login.html" style="color:#fff;font-weight:600;margin-right:10px;text-decoration:none;">Iniciar sesión</a> |
+    <a href="registro.html" style="color:#fff;font-weight:600;margin-left:10px;text-decoration:none;">Registrarse</a>
+  </div>
+
+  <!-- ==================== HEADER ==================== -->
+  <header class="header">
+    <div class="container navbar">
+      <a href="index.html" class="brand" aria-label="HuertoHogar - Inicio">
+        <img src="../assets/image/logo.png" alt="Logo HuertoHogar">
+        <h1>HuertoHogar</h1>
+      </a>
+      <nav class="nav-links" role="navigation" aria-label="Menú principal">
+        <a href="index.html">Inicio</a>
+        <a href="nosotros.html">Nosotros</a>
+        <a href="contactos.html">Contacto</a>
+        <a href="blogs.html">Blogs</a>
+        <a href="productos.html">Productos</a>
+        <a href="perfilCliente.html">Mi perfil</a>
+        <a href="carrito.html" class="btn">Carrito 
+          <span id="cartCount" style="background:#fff;color:#2E8B57;border-radius:8px;padding:2px 6px;margin-left:6px">0</span>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ==================== MAIN ==================== -->
+  <main class="container">
+    <h2 style="margin:20px 0;color:#8B4513;font-family:'Playfair Display',serif;text-align:center;">
+      Detalle del Producto
+    </h2>
+
+    <!-- Producto seleccionado -->
+    <div id="productDetail" class="product-detail" style="display:flex;flex-wrap:wrap;gap:20px;align-items:flex-start;justify-content:center;">
+      <div style="flex:1;min-width:250px;text-align:center;">
+        <img id="productImage" src="../assets/image/placeholder.png" alt="Producto" style="max-width:100%;border-radius:8px;">
+      </div>
+      <div style="flex:2;min-width:280px;">
+        <h3 id="productName">Nombre del producto</h3>
+        <p id="productDesc">Descripción detallada del producto seleccionado.</p>
+        <p><strong>Stock disponible:</strong> <span id="productStock">0</span></p>
+        <div id="productPrice" class="price" style="font-size:1.2em;font-weight:600;margin:12px 0;">$0</div>
+        <button id="addToCartBtn" class="btn">Añadir al carrito</button>
+        <a href="productos.html" class="btn secondary" style="margin-left:8px;">Volver a productos</a>
+      </div>
+    </div>
+
+    <!-- Productos relacionados -->
+    <section style="margin-top:40px;">
+      <h3 style="color:#8B4513;font-family:'Playfair Display',serif;">Productos relacionados</h3>
+      <div id="relatedProducts" class="products" style="margin-top:12px;display:flex;flex-wrap:wrap;gap:20px;">
+        <!-- Se llenan por JS -->
+      </div>
+    </section>
+  </main>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="footer" role="contentinfo" style="background:#2E8B57;color:#fff;padding:40px 0 20px 0;margin-top:40px;">
+    <div class="container" style="max-width:1200px;margin:auto;">
+      <p style="text-align:center;margin:0;">&copy; <span id="yearFoot"></span> Proyecto Evaluación 1 - HuertoHogar</p>
+    </div>
+  </footer>
+
+  <!-- ==================== SCRIPT DETALLE ==================== -->
+  <script>
+    const products = [
+      {id:"FR001", name:"Manzana Fuji", price:1200, stock:150, img:"manzanafuji.png", desc:"Manzanas Fuji crujientes y dulces, cultivadas en el Valle del Maule. Perfectas para meriendas saludables o como ingrediente en postres."},
+      {id:"FR002", name:"Naranja Valencia", price:1000, stock:200, img:"naranja.png", desc:"Jugosas y ricas en vitamina C, ideales para jugos frescos y refrescantes."},
+      {id:"FR003", name:"Plátano Cavendish", price:800, stock:250, img:"platano.png", desc:"Plátanos maduros y dulces, ricos en potasio y vitaminas."},
+      {id:"VR001", name:"Zanahoria Orgánica", price:900, stock:100, img:"zanahoria.png", desc:"Zanahorias crujientes cultivadas sin pesticidas en O'Higgins. Fuente de vitamina A y fibra."},
+      {id:"VR002", name:"Espinaca Fresca", price:700, stock:80, img:"espinaca.png", desc:"Espinacas frescas y nutritivas, perfectas para ensaladas y batidos verdes."},
+      {id:"VR003", name:"Pimientos Tricolores", price:1500, stock:120, img:"pimientos.png", desc:"Pimientos rojos, amarillos y verdes, ricos en antioxidantes y vitaminas."},
+      {id:"PO001", name:"Miel Orgánica", price:5000, stock:50, img:"miel.png", desc:"Miel pura y orgánica producida por apicultores locales."}
+    ];
+
+    // Obtener ID de la URL
+    const params = new URLSearchParams(window.location.search);
+    const productId = params.get("id");
+    const product = products.find(p => p.id === productId);
+
+    if (product) {
+      document.getElementById("productName").textContent = product.name;
+      document.getElementById("productDesc").textContent = product.desc;
+      document.getElementById("productStock").textContent = product.stock + " unidades";
+      document.getElementById("productPrice").textContent = "$" + product.price;
+      document.getElementById("productImage").src = "../assets/image/" + product.img;
+
+      document.getElementById("addToCartBtn").addEventListener("click", () => {
+        alert(product.name + " añadido al carrito");
+        // Aquí enlazar con la lógica real de carrito/localStorage
+      });
+
+      // Productos relacionados (3 aleatorios diferentes del actual)
+      const related = products.filter(p => p.id !== product.id);
+      const randomRelated = related.sort(() => 0.5 - Math.random()).slice(0, 3);
+
+      const relatedContainer = document.getElementById("relatedProducts");
+      randomRelated.forEach(rp => {
+        const card = document.createElement("article");
+        card.classList.add("card");
+        card.innerHTML = `
+          <a href="detalleProducto.html?id=${rp.id}">
+            <img src="../assets/image/${rp.img}" alt="${rp.name}">
+            <h3>${rp.name}</h3>
+          </a>
+          <p>${rp.desc.substring(0,60)}...</p>
+          <div class="price">$${rp.price}</div>
+          <button class="btn add-to-cart" data-id="${rp.id}" data-name="${rp.name}" data-price="${rp.price}">Añadir</button>
+        `;
+        relatedContainer.appendChild(card);
+      });
+    }
+
+    document.getElementById("yearFoot").textContent = new Date().getFullYear();
+  </script>
+  <script src="../assets/js/script.js"></script>
+</body>
+</html>
