@@ -1,0 +1,1465 @@
+/* ==========================================================
+   🔹 HOME (index.html) – ESTILO FINAL CON COLORES HUERTOHOGAR
+   ========================================================== */
+
+:root {
+  --verde: #2E8B57;
+  --mostaza: #FFD700;
+  --marron: #8B4513;
+  --gris: #f2f2f2;
+  --txt: #333333;
+}
+
+/* ======= BASE ======= */
+body {
+  font-family: "Montserrat", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  color: var(--txt);
+  background-color: #f8f8f9;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+
+/* ======= TOP MINI BAR (login | registro) ======= */
+.topbar {
+  background: #ffffff;
+  padding: 8px 0;
+  border-bottom: 1px solid #eaeaea;
+}
+
+.topbar .container {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.topbar a {
+  color: var(--verde);
+  font-weight: 600;
+}
+
+.topbar a:hover {
+  color: var(--marron);
+}
+
+/* ======= HEADER + NAV ======= */
+header {
+  background: #ffffff;
+  border-bottom: 1px solid #e0e0e0;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 0;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.brand img {
+  height: 50px;
+  width: auto;
+  transition: transform 0.3s ease;
+}
+
+.brand img:hover {
+  transform: scale(1.05);
+}
+
+.brand h1 {
+  font: 700 20px "Playfair Display", serif;
+  color: var(--verde);
+  margin: 0;
+}
+
+nav a {
+  margin: 0 10px;
+  color: var(--verde);
+  font-weight: 600;
+}
+
+nav a:hover {
+  color: var(--marron);
+}
+
+nav .cart {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.cart-badge {
+  background: var(--marron);
+  color: #fff;
+  border-radius: 10px;
+  padding: 2px 6px;
+  font-size: 12px;
+}
+
+/* ======= HERO PRINCIPAL ======= */
+.hero-wrap {
+  background: #ffffff;
+  margin: 40px 0;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 40px;
+  padding: 50px;
+}
+
+.hero-text h2 {
+  font-family: "Playfair Display", serif;
+  font-size: 30px;
+  color: var(--verde);
+  margin-bottom: 10px;
+}
+
+.hero-text p {
+  color: #666666;
+  font-size: 16px;
+  line-height: 1.6;
+  margin-bottom: 25px;
+  max-width: 450px;
+}
+
+.hero-text .cta {
+  background-color: var(--verde);
+  color: #fff;
+  padding: 10px 22px;
+  border-radius: 6px;
+  font-weight: 600;
+  transition: background 0.3s ease, transform 0.2s ease;
+  display: inline-block;
+}
+
+.hero-text .cta:hover {
+  background-color: #246e45;
+  transform: scale(1.05);
+}
+
+.hero-imgbox {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-imgbox img {
+  width: 100%;
+  border-radius: 12px;
+  object-fit: cover;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.hero-imgbox img:hover {
+  transform: scale(1.02);
+}
+
+/* ======= PRODUCTOS ======= */
+.section-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 18px 2px;
+}
+
+.section-head h3 {
+  font: 700 20px "Playfair Display", serif;
+  color: var(--marron);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 32px;
+  margin-top: 20px;
+}
+
+.card-link {
+  display: block;
+  color: inherit;
+}
+
+.card {
+  background: #ffffff;
+  border-radius: 6px;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  padding: 14px;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.card .thumb {
+  aspect-ratio: 16 / 10;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+}
+
+.card .thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card h4 {
+  text-align: center;
+  margin: 10px 0 6px;
+  color: var(--verde);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.card p {
+  font-size: 13px;
+  text-align: center;
+  color: #666;
+  margin-bottom: 8px;
+}
+
+.card .meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: #666666;
+}
+
+/* ======= ¿POR QUÉ ELEGIRNOS? ======= */
+.why {
+  background: #ffffff;
+  margin: 40px 0;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.why h3 {
+  font: 700 20px "Playfair Display", serif;
+  color: var(--verde);
+  margin-bottom: 10px;
+}
+
+.why .cols {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 20px;
+}
+
+.why ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  color: #666;
+  line-height: 1.6;
+}
+
+.badge {
+  background: #eaf6ee;
+  color: #1c5b3a;
+  border-radius: 999px;
+  padding: 5px 12px;
+  font-size: 12px;
+  margin: 6px 6px 0 0;
+  display: inline-block;
+}
+
+/* ======= RESEÑAS ======= */
+.reviews {
+  margin: 40px 0;
+}
+
+.reviews h3 {
+  color: var(--verde);
+  font-family: "Playfair Display", serif;
+  margin-bottom: 15px;
+}
+
+.rev-track {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 6px;
+  scroll-behavior: smooth;
+}
+
+.rev-track::-webkit-scrollbar {
+  display: none;
+}
+
+.rev-card {
+  flex: 0 0 260px;
+  background: #fff;
+  border-radius: 10px;
+  padding: 14px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  scroll-snap-align: start;
+}
+
+.rev-stars {
+  color: var(--mostaza);
+  font-size: 18px;
+  margin-bottom: 6px;
+}
+
+.rev-name {
+  color: var(--verde);
+  font-weight: 700;
+}
+
+/* ==========================================================
+   🔹 FOOTER HUERTOHOGAR
+   ========================================================== */
+
+.footer {
+  background-color: var(--verde); /* Verde esmeralda */
+  color: #ffffff;
+  padding: 40px 0 25px;
+  margin-top: 50px;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.footer .container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 0 20px;
+}
+
+/* === SECCIÓN SUPERIOR: LOGO, ENLACES, SUSCRIPCIÓN === */
+.footer-top {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 40px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  padding-bottom: 25px;
+}
+
+.footer-left h2 {
+  font-family: "Playfair Display", serif;
+  color: #ffffff;
+  margin-bottom: 10px;
+}
+
+.foot-links a {
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 600;
+  margin: 0 8px;
+  transition: color 0.3s ease;
+}
+
+.foot-links a:hover {
+  color: var(--mostaza);
+}
+
+/* === SUSCRIPCIÓN === */
+.footer-right p {
+  font-weight: 500;
+  margin-bottom: 10px;
+  color: #ffffff;
+}
+
+.subscribe-form {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.subscribe-form input[type="email"] {
+  padding: 8px 10px;
+  border-radius: 6px;
+  border: none;
+  outline: none;
+  min-width: 200px;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.subscribe-form button {
+  background: #ffffff;
+  color: var(--verde);
+  font-weight: 600;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.subscribe-form button:hover {
+  background: #f3f3f3;
+  transform: scale(1.05);
+}
+
+/* === SECCIÓN INFERIOR: CONTACTO, REDES Y PAGOS === */
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  margin-top: 30px;
+  gap: 30px;
+}
+
+.footer-column {
+  flex: 1;
+  min-width: 220px;
+}
+
+.footer-column h3 {
+  font-family: "Playfair Display", serif;
+  font-size: 16px;
+  margin-bottom: 10px;
+  color: #ffffff;
+}
+
+.footer-column p,
+.footer-column a {
+  color: #ffffff;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.footer-column a:hover {
+  text-decoration: underline;
+}
+
+/* === ICONOS DE REDES SOCIALES === */
+.social-icons {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.social-icons img {
+  height: 30px;
+  width: 30px;
+  border-radius: 6px;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.social-icons img:hover {
+  transform: scale(1.1);
+  opacity: 0.8;
+}
+
+/* === ICONOS DE PAGOS === */
+.pay-icons {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.pay-icons img {
+  height: 26px;
+  filter: brightness(0) invert(1); /* logos blancos */
+  opacity: 0.9;
+  transition: opacity 0.3s ease;
+}
+
+.pay-icons img:hover {
+  opacity: 1;
+}
+
+/* === LOGO INFERIOR === */
+.footer-logo {
+  margin-top: 35px;
+  text-align: center;
+}
+
+.footer-logo img {
+  height: 60px;
+  opacity: 0.9;
+  transition: transform 0.3s ease;
+}
+
+.footer-logo img:hover {
+  transform: scale(1.05);
+}
+
+/* === RESPONSIVE FOOTER === */
+@media (max-width: 920px) {
+  .footer-top {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .social-icons,
+  .pay-icons {
+    justify-content: center;
+  }
+}
+/* ==========================================================
+   🔹 LOGIN (Diseño centrado y fiel al mockup)
+   ========================================================== */
+
+/* Contenedor principal: centra todo vertical y horizontalmente */
+.login-container {
+  width: 100%;              /* 👉 ocupa todo el ancho del main */
+  max-width: 100%;
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;  /* centro vertical */
+  align-items: center;      /* centro horizontal */
+  padding: 40px 20px;
+}
+
+
+/* Logo + nombre */
+.login-header {
+  text-align: center;
+  margin-bottom: 10px;
+}
+.login-header img {
+  width: 130px;
+  height: auto;
+  margin-bottom: 6px;
+}
+.login-header h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 26px;
+  color: #2E8B57;
+}
+
+/* Cuadro gris del formulario */
+.login-box {
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  width: 440px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  overflow: hidden;
+}
+
+/* Barra superior gris */
+.login-header-bar {
+  background-color: #d0d0d0;
+  padding: 10px 16px;
+  border-bottom: 1px solid #c0c0c0;
+}
+.login-header-bar h2 {
+  margin: 0;
+  font-size: 14px;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: #333;
+}
+
+/* Formulario */
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 24px 30px 40px;
+}
+.login-form label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #333;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+.login-form input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #999;
+  border-radius: 2px;
+  font-size: 14px;
+  outline: none;
+}
+.login-form input:focus {
+  border-color: #2E8B57;
+  box-shadow: 0 0 3px rgba(46,139,87,0.3);
+}
+
+/* Botón verde */
+.login-form button {
+  margin: 20px auto 0;
+  background: #2E8B57;
+  color: #fff;
+  font-weight: 600;
+  border: 1px solid #222;
+  padding: 12px 30px;
+  border-radius: 2px;
+  cursor: pointer;
+  width: 60%;
+  transition: background 0.3s ease;
+}
+.login-form button:hover {
+  background: #256f48;
+}
+
+/* Texto inferior */
+.login-extra {
+  text-align: center;
+  margin-top: 18px;
+  font-size: 14px;
+  color: #333;
+}
+.login-extra a {
+  color: #2E8B57;
+  font-weight: 600;
+  text-decoration: none;
+}
+.login-extra a:hover {
+  text-decoration: underline;
+}
+
+/* ==========================================================
+   🔹 Sección de contacto profesional (información + mapa)
+   ========================================================== */
+.contact-info {
+  background: #f9faf9;
+}
+
+.contact-box {
+  border-left: 4px solid #f2f2f2;
+  transition: all 0.3s ease;
+}
+
+.contact-box:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.contact-info h4 i {
+  vertical-align: middle;
+}
+
+.map-wrapper iframe {
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
+}
+
+
+
+/* ==========================================================
+   SECCIÓN BLOG (NOTICIAS IMPORTANTES)
+   ========================================================== */
+.noticias-importantes {
+  margin: 60px auto;
+  max-width: 1200px;
+}
+
+.titulo-noticias {
+  text-align: center;
+  font-family: "Playfair Display", serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #2E8B57;
+  margin-bottom: 40px;
+  letter-spacing: 0.5px;
+}
+
+.blog-caso {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  align-items: stretch;
+  background: #f1f1f1;
+  border-radius: 6px;
+  margin-bottom: 40px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.blog-caso:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.12);
+}
+
+.blog-info {
+  padding: 40px 45px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.blog-titulo {
+  font-size: 1.5rem;
+  color: #2E8B57;
+  font-weight: 700;
+  margin-bottom: 16px;
+  line-height: 1.3;
+}
+
+.blog-info p {
+  font-size: 1rem;
+  color: #333;
+  margin-bottom: 24px;
+  line-height: 1.7;
+  text-align: justify;
+}
+
+.blog-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Botones personalizados */
+.btn-caso {
+  display: inline-block;
+  padding: 10px 24px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border-radius: 4px;
+  border: none;
+  text-decoration: none;
+  color: #fff;
+  transition: all 0.3s ease;
+  align-self: flex-start;
+}
+
+.btn-verde {
+  background: #2E8B57;
+}
+
+.btn-verde:hover {
+  background: #256f46;
+}
+
+.btn-cafe {
+  background: #8B4513;
+}
+
+.btn-cafe:hover {
+  background: #6b3410;
+}
+
+
+/* Responsive */
+@media (max-width: 900px) {
+  .blog-caso {
+    grid-template-columns: 1fr;
+  }
+
+  .blog-info {
+    text-align: center;
+    padding: 25px;
+  }
+
+  .btn-caso {
+    align-self: center;
+  }
+
+  .blog-img img {
+    height: 260px;
+  }
+}
+
+    /* ======== ESTILO EXACTO MOCKUP ======== */
+    body {
+      background: url('../assets/image/textura-papel-blanco_1194-5416.jpg');
+      background-size: cover;
+      background-attachment: fixed;
+    }
+
+    main {
+      background: #fff;
+      border-radius: 8px;
+      padding: 40px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    }
+
+    h2 {
+      text-align: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      color: #333;
+      font-weight: 700;
+      margin-bottom: 40px;
+    }
+
+    /* Grid productos */
+    .productos-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 30px;
+      justify-items: center;
+    }
+
+    .producto-card {
+      background: #f2f2f2;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      text-align: center;
+      width: 230px;
+      padding: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+      transition: all 0.3s ease;
+    }
+
+    .producto-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.12);
+    }
+
+    .producto-card img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 3px;
+      background: #ddd;
+    }
+
+    .producto-card h4 {
+      font-size: 14px;
+      color: #2E8B57;
+      margin-top: 10px;
+      font-weight: 700;
+    }
+
+    .producto-card p {
+      font-size: 14px;
+      color: #222;
+      margin: 5px 0;
+    }
+
+    .producto-card .price {
+      color: #333;
+      font-weight: 600;
+      font-size: 15px;
+      margin-bottom: 6px;
+    }
+
+    .producto-card button {
+      background: #2E8B57;
+      color: #fff;
+      border: 1px solid #000;
+      border-radius: 3px;
+      padding: 4px 18px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .producto-card button:hover {
+      background: #256e49;
+    }
+
+    /* Responsive */
+    @media (max-width: 992px) {
+      .productos-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .productos-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .productos-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+
+
+    body { background:#F7F7F7; margin:0; font-family:'Montserrat',sans-serif; }
+    main { max-width:1200px; margin:30px auto; padding:0 20px; display:flex; gap:20px; flex-wrap:wrap; }
+    .carrito { flex:2; min-width:360px; }
+    .resumen { flex:1; min-width:260px; background:#fff; padding:20px; border:1px solid #ccc; border-radius:8px; height:fit-content; }
+
+    /* PRODUCTO */
+    .producto { display:flex; align-items:center; background:#fff; border:1px solid #ddd; margin-bottom:15px; padding:10px; border-radius:6px; }
+    .producto img { width:80px; height:80px; object-fit:cover; margin-right:15px; border-radius:6px; }
+    .producto-info { flex:1; }
+    .producto-nombre { font-weight:600; margin:0; }
+    .producto-desc { font-size:14px; color:#666; margin:5px 0; }
+    .producto-precio { font-weight:700; color:#2E8B57; margin:0 15px; }
+
+    /* CANTIDAD */
+    .cantidad { display:flex; align-items:center; }
+    .cantidad button { width:28px; height:28px; border:1px solid #ccc; background:#fff; cursor:pointer; font-weight:600; }
+    .cantidad input { width:40px; text-align:center; border:1px solid #ccc; height:28px; margin:0 5px; border-radius:4px; }
+
+    /* RESUMEN */
+    .resumen h3 { margin:0 0 15px; color:#8B4513; font-family:'Playfair Display',serif; }
+    .resumen p { font-size:18px; font-weight:700; color:#2E8B57; }
+    .resumen input { width:100%; padding:8px; margin:10px 0; border:1px solid #ccc; border-radius:4px; }
+    .resumen button { width:100%; padding:12px; font-size:16px; font-weight:700; border:none; border-radius:4px; cursor:pointer; }
+    .btn-aplicar { background:#ccc; color:#333; margin-top:5px; }
+    .btn-pagar { background:#2E8B57; color:#fff; margin-top:10px; }
+   
+
+    body {
+  font-family: 'Montserrat', sans-serif;
+  background-color: #fdfdfd;
+}
+
+/* Detalle principal */
+.detalle-img {
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  width: 100%;
+  height: 350px;
+  object-fit: cover;
+}
+
+.miniatura {
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: border 0.2s ease;
+}
+.miniatura:hover,
+.miniatura.active {
+  border-color: #2E8B57;
+}
+
+/* Info del producto */
+.precio {
+  color: #8B4513;
+  font-weight: 700;
+  font-size: 1.3rem;
+}
+
+.btn-huerto {
+  background-color: #2E8B57;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-weight: 600;
+}
+.btn-huerto:hover {
+  background-color: #256d46;
+}
+
+/* Productos relacionados */
+.card-rel {
+  border: none;
+  transition: transform 0.2s ease;
+}
+.card-rel:hover {
+  transform: scale(1.03);
+}
+.card-rel img {
+  height: 180px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+/* ======== ESTRUCTURA GENERAL ======== */
+    main {
+      max-width: 1200px;
+      margin: 40px auto;
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+      padding: 40px;
+    }
+
+    /* ======== BREADCRUMB ======== */
+    .breadcrumb {
+      font-size: 14px;
+      margin-bottom: 25px;
+    }
+    .breadcrumb a {
+      color: #2E8B57;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .breadcrumb span {
+      color: #888;
+      margin: 0 4px;
+    }
+
+    /* ======== SECCIÓN PRINCIPAL ======== */
+    .detalle-layout {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 30px;
+    }
+
+    /* IMAGEN PRINCIPAL */
+    .detalle-imagen img {
+      width: 100%;
+      height: 350px;
+      object-fit: cover;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+    }
+
+    /* MINIATURAS */
+    .miniaturas {
+      display: flex;
+      gap: 10px;
+      margin-top: 12px;
+    }
+    .miniaturas img {
+      width: 70px;
+      height: 70px;
+      border: 2px solid transparent;
+      border-radius: 4px;
+      object-fit: cover;
+      cursor: pointer;
+      transition: border 0.2s ease;
+    }
+    .miniaturas img:hover,
+    .miniaturas img.active {
+      border-color: #2E8B57;
+    }
+
+    /* INFO PRODUCTO */
+    .detalle-info h2 {
+      font-family: 'Playfair Display', serif;
+      color: #2E8B57;
+      font-size: 26px;
+      margin-bottom: 8px;
+    }
+    .detalle-info .precio {
+      font-size: 22px;
+      color: #8B4513;
+      font-weight: 700;
+      margin-bottom: 15px;
+    }
+    .detalle-info p {
+      font-size: 15px;
+      color: #555;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+    .detalle-info label {
+      font-weight: 600;
+      margin-right: 10px;
+    }
+    .detalle-info input[type="number"] {
+      width: 70px;
+      padding: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      margin-bottom: 20px;
+    }
+    .detalle-info .btn {
+      display: block;
+      background-color: #2E8B57;
+      color: white;
+      padding: 10px;
+      border: none;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+      width: 200px;
+      text-align: center;
+    }
+    .detalle-info .btn:hover {
+      background-color: #256d46;
+    }
+
+    /* ======== PRODUCTOS RELACIONADOS ======== */
+.relacionados {
+  margin-top: 60px;
+  padding-top: 30px;
+  border-top: 1px solid #ddd;
+  text-align: center;
+}
+
+.titulo-relacionados {
+  font-family: 'Playfair Display', serif;
+  color: #2E8B57;
+  font-size: 22px;
+  margin-bottom: 25px;
+}
+
+/* Cuadrícula fija con 5 columnas */
+.rel-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 20px;
+  justify-content: center;
+  align-items: start;
+}
+
+/* Cada producto relacionado */
+.rel-grid .producto-rel {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: #fff;
+  transition: transform 0.2s ease;
+  cursor: pointer;
+  min-height: 220px; /* mantiene el tamaño uniforme incluso si hay menos productos */
+}
+
+.rel-grid .producto-rel:hover {
+  transform: scale(1.03);
+}
+
+.rel-grid img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+}
+
+.rel-grid .nombre-rel {
+  font-size: 15px;
+  color: #2E8B57;
+  font-weight: 600;
+  margin: 10px 0;
+}
+
+/* Responsive: 2 o 3 productos por fila en pantallas pequeñas */
+@media (max-width: 992px) {
+  .rel-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media (max-width: 600px) {
+  .rel-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+
+    /* ======== FORMULARIO DE REGISTRO ======== */
+
+.body  {
+      background-color: #fff;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    .register-box {
+      max-width: 600px;
+      margin: 50px auto;
+      background: #f1f1f1;
+      border: 1px solid #ccc;
+    }
+
+    .register-header {
+      background: #e5e5e5;
+      color: #333;
+      font-weight: 600;
+      text-align: center;
+      padding: 10px;
+      border-bottom: 1px solid #ccc;
+    }
+
+    .register-body {
+      padding: 25px;
+    }
+
+    label {
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    .form-control, .form-select {
+      border-radius: 0;
+      border: 1px solid #aaa;
+      font-size: 0.95rem;
+    }
+
+    button.btn {
+      background: #fff;
+      border: 1px solid #000;
+      font-weight: 600;
+      color: #000;
+    }
+
+    button.btn:hover {
+      background: #2E8B57;
+      border: 1px solid #2E8B57;
+      color: #fff;
+    }
+
+    .text-small {
+      font-size: 0.9rem;
+    }
+
+   
+/* ==========================================================
+   🔹 SECCIÓN DE RESEÑAS (carrusel horizontal)
+   ========================================================== */
+.reviews {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.rev-wrapper {
+  overflow: hidden;
+  position: relative;
+}
+
+.rev-track {
+  display: flex;
+  transition: transform 0.5s ease;
+}
+
+.rev-card {
+  flex: 0 0 calc(33.333% - 1rem);
+  box-sizing: border-box;
+  margin: 0 0.5rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .rev-card { flex: 0 0 calc(50% - 1rem); }
+}
+@media (max-width: 576px) {
+  .rev-card { flex: 0 0 100%; }
+}
+
+.rev-btn {
+  background: #2E8B57;
+  border: none;
+  color: white;
+  font-size: 1.2rem;
+  padding: 6px 10px;
+  border-radius: 8px;
+  transition: background 0.3s;
+}
+.rev-btn:hover { background: #256a44; }
+
+
+
+/* ==========================================================
+       🌿 DETALLE PRODUCTO – DISEÑO EXACTO MOCKUP
+       ========================================================== */
+    body {
+      font-family: "Montserrat", sans-serif;
+      background: url("../assets/image/textura-papel-blanco_1194-5416.jpg") no-repeat center/cover fixed;
+    }
+
+    #detalle-producto {
+      max-width: 1200px;
+      margin: 60px auto;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 12px;
+      padding: 40px 60px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    }
+
+    /* Migas */
+    .breadcrumb {
+      background: none;
+      font-size: 15px;
+    }
+    .breadcrumb-item + .breadcrumb-item::before {
+      content: "›";
+      color: #2E8B57;
+    }
+    .breadcrumb a {
+      color: #2E8B57;
+      text-decoration: none;
+    }
+    .breadcrumb a:hover {
+      text-decoration: underline;
+    }
+
+    /* Imagen principal */
+    .img-principal {
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    /* Miniaturas */
+    .miniaturas {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 15px;
+    }
+    .miniaturas img {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border: 2px solid transparent;
+      border-radius: 8px;
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+    .miniaturas img:hover {
+      border-color: #2E8B57;
+      transform: scale(1.05);
+    }
+
+    /* Información */
+    #nombreProducto {
+      font-family: "Playfair Display", serif;
+      font-weight: 700;
+      color: #2E8B57;
+      margin-bottom: 10px;
+    }
+
+    #precioProducto {
+      font-weight: 600;
+      color: #2E8B57;
+      font-size: 20px;
+      margin-bottom: 20px;
+    }
+
+    #descripcionProducto {
+      color: #555;
+      font-size: 15px;
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+
+    #detalle-producto ul li {
+      margin-bottom: 6px;
+    }
+
+    /* Botón */
+    .btn-success {
+      background-color: #2E8B57 !important;
+      border: none;
+      transition: all 0.3s ease;
+      font-weight: 600;
+    }
+    .btn-success:hover {
+      background-color: #3FAE70 !important;
+      transform: translateY(-2px);
+    }
+
+  
+    /* Productos relacionados */
+    #relacionados {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-top: 30px;
+    }
+
+    #relacionados .card {
+      width: 200px;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+      transition: all 0.3s;
+    }
+    #relacionados .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+
+
+    /* Carrusel home */
+#homeCarousel {
+  max-width: 1200px;
+  margin: 0 auto;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+/* En pantallas grandes, máx 1200 centrado; en pequeñas, 100% */
+.max-1200{ max-width:1200px; margin:0 auto; }
+
+#homeCarousel{ border-radius:12px; overflow:hidden; }
+#homeCarousel .carousel-item{ height:300px; }       /* alto fijo del mockup */
+#homeCarousel .carousel-img{
+  width:100%;
+  height:100%;
+  object-fit:cover;          /* rellena sin deformar */
+  object-position:center;    /* centrado */
+}
+#homeCarousel .carousel-caption{
+  bottom:1.6rem;
+  text-shadow:0 2px 6px rgba(0,0,0,.4);
+}
+#homeCarousel .carousel-indicators{ bottom:12px; }
+/* ¿Por qué elegirnos? */
+#porque-elegirnos h2{
+  font-family: "Playfair Display", serif;
+  font-weight: 700;
+}
+#porque-elegirnos .feature-icon{
+  width: 56px; height: 56px;
+  display: grid; place-items: center;
+  border-radius: 50%;
+  background: rgba(46,139,87,.08);     /* verde suave */
+}
+#porque-elegirnos .feature-icon i{ font-size: 1.25rem; color: #2E8B57; }
+
+/* Avatares de reseñas */
+.avatar-review {
+  width: 45px;
+  height: 45px;
+  object-fit: cover;
+  border-radius: 8px; /* ligeramente redondeado, no circular */
+  border: 2px solid #2E8B57; /* verde del contexto */
+  background-color: #fff;
+}
+/* navbar caret compacto */
+.nav-categories .dropdown-toggle{padding-left:4px;padding-right:4px}
+
+
+/*blog 1*/
+
+    /* Animaciones suaves */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .fade-up.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /*blog 2*/
+         .fade-up {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .fade-up.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Neutraliza fondo dentro del main de ofertas */
+.ofertas-page { background:#fff; border:1px solid #e9ecef; border-radius:12px; }

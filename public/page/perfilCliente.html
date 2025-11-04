@@ -16,8 +16,8 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
   <!-- Estilos propios (puedes ajustar colores, pero mantén la paleta del contexto) -->
-  <link rel="stylesheet" href="../assets/css/style.css">
-  <link rel="stylesheet" href="../assets/css/productos.css">
+  <link rel="stylesheet" href="../assets/css/perfil.css">
+  
 
   <!-- JS (todo externo, nada embebido) -->
   <script type="module" src="../assets/js/script.js" defer></script>
@@ -25,22 +25,24 @@
   <script type="module" src="../assets/js/ui.js" defer></script>
   <script type="module" src="../assets/js/cart.js" defer></script>
   <script type="module" src="../assets/js/productos.js" defer></script>
+  <script type="module" src="../assets/js/perfil.js" defer></script>
+
 </head>
 
 <body>
 
-   <!-- ======= TOPBAR: logo + buscador + botones + carrito ======= -->
+    <!-- ======= TOPBAR: logo + buscador + botones + carrito ======= -->
   <header class="border-bottom">
     <div class="bg-white">
       <div class="container py-2">
         <div class="row align-items-center g-2">
           
           <!-- Logo a la izquierda -->
-            <div class="col-6 col-md-2 d-flex align-items-center">
-              <a href="./index.html" class="d-inline-flex align-items-center text-decoration-none">
-                <img src="../assets/image/logo.png" alt="Huerto Hogar" class="me-2" style="width:auto;height:55px;object-fit:contain;">
-              </a>
-            </div>
+          <div class="col-6 col-md-2 d-flex align-items-center">
+            <a href="../index.html" class="d-inline-flex align-items-center text-decoration-none">
+              <img src="../assets/image/logo.png" alt="Huerto Hogar" class="me-2" style="width:auto;height:55px;object-fit:contain;">
+            </a>
+          </div>
 
           <!-- Buscador centrado -->
           <div class="col-12 col-md-6 d-flex justify-content-md-center">
@@ -72,18 +74,25 @@
         </button>
         <div id="mainNav" class="collapse navbar-collapse">
           <ul class="navbar-nav mx-auto">
-            <li class="nav-item"><a class="nav-link active fw-semibold" aria-current="page" href="./index.html">Home</a></li>
+            <li class="nav-item">
+              <a class="nav-link active fw-semibold" aria-current="page" href="../index.html">Home</a>
+            </li>
 
-            <!-- Categorías (dropdown) -->
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="./categorias.html" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Categorías
+            <!-- Categorías: link + flecha (split dropdown) -->
+            <li class="nav-item dropdown d-flex align-items-center nav-categories">
+              <a class="nav-link" href="./productos.html">Productos</a>
+              <a class="nav-link dropdown-toggle dropdown-toggle-split px-1"
+                 href="#" id="catToggle" role="button"
+                 data-bs-toggle="dropdown" aria-expanded="false">
+                <span class="visually-hidden">Abrir subcategorías</span>
               </a>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="./categorias.html?c=Frutas Frescas">Frutas Frescas</a></li>
-                <li><a class="dropdown-item" href="./categorias.html?c=Verduras Orgánicas">Verduras Orgánicas</a></li>
-                <li><a class="dropdown-item" href="./categorias.html?c=Productos Orgánicos">Productos Orgánicos</a></li>
-                <li><a class="dropdown-item" href="./categorias.html?c=Lácteos">Lácteos</a></li>
+
+              <!-- Subcategorías -->
+              <ul class="dropdown-menu" aria-labelledby="catToggle">
+                <li><a class="dropdown-item" href="./categorias.html?c=Frutas%20Frescas">Frutas Frescas</a></li>
+                <li><a class="dropdown-item" href="./categorias.html?c=Verduras%20Org%C3%A1nicas">Verduras Orgánicas</a></li>
+                <li><a class="dropdown-item" href="./categorias.html?c=Productos%20Org%C3%A1nicos">Productos Orgánicos</a></li>
+                <li><a class="dropdown-item" href="./categorias.html?c=L%C3%A1cteos">Lácteos</a></li>
               </ul>
             </li>
 
@@ -97,146 +106,156 @@
     </nav>
   </header>
   <!-- ==================== MAIN ==================== -->
-  <main class="container" style="max-width:1000px;margin-top:30px;">
+  <main class="container py-5" style="background:url('../assets/image/textura-papel-blanco_1194-5416.jpg'); background-size:cover; background-attachment:fixed; border-radius:12px;">
 
-    <h2 style="color:#8B4513;font-family:'Playfair Display',serif;margin-bottom:20px;">Perfil del Cliente</h2>
+    <!-- Título + botón cerrar sesión -->
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+    <h2 id="perfilTitulo"
+        style="color:#8B4513;font-family:'Playfair Display',serif;margin:0;">
+      Perfil del Cliente
+    </h2>
+    <button id="btnLogout" class="btn btn-outline-danger btn-sm">
+      Cerrar sesión
+    </button>
+  </div>
 
-    <!-- Información personal -->
-    <section class="card" style="padding:20px;margin-bottom:30px;">
-      <h3 style="color:#2E8B57;">👤 Información personal</h3>
-      <form class="form" style="margin-top:16px;">
-        <div class="field">
-          <label>Nombre</label>
-          <input type="text" value="Karla Herrera" readonly>
-          <small>(Edición y guardado requieren backend)</small>
-        </div>
-        <div class="field">
-          <label>Dirección de entrega</label>
-          <input type="text" placeholder="Calle, número, comuna">
-        </div>
-        <div class="field">
-          <label>Teléfono</label>
-          <input type="text" placeholder="+56 9 ...">
-        </div>
-        <div style="display:flex;gap:8px;margin-top:12px;">
-          <button class="btn" type="button" onclick="alert('Simulado: guardar perfil (pendiente backend)')">Guardar cambios</button>
-        </div>
-      </form>
-    </section>
+ <section class="card" style="padding:20px;margin-bottom:30px;">
+  <h3 style="color:#2E8B57;">👤 Información personal</h3>
+  <form id="perfilForm" class="form" style="margin-top:16px;">
+    <div class="field" style="margin-bottom:10px;">
+      <label for="perfilNombre">Nombre completo</label>
+      <input id="perfilNombre" type="text" readonly>
+    </div>
 
-    <!-- Historial de compras -->
-    <section class="card" style="padding:20px;margin-bottom:30px;">
-      <h3 style="color:#2E8B57;">🛒 Historial de Compras</h3>
-      <table style="width:100%;margin-top:16px;border-collapse:collapse;">
-        <thead style="background:#f3f3f3;">
-          <tr>
-            <th style="padding:8px;border:1px solid #ccc;">Fecha</th>
-            <th style="padding:8px;border:1px solid #ccc;">Producto</th>
-            <th style="padding:8px;border:1px solid #ccc;">Total</th>
-            <th style="padding:8px;border:1px solid #ccc;">Acción</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td style="padding:8px;border:1px solid #ccc;">02/09/2025</td>
-            <td style="padding:8px;border:1px solid #ccc;">Canasta Mixta</td>
-            <td style="padding:8px;border:1px solid #ccc;">$12.000</td>
-            <td style="padding:8px;border:1px solid #ccc;text-align:center;">
-              <button class="btn" onclick="alert('Pedido repetido (simulación)')">Repetir</button>
-            </td>
-          </tr>
-          <tr>
-            <td style="padding:8px;border:1px solid #ccc;">25/08/2025</td>
-            <td style="padding:8px;border:1px solid #ccc;">Miel Natural</td>
-            <td style="padding:8px;border:1px solid #ccc;">$3.500</td>
-            <td style="padding:8px;border:1px solid #ccc;text-align:center;">
-              <button class="btn" onclick="alert('Pedido repetido (simulación)')">Repetir</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
+    <div class="field" style="margin-bottom:10px;">
+      <label for="perfilCorreo">Correo</label>
+      <input id="perfilCorreo" type="email" readonly>
+    </div>
 
-    <!-- Procesamiento y seguimiento de pedidos -->
-    <section class="card" style="padding:20px;margin-bottom:30px;">
-      <h3 style="color:#2E8B57;">📦 Procesamiento y Seguimiento de Pedidos</h3>
-      <p style="color:#555;margin-top:6px;">Aquí puedes confirmar tus pedidos, generar boletas y revisar su estado actual.</p>
-      
-      <table style="width:100%;margin-top:16px;border-collapse:collapse;">
-        <thead style="background:#f3f3f3;">
-          <tr>
-            <th style="padding:8px;border:1px solid #ccc;">Pedido</th>
-            <th style="padding:8px;border:1px solid #ccc;">Fecha</th>
-            <th style="padding:8px;border:1px solid #ccc;">Estado</th>
-            <th style="padding:8px;border:1px solid #ccc;">Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td style="padding:8px;border:1px solid #ccc;">#10023</td>
-            <td style="padding:8px;border:1px solid #ccc;">05/09/2025</td>
-            <td style="padding:8px;border:1px solid #ccc;">Preparación</td>
-            <td style="padding:8px;border:1px solid #ccc;text-align:center;">
-              <button class="btn" onclick="alert('Pedido confirmado (simulación)')">Confirmar</button>
-              <button class="btn" onclick="alert('Boleta generada (simulación)')">Boleta</button>
-            </td>
-          </tr>
-          <tr>
-            <td style="padding:8px;border:1px solid #ccc;">#10022</td>
-            <td style="padding:8px;border:1px solid #ccc;">02/09/2025</td>
-            <td style="padding:8px;border:1px solid #ccc;">Entregado</td>
-            <td style="padding:8px;border:1px solid #ccc;text-align:center;">
-              <button class="btn" onclick="alert('Boleta generada (simulación)')">Boleta</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
+    <div class="field" style="margin-bottom:10px;">
+      <label for="perfilRut">RUT / RUN</label>
+      <input id="perfilRut" type="text" readonly>
+    </div>
 
-    <!-- Seguimiento de envíos -->
-    <section class="card" style="padding:20px;margin-bottom:30px;">
-      <h3 style="color:#2E8B57;">🚚 Gestión y Seguimiento de Envíos</h3>
-      <p style="color:#555;margin-top:6px;">Rastrea tus pedidos en tiempo real y selecciona la fecha de entrega preferida.</p>
-      
-      <div style="margin-top:16px;">
-        <label for="trackCode" style="font-weight:600;">Código de seguimiento:</label>
-        <input type="text" id="trackCode" placeholder="Ej: #10023" style="padding:6px;border:1px solid #ccc;border-radius:6px;margin-left:8px;">
-        <button class="btn" onclick="alert('Simulación: seguimiento en tiempo real')">Rastrear</button>
-      </div>
+    <div class="field" style="margin-bottom:10px;">
+      <label for="perfilFecha">Fecha de nacimiento</label>
+      <input id="perfilFecha" type="date" readonly>
+    </div>
 
-      <div style="margin-top:20px;">
-        <label for="deliveryDate" style="font-weight:600;">Selecciona tu fecha de entrega:</label>
-        <input type="date" id="deliveryDate" style="padding:6px;border:1px solid #ccc;border-radius:6px;margin-left:8px;">
-        <button class="btn" onclick="alert('Fecha de entrega guardada (simulación)')">Guardar</button>
-      </div>
-    </section>
+    <div class="field" style="margin-bottom:10px;">
+      <label for="perfilTelefono">Teléfono</label>
+      <input id="perfilTelefono" type="text" placeholder="+56 9 ...">
+    </div>
 
-    <!-- Recomendaciones -->
-    <section class="card" style="padding:20px;">
-      <h3 style="color:#2E8B57;">⭐ Recomendaciones para ti</h3>
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px;margin-top:16px;">
-        <article class="card" style="padding:12px;text-align:center;">
-          <img src="../assets/image/naranja.png" alt="Naranjas" style="max-width:100%;height:120px;object-fit:contain;">
-          <h4>Naranjas Valencia</h4>
-          <p style="color:#555;">Jugosas y frescas, ideales para jugos.</p>
-          <button class="btn" onclick="alert('Añadido al carrito (simulación)')">Añadir</button>
-        </article>
-        <article class="card" style="padding:12px;text-align:center;">
-          <img src="../assets/image/espinaca.png" alt="Espinaca" style="max-width:100%;height:120px;object-fit:contain;">
-          <h4>Espinaca Fresca</h4>
-          <p style="color:#555;">Perfecta para ensaladas y batidos.</p>
-          <button class="btn" onclick="alert('Añadido al carrito (simulación)')">Añadir</button>
-        </article>
-        <article class="card" style="padding:12px;text-align:center;">
-          <img src="../assets/image/miel.png" alt="Miel" style="max-width:100%;height:120px;object-fit:contain;">
-          <h4>Miel Natural</h4>
-          <p style="color:#555;">Dulce, saludable y artesanal.</p>
-          <button class="btn" onclick="alert('Añadido al carrito (simulación)')">Añadir</button>
-        </article>
-      </div>
-    </section>
+    <div class="field" style="margin-bottom:10px;">
+      <label for="perfilRegion">Región</label>
+      <input id="perfilRegion" type="text" readonly>
+    </div>
 
-  </main>
+    <div class="field" style="margin-bottom:10px;">
+      <label for="perfilComuna">Comuna</label>
+      <input id="perfilComuna" type="text" readonly>
+    </div>
+
+    <div class="field" style="margin-bottom:10px;">
+      <label for="perfilDireccion">Dirección de entrega</label>
+      <input id="perfilDireccion" type="text" placeholder="Calle, número, depto">
+    </div>
+
+    <div style="display:flex;gap:8px;margin-top:12px;align-items:center;">
+      <button class="btn" type="submit">Guardar cambios</button>
+      <span id="perfilMsg" style="margin-left:8px;color:#2E8B57;"></span>
+    </div>
+  </form>
+</section>
+
+
+  <!-- Historial de compras -->
+  <section class="card" style="padding:20px;margin-bottom:30px;">
+    <h3 style="color:#2E8B57;">🛒 Historial de Compras</h3>
+    <table style="width:100%;margin-top:16px;border-collapse:collapse;">
+      <thead style="background:#f3f3f3;">
+        <tr>
+          <th style="padding:8px;border:1px solid #ccc;">Fecha</th>
+          <th style="padding:8px;border:1px solid #ccc;">Producto</th>
+          <th style="padding:8px;border:1px solid #ccc;">Total</th>
+          <th style="padding:8px;border:1px solid #ccc;">Acción</th>
+        </tr>
+      </thead>
+      <tbody id="historialBody"></tbody>
+    </table>
+  </section>
+
+  <!-- Procesamiento y seguimiento de pedidos -->
+  <section class="card" style="padding:20px;margin-bottom:30px;">
+    <h3 style="color:#2E8B57;">📦 Procesamiento y Seguimiento de Pedidos</h3>
+    <p style="color:#555;margin-top:6px;">
+      Aquí puedes confirmar tus pedidos, generar boletas y revisar su estado actual.
+    </p>
+
+    <table style="width:100%;margin-top:16px;border-collapse:collapse;">
+      <thead style="background:#f3f3f3;">
+        <tr>
+          <th style="padding:8px;border:1px solid #ccc;">Pedido</th>
+          <th style="padding:8px;border:1px solid #ccc;">Fecha</th>
+          <th style="padding:8px;border:1px solid #ccc;">Estado</th>
+          <th style="padding:8px;border:1px solid #ccc;">Acciones</th>
+        </tr>
+      </thead>
+      <tbody id="pedidosBody"></tbody>
+    </table>
+  </section>
+
+  <!-- Gestión y seguimiento de envíos -->
+  <section class="card" style="padding:20px;margin-bottom:30px;">
+    <h3 style="color:#2E8B57;">🚚 Gestión y Seguimiento de Envíos</h3>
+    <p style="color:#555;margin-top:6px;">
+      Rastrea tus pedidos en tiempo real y selecciona la fecha de entrega preferida.
+    </p>
+
+    <div style="margin-top:16px;">
+      <label for="trackCode" style="font-weight:600;">Código de seguimiento:</label>
+      <input type="text" id="trackCode" placeholder="Ej: #10023"
+             style="padding:6px;border:1px solid #ccc;border-radius:6px;margin-left:8px;">
+      <button id="btnTrack" class="btn">Rastrear</button>
+    </div>
+
+    <div style="margin-top:20px;">
+      <label for="deliveryDate" style="font-weight:600;">Selecciona tu fecha de entrega:</label>
+      <input type="date" id="deliveryDate"
+             style="padding:6px;border:1px solid #ccc;border-radius:6px;margin-left:8px;">
+      <button id="btnSaveDelivery" class="btn">Guardar</button>
+    </div>
+  </section>
+
+  <!-- Recomendaciones -->
+  <section class="card" style="padding:20px;">
+    <h3 style="color:#2E8B57;">⭐ Recomendaciones para ti</h3>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px;margin-top:16px;">
+      <article class="card" style="padding:12px;text-align:center;">
+        <img src="../assets/image/naranja.png" alt="Naranjas"
+             style="max-width:100%;height:120px;object-fit:contain;">
+        <h4>Naranjas Valencia</h4>
+        <p style="color:#555;">Jugosas y frescas, ideales para jugos.</p>
+        <button class="btn">Añadir</button>
+      </article>
+      <article class="card" style="padding:12px;text-align:center;">
+        <img src="../assets/image/espinaca.png" alt="Espinaca"
+             style="max-width:100%;height:120px;object-fit:contain;">
+        <h4>Espinaca Fresca</h4>
+        <p style="color:#555;">Perfecta para ensaladas y batidos.</p>
+        <button class="btn">Añadir</button>
+      </article>
+      <article class="card" style="padding:12px;text-align:center;">
+        <img src="../assets/image/miel.png" alt="Miel"
+             style="max-width:100%;height:120px;object-fit:contain;">
+        <h4>Miel Natural</h4>
+        <p style="color:#555;">Dulce, saludable y artesanal.</p>
+        <button class="btn">Añadir</button>
+      </article>
+    </div>
+  </section>
+</main>
 
   <!-- ==================== FOOTER ==================== -->
   <footer class="footer" role="contentinfo" style="background:#2E8B57;color:#fff;padding:40px 0 20px;margin-top:40px;">
@@ -270,10 +289,7 @@
     </div>
   </footer>
 
-  <!-- ==================== SCRIPTS ==================== -->
-  <script src="../assets/js/script.js"></script>
-  <script>
-    document.getElementById('yearPerfil').textContent = new Date().getFullYear();
-  </script>
+  <!-- Bootstrap JS (Eval. 2: diseño responsivo) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

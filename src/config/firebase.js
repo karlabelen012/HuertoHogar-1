@@ -1,20 +1,24 @@
 // src/config/firebase.js
-import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
-import { getAuth } from "firebase/auth";
+// Configuración de Firebase para el proyecto Huerto Hogar
 
+import { initializeApp } from 'firebase/app';
+import { getFirestore } from 'firebase/firestore';
+import { getAuth } from 'firebase/auth';
+
+// Tu configuración de Firebase (sacada directamente de la consola)
 const firebaseConfig = {
-  apiKey: "TU_API_KEY",
-  authDomain: "TU_AUTH_DOMAIN",
-  projectId: "TU_PROJECT_ID",
-  storageBucket: "TU_STORAGE_BUCKET",
-  messagingSenderId: "TU_MSG_SENDER_ID",
-  appId: "TU_APP_ID",
+  apiKey: "AIzaSyBgqQMt_O0193-SH7W6rhxNOPJgsTLzGWw",
+  authDomain: "huertohogar-7c6dd.firebaseapp.com",
+  projectId: "huertohogar-7c6dd",
+  storageBucket: "huertohogar-7c6dd.firebasestorage.app",
+  messagingSenderId: "1056561014185",
+  appId: "1:1056561014185:web:2567db85cd53b5756d10b8",
+  measurementId: "G-TDQVPAJ40P"
 };
 
+// Inicializa Firebase
 const app = initializeApp(firebaseConfig);
 
-// BD
+// Exporta los servicios que usará tu proyecto
 export const db = getFirestore(app);
-// AUTH
 export const auth = getAuth(app);

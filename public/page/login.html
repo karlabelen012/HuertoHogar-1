@@ -21,11 +21,7 @@
 
   
   <!-- JS (todo externo, nada embebido) -->
-  <script type="module" src="../assets/js/script.js" defer></script>  <!-- si usas navbar dinámica -->
-  <script type="module" src="../assets/js/data.js" defer></script>
-  <script type="module" src="../assets/js/ui.js" defer></script>
-  <script type="module" src="../assets/js/cart.js" defer></script>
-  <script type="module" src="../assets/js/productos.js" defer></script>
+  <script type="module" src="../assets/js/data.js" defer></script> <script type="module" src="../assets/js/cart.js" defer></script>
   <script type="module" src="../assets/js/login.js" defer></script>
 
 </head>
@@ -111,38 +107,43 @@
 <!-- ==================== FORMULARIO DE LOGIN (mockup exacto con textura) ==================== -->
 <main class="container py-5" style="background:url('../assets/image/textura-papel-blanco_1194-5416.jpg'); background-size:cover; background-attachment:fixed; border-radius:12px;">
 
+  <!-- CONTENEDOR QUE CENTRA TODO -->
+  <div class="login-container">
 
-  <!-- Logo y nombre de empresa -->
-  <section class="login-header">
-    <img src="../assets/image/logo.png" alt="Logo HuertoHogar">
-    <h1>HuertoHogar</h1>
-  </section>
+    <!-- Logo y nombre de empresa -->
+    <section class="login-header">
+      <img src="../assets/image/logo.png" alt="Logo HuertoHogar">
+      <h1>HuertoHogar</h1>
+    </section>
 
-  <!-- Cuadro del formulario -->
-  <div class="login-box">
-    <div class="login-header-bar">
-      <h2>INICIO DE SESIÓN</h2>
+    <!-- Cuadro del formulario -->
+    <div class="login-box">
+      <div class="login-header-bar">
+        <h2>INICIO DE SESIÓN</h2>
+      </div>
+
+      <form id="loginForm" class="login-form">
+        <label for="email">CORREO</label>
+        <input type="email" id="email" name="email" required placeholder="Ej: usuario@gmail.com">
+
+        <label for="password">CONTRASEÑA</label>
+        <input type="password" id="password" name="password" required placeholder="********">
+
+        <button type="submit">Iniciar sesión</button>
+      </form>
     </div>
 
-    <form id="loginForm" class="login-form">
-      <label for="email">CORREO</label>
-      <input type="email" id="email" name="email" required placeholder="Ej: usuario@gmail.com">
+    <!-- Enlaces inferiores -->
+    <p class="login-extra">
+      ¿No tienes cuenta?
+      <a href="registro.html">Regístrate aquí</a><br>
+      ¿Olvidaste tu contraseña?
+      <a href="#">Recupérala</a>
+    </p>
 
-      <label for="password">CONTRASEÑA</label>
-      <input type="password" id="password" name="password" required placeholder="********">
-
-      <button type="submit">Iniciar sesión</button>
-    </form>
   </div>
-
-  <!-- Enlaces inferiores -->
-  <p class="login-extra">
-    ¿No tienes cuenta?
-    <a href="registro.html">Regístrate aquí</a><br>
-    ¿Olvidaste tu contraseña?
-    <a href="#">Recupérala</a>
-  </p>
 </main>
+
 
 
   <!-- ==================== FOOTER ==================== -->

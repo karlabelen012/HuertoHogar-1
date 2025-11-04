@@ -1,0 +1,254 @@
+/* ===================== PERFIL DEL CLIENTE ===================== */
+/* Archivo: assets/css/perfil.css */
+
+main {
+  max-width: 1100px;
+  margin: 40px auto;
+  padding: 32px 32px 40px;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(0, 0, 0, 0.03);
+}
+
+/* Título principal "Perfil del Cliente" */
+.perfil-titulo {
+  font-family: "Playfair Display", serif;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #2e8b57;
+  margin-bottom: 8px;
+}
+
+.perfil-subtitulo {
+  font-size: 0.95rem;
+  color: #666;
+  margin-bottom: 24px;
+}
+
+/* Contenedor general de secciones */
+.perfil-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Tarjetitas/secciones (Información personal, historial, etc.) */
+.perfil-card {
+  background: #faf7f2;
+  border-radius: 14px;
+  padding: 18px 20px 20px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* Encabezado de cada tarjeta */
+.perfil-card-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.perfil-card-header .icono {
+  font-size: 1.1rem;
+}
+
+.perfil-card-title {
+  font-weight: 600;
+  font-size: 1rem;
+  margin: 0;
+  color: #355749;
+}
+
+.perfil-card-subtitle {
+  font-size: 0.85rem;
+  color: #777;
+}
+
+/* ===================== FORMULARIO INFO PERSONAL ===================== */
+
+.perfil-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px 20px;
+  align-items: center;
+}
+
+.perfil-form-grid .form-label {
+  font-size: 0.9rem;
+  margin-bottom: 4px;
+}
+
+.perfil-form-grid .form-control {
+  font-size: 0.9rem;
+  padding: 6px 10px;
+  border-radius: 8px;
+}
+
+.perfil-form-actions {
+  margin-top: 12px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* Botón "Guardar cambios" */
+.perfil-btn-primario {
+  background-color: #2e8b57;
+  border-color: #2e8b57;
+  color: #fff;
+  border-radius: 999px;
+  padding: 6px 18px;
+  font-size: 0.9rem;
+}
+
+.perfil-btn-primario:hover {
+  background-color: #276d46;
+  border-color: #276d46;
+}
+
+/* ===================== TABLAS (Historial, Procesamiento, Envíos) ===================== */
+
+.perfil-table-wrapper {
+  overflow-x: auto;
+}
+
+.perfil-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.perfil-table th,
+.perfil-table td {
+  padding: 8px 10px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.perfil-table th {
+  background: rgba(46, 139, 87, 0.08);
+  color: #355749;
+  font-weight: 600;
+}
+
+.perfil-table tr:last-child td {
+  border-bottom: none;
+}
+
+/* Botones de acción en tablas (Repetir, Confirmar, etc.) */
+.perfil-btn-tabla {
+  font-size: 0.8rem;
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+
+/* ===================== RECOMENDACIONES ===================== */
+
+.perfil-reco-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+  margin-top: 6px;
+}
+
+.perfil-reco-card {
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.03);
+  text-align: center;
+}
+
+.perfil-reco-card img {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+}
+
+.perfil-reco-body {
+  padding: 10px 12px 12px;
+}
+
+.perfil-reco-body h6 {
+  font-size: 0.9rem;
+  margin-bottom: 4px;
+}
+
+.perfil-reco-body .precio {
+  font-weight: 600;
+  color: #2e8b57;
+  font-size: 0.9rem;
+  margin-bottom: 6px;
+}
+
+.perfil-reco-body .btn {
+  font-size: 0.8rem;
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+
+/* ===================== RESPONSIVE ===================== */
+
+@media (max-width: 992px) {
+  main {
+    margin: 24px 12px;
+    padding: 22px 16px 26px;
+  }
+}
+
+@media (max-width: 768px) {
+  .perfil-form-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .perfil-form-actions {
+    justify-content: stretch;
+  }
+
+  .perfil-form-actions .perfil-btn-primario {
+    width: 100%;
+    text-align: center;
+  }
+}
+/* ===================== BOTONES PERSONALIZADOS (PERFIL) ===================== */
+
+/* Botones dentro de las tarjetas del perfil (Información, Historial, Envíos, Recomendaciones) */
+main .card .btn {
+  background-color: #2e8b57;         /* Verde Huerto Hogar */
+  border: none;
+  color: #fff;
+  border-radius: 999px;
+  padding: 6px 18px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 110px;
+  cursor: pointer;
+  text-decoration: none;
+  box-shadow: 0 3px 8px rgba(46, 139, 87, 0.25);
+  transition: background-color 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+}
+
+main .card .btn:hover {
+  background-color: #256e46;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(46, 139, 87, 0.3);
+}
+
+main .card .btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(46, 139, 87, 0.25);
+}
+
+/* Estado "Añadido ✓" para cuando quieras marcar que ya se agregó algo al carrito */
+main .card .btn.btn-added {
+  background-color: #f4b400;   /* Amarillo suave */
+  box-shadow: 0 3px 8px rgba(244, 180, 0, 0.3);
+}
+
+main .card .btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(46, 139, 87, 0.35);
+}

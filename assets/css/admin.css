@@ -1,0 +1,437 @@
+/* ==========================================================
+   HUERTO HOGAR - ADMIN PANEL
+   ========================================================== */
+
+/* Variables */
+:root {
+  --hh-bg: #f2f2f2;
+  --hh-white: #ffffff;
+  --hh-border: #e5e5e5;
+  --hh-text: #1f2937;
+  --hh-muted: #6b7280;
+  --hh-primary: #0d6efd;
+  --hh-success: #198754;
+  --hh-warning: #f4b000;
+  --hh-dark: #1f2937;
+}
+
+/* body admin */
+body.hh-admin {
+  min-height: 100vh;
+  margin: 0;
+  background: var(--hh-bg);
+  font-family: "Montserrat", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+/* =================== TOPBAR =================== */
+.hh-admin-topbar {
+  height: 46px;
+  background: #202124;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 18px;
+  gap: 12px;
+}
+
+.hh-admin-company {
+  font-weight: 500;
+}
+
+/* =================== SHELL (SIDEBAR + CONTENT) =================== */
+.hh-admin-shell {
+  display: flex;
+  min-height: calc(100vh - 46px);
+}
+
+/* =================== SIDEBAR =================== */
+.hh-admin-sidebar {
+  width: 250px;
+  background: #ffffff;
+  border-right: 1px solid var(--hh-border);
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+
+.hh-admin-menu {
+  display: flex;
+  flex-direction: column;
+  gap: .35rem;
+}
+
+.hh-admin-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: transparent;
+  border: none;
+  color: #1f2937;
+  border-radius: 999px;
+  padding: 7px 12px;
+  text-decoration: none;
+  font-size: .9rem;
+  transition: .15s;
+  cursor: pointer;
+}
+
+.hh-admin-item i {
+  font-size: 1rem;
+  width: 20px;
+  text-align: center;
+}
+
+.hh-admin-item:hover {
+  background: #e5e7eb;
+}
+
+.hh-admin-item.active {
+  background: var(--hh-primary);
+  color: #fff;
+}
+
+.hh-admin-separator {
+  border-top: 1px solid var(--hh-border);
+  margin: 12px 0;
+}
+
+/* botones de abajo */
+.hh-admin-bottom {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+}
+
+.hh-admin-bigbtn {
+  border: none;
+  border-radius: 6px;
+  padding: 7px 12px;
+  font-weight: 600;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+  cursor: pointer;
+}
+
+.hh-admin-bigbtn.tienda {
+  background: #1f2937;
+  color: #fff;
+}
+
+.hh-admin-bigbtn.cerrar {
+  background: #dc3545;
+  color: #fff;
+}
+
+/* =================== CONTENIDO =================== */
+.hh-admin-content {
+  flex: 1;
+  padding: 18px 22px 26px;
+}
+
+/* header de cada vista */
+.hh-admin-header h2 {
+  font-family: "Playfair Display", serif;
+  font-size: 1.5rem;
+  margin-bottom: 2px;
+  color: #1f2937;
+}
+
+.hh-admin-header p {
+  color: #6b7280;
+  margin-bottom: 14px;
+}
+
+/* =================== KPIs =================== */
+.hh-admin-kpis {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.hh-admin-kpi {
+  display: flex;
+  gap: 10px;
+  border-radius: 6px;
+  padding: 14px 16px 13px;
+  color: #fff;
+  align-items: center;
+}
+
+.hh-admin-kpi h5 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.kpi-number {
+  font-size: 1.6rem;
+  font-weight: 700;
+  line-height: 1;
+  margin: 2px 0 4px;
+}
+
+.kpi-hint {
+  font-size: .78rem;
+  margin: 0;
+}
+
+.kpi-icon {
+  font-size: 2.3rem;
+  line-height: 1;
+  opacity: .85;
+}
+
+.kpi-blue { background: #0d6efd; }
+.kpi-green { background: #198754; }
+.kpi-yellow { background: #f4b000; }
+
+/* =================== GRID de tarjetas =================== */
+.hh-admin-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(160px, 1fr));
+  gap: 14px;
+}
+
+.hh-admin-tile {
+  background: #fff;
+  border: 1px solid #e5e5e5;
+  border-radius: 6px;
+  padding: 16px 14px 15px;
+  min-height: 130px;
+}
+
+.hh-admin-tile h6 {
+  margin-top: 6px;
+  margin-bottom: 3px;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.hh-admin-tile p {
+  font-size: .78rem;
+  color: #6b7280;
+  margin-bottom: 0;
+}
+
+.tile-icon {
+  font-size: 1.6rem;
+  color: #0d6efd;
+}
+
+/* =================== TABLAS =================== */
+.hh-tablewrap {
+  background: #fff;
+  border: 1px solid #e5e5e5;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.hh-tablewrap table {
+  margin-bottom: 0;
+}
+
+/* =================== PERFIL =================== */
+.hh-profile-card {
+  background: #fff;
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  padding: 20px 22px;
+  max-width: 820px;
+}
+
+.hh-profile-avatar {
+  width: 70px;
+  height: 70px;
+  border-radius: 999px;
+  background: #e5e7eb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  color: #374151;
+  margin-bottom: 10px;
+}
+
+.hh-profile-title {
+  font-family: "Playfair Display", serif;
+}
+
+.hh-profile-sub {
+  color: #6b7280;
+  margin-bottom: 16px;
+}
+
+.hh-profile-btn-neutral {
+  background: #fff;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  padding: 4px 12px;
+  font-size: .85rem;
+  cursor: pointer;
+}
+
+.hh-profile-btn-danger {
+  background: #dc3545;
+  border: none;
+  border-radius: 6px;
+  padding: 4px 12px;
+  font-size: .85rem;
+  color: #fff;
+  cursor: pointer;
+}
+
+/* form del perfil */
+.hh-form-row {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.hh-form-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.hh-form-group input,
+.hh-form-group select {
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  padding: 6px 9px;
+  font-size: .9rem;
+}
+
+/* =================== BOTONES GENERALES =================== */
+.hh-btn {
+  border: none;
+  border-radius: 6px;
+  padding: 6px 14px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.hh-btn-primary {
+  background: #0d6efd;
+  color: #fff;
+}
+
+.hh-btn-light {
+  background: #e5e7eb;
+  color: #1f2937;
+}
+
+/* =================== VISTAS =================== */
+.hh-view.d-none {
+  display: none !important;
+}
+
+/* =================== RESPONSIVE =================== */
+@media (max-width: 991px) {
+  .hh-admin-shell {
+    flex-direction: column;
+  }
+  .hh-admin-sidebar {
+    width: 100%;
+    flex-direction: row;
+    overflow-x: auto;
+    height: auto;
+  }
+  .hh-admin-content {
+    padding: 14px;
+  }
+  .hh-admin-kpis {
+    grid-template-columns: 1fr;
+  }
+  .hh-admin-grid {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  }
+  .hh-form-row {
+    flex-direction: column;
+  }
+}
+
+ /* ======== Perfli admin  ======== */
+  
+ /* ====== ADMIN THEME (negro + gris) ====== */
+:root{
+  --hh-black:#121212; --hh-grey:#2c2c2c; --hh-line:#dcdcdc; --hh-bg:#f5f5f5;
+  --hh-white:#fff; --hh-accent:#2E8B57; --hh-muted:#8f8f8f;
+}
+
+body.hh-admin{display:flex;min-height:100vh;background:var(--hh-bg);color:#111;margin:0;
+  font-family:'Montserrat',system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,'Helvetica Neue',Arial,sans-serif}
+
+/* Sidebar */
+.hh-sidebar{width:250px;background:var(--hh-black);color:var(--hh-white);display:flex;flex-direction:column;
+  justify-content:space-between;padding:18px 14px;position:sticky;top:0;height:100vh}
+.hh-brand{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.hh-logo{width:30px;height:30px;object-fit:contain}
+.hh-brandtext{line-height:1}.hh-brandtext span{display:block;font-size:.8rem;color:#bdbdbd}
+
+.hh-nav{display:flex;flex-direction:column;gap:4px}
+.hh-link{display:flex;align-items:center;gap:10px;padding:10px 12px;border:0;border-radius:8px;background:transparent;
+  color:#eaeaea;cursor:pointer;text-align:left}
+.hh-link i{font-size:1rem;width:20px;text-align:center}
+.hh-link:hover{background:var(--hh-grey)}
+.hh-link.active{background:#1d1d1d}
+.hh-nav-bottom{margin-top:auto;border-top:1px solid #1f1f1f;padding-top:12px}
+.hh-profile-mini{display:flex;align-items:center;gap:8px;margin-top:10px;color:#bdbdbd;font-size:.9rem}
+
+/* Main */
+.hh-main{flex:1;display:flex;flex-direction:column;gap:14px;padding:16px 18px}
+
+/* Top bar */
+.hh-topbar{display:flex;align-items:center;justify-content:space-between;border:1px solid #cfcfcf;background:#eee;
+  padding:12px 16px;border-radius:6px}
+.hh-title{font-size:1.6rem;margin:0}
+.hh-notifs .btn{border:1px solid #cfcfcf}
+.hh-dropdown{max-height:320px;overflow:auto;width:360px}
+.hh-notif-item{display:flex;gap:10px;align-items:flex-start;padding:8px 10px}
+.hh-notif-item .dot{width:10px;height:10px;border-radius:50%;background:#dc3545;margin-top:6px}
+.hh-notif-actions{border-top:1px solid #eee;padding:6px 10px}
+
+/* Secciones */
+.hh-section{display:none}.hh-section.active{display:block}
+
+/* Cards */
+.hh-card{background:var(--hh-white);border:1px solid var(--hh-line);border-radius:8px;
+  box-shadow:0 1px 4px rgba(0,0,0,.04);padding:16px}
+.hh-kpi{font-size:2rem;margin:0}
+
+/* Tabla estilo mockup */
+.hh-tablewrap{border:1px solid #bbb;border-radius:6px;overflow:auto;box-shadow:inset 0 0 0 1px #ddd}
+.hh-table thead th{background:#efefef;border-bottom:1px solid #bdbdbd;font-weight:600}
+.hh-table tbody tr:nth-child(odd){background:#fafafa}
+.hh-table tbody tr:nth-child(even){background:#f0f0f0}
+.hh-table td,.hh-table th{vertical-align:middle}
+
+/* Paginación */
+.hh-paginate{display:flex;gap:6px;align-items:center;justify-content:center;border:1px solid #bbb;border-radius:6px;padding:6px;margin-top:8px}
+.hh-page{border:1px solid #bdbdbd;background:#efefef;border-radius:4px;padding:4px 10px;cursor:pointer}
+.hh-page:hover{background:#e5e5e5}
+.hh-page-numbers{display:flex;gap:6px}
+.hh-page-numbers button{border:1px solid #bdbdbd;background:#fff;border-radius:4px;padding:4px 8px;min-width:36px}
+.hh-page-numbers button.active{background:#1d1d1d;color:#fff}
+
+/* Badges de estado */
+.badge-estado{padding:.35rem .55rem;border-radius:.5rem;font-weight:600}
+.badge-prep{background:#fff3cd;border:1px solid #ffe69c;color:#946200}
+.badge-ok{background:#d1e7dd;border:1px solid #a3cfbb;color:#0f5132}
+.badge-cancel{background:#f8d7da;border:1px solid #f1aeb5;color:#842029}
+
+/* Botón oscuro */
+.btn-dark{background:#1d1d1d;border-color:#1d1d1d}
+.btn-dark:hover{background:#2c2c2c;border-color:#2c2c2c}
+
+/* Responsive colapsa texto del sidebar */
+@media (max-width: 992px){
+  .hh-sidebar{width:84px;padding:14px}
+  .hh-link span,.hh-brandtext{display:none}
+  .hh-logo{margin:0 auto}
+}
+
