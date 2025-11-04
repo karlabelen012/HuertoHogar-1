@@ -11,11 +11,12 @@ import { Auth } from './auth.js';
 
 const $ = s => document.querySelector(s);
 const pick = sel =>
-  sel.split(',').map(s => s.trim())
+  sel.split(',')
+     .map(s => s.trim())
      .map(document.querySelector.bind(document))
      .find(Boolean);
 
-// dominios DUOC que mandan a perfilAdmin
+// dominios DUOC (por si quieres usarlo), pero la verdad la toma de user.rol
 const DUOC_REGEX = /@(duoc\.cl|duocuc\.cl|profesor\.duoc\.cl|duocpro\.cl)$/i;
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -25,13 +26,16 @@ document.addEventListener('DOMContentLoaded', () => {
   const msgBox = pick(IDS.msg);
 
   const show = (t, type='danger') => {
-    if (!msgBox) { alert((type==='success'?'✅ ':'⚠️ ') + t); return; }
+    if (!msgBox) { 
+      alert((type==='success'?'✅ ':'⚠️ ') + t); 
+      return; 
+    }
     msgBox.className = `alert alert-${type}`;
     msgBox.textContent = t;
     msgBox.hidden = false;
   };
 
-  form.addEventListener('submit', async (e) => {
+  form.addEventListener('submit', (e) => {
     e.preventDefault();
 
     const email = emailEl?.value?.trim() || '';
@@ -43,30 +47,19 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     try {
-      // Hace login y guarda sesión (Auth debe encargarse de localStorage)
-      // Se recomienda que Auth.login retorne el usuario autenticado.
-      const user = await Auth.login(email, pass);
-
-      // fallback por si Auth.login no retorna usuario:
-      const u = user || (() => {
-        try {
-          const active = JSON.parse(localStorage.getItem('usuarioActivo') || 'null');
-          if (active) return active;
-          const auth = JSON.parse(localStorage.getItem('hh_auth') || 'null');
-          return auth?.user || null;
-        } catch { return null; }
-      })();
+      // Hace login y guarda sesión (Auth se encarga de localStorage)
+      const user = Auth.login(email, pass);
 
       show('Inicio de sesión correcto. Redirigiendo…', 'success');
 
-      // Redirección según dominio
-      const isDuoc = DUOC_REGEX.test(email);
-      const target = isDuoc
-        ? '../page/perfilAdmin.html'
-        : '../page/perfil.html';
+      // Redirección según rol guardado
+      const target =
+        user.rol === 'admin'
+          ? '../page/perfilAdmin.html'
+          : '../page/perfil.html';
 
       // dispara evento para que la navbar se actualice si tu script.js lo escucha
-      window.dispatchEvent(new CustomEvent('auth:changed', { detail: { user: u }}));
+      window.dispatchEvent(new CustomEvent('auth:changed', { detail: { user } }));
 
       setTimeout(() => location.href = target, 500);
     } catch (err) {

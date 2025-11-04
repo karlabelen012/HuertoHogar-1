@@ -107,7 +107,8 @@
   </header>
 
 
-  <main class="container my-4">
+  <main class="container py-5" style="background:url('../assets/image/textura-papel-blanco_1194-5416.jpg'); background-size:cover; background-attachment:fixed; border-radius:12px;">
+
 
     <!-- Banner informativo DESCARTABLE -->
     <div class="alert alert-primary alert-dismissible fade show d-flex align-items-start justify-content-between" role="alert">
@@ -138,112 +139,59 @@
       </div>
     </div>
 
+    <div class="row g-4">
+      <!-- ================== LISTA DE PRODUCTOS (Izquierda) ================== -->
+      <section class="col-lg-5">
+        <h5 class="mb-3 fw-bold">Lista de productos</h5>
 
-  <div class="row g-4">
-    <!-- ================== LISTA DE PRODUCTOS (Izquierda) ================== -->
-    <section class="col-lg-5">
-      <h5 class="mb-3 fw-bold">Lista de productos</h5>
+        <div id="gridProductosCarrito" class="row g-3">
+          <!-- JS inyecta las tarjetas de productos aquí -->
+        </div>
+      </section>
 
-      <div id="gridProductosCarrito" class="row g-3">
-        <!--
-          Tus JS (productos.js) deben inyectar aquí tarjetas como:
-          
-          <article class="col-6">
-            <div class="card h-100">
-              <div class="ratio ratio-16x9 bg-light">
-                <img src="../assets/image/placeholder-400x200.png" class="object-fit-cover" alt="Producto">
-              </div>
-              <div class="card-body p-2">
-                <h6 class="card-title mb-1 text-truncate">Nombre del producto</h6>
-                <div class="d-flex align-items-center justify-content-between">
-                  <span class="fw-bold text-warning-emphasis">$ 4.999</span>
-                  <small class="text-muted">Stock Disponible</small>
-                </div>
-                <button class="btn btn-success btn-sm w-100 mt-2" data-add="ID_DEL_PRODUCTO">Añadir</button>
-              </div>
-            </div>
-          </article>
-        -->
-      </div>
-    </section>
+      <!-- ================== CARRITO (Derecha) ================== -->
+      <section class="col-lg-7">
+        <h5 class="mb-3 fw-bold">Carrito de Compras</h5>
 
-    <!-- ================== CARRITO (Derecha) ================== -->
-    <section class="col-lg-7">
-      <h5 class="mb-3 fw-bold">Carrito de Compras</h5>
-
-      <div class="table-responsive">
-        <table class="table align-middle table-bordered mb-3">
-          <thead class="table-light">
-            <tr>
-              <th style="width:72px">Imagen</th>
-              <th>Nombre</th>
-              <th style="width:110px" class="text-end">Precio</th>
-              <th style="width:140px" class="text-center">Cantidad</th>
-              <th style="width:120px" class="text-end">Subtotal</th>
-              <th style="width:110px" class="text-center">Acciones</th>
-            </tr>
-          </thead>
-          <tbody id="cartTableBody">
-            <!--
-              Tus JS (cart.js) deben inyectar filas como:
-
+        <div class="table-responsive">
+          <table class="table align-middle table-bordered mb-3">
+            <thead class="table-light">
               <tr>
-                <td><img src="../assets/image/prod.jpg" class="rounded" alt="prod" style="width:60px;height:60px;object-fit:cover"></td>
-                <td>The Sims 4</td>
-                <td class="text-end">$ 3.999</td>
-                <td class="text-center">
-                  <div class="btn-group btn-group-sm" role="group" aria-label="Cantidad">
-                    <button class="btn btn-outline-secondary" data-dec="ID">−</button>
-                    <input type="number" class="form-control d-inline-block text-center mx-1" value="1" min="1" style="width:56px" data-qty="ID">
-                    <button class="btn btn-outline-secondary" data-inc="ID">+</button>
-                  </div>
-                </td>
-                <td class="text-end">$ 3.999</td>
-                <td class="text-center">
-                  <button class="btn btn-outline-danger btn-sm" data-del="ID">Eliminar</button>
-                </td>
+                <th style="width:72px">Imagen</th>
+                <th>Nombre</th>
+                <th style="width:110px" class="text-end">Precio</th>
+                <th style="width:140px" class="text-center">Cantidad</th>
+                <th style="width:120px" class="text-end">Subtotal</th>
+                <th style="width:110px" class="text-center">Acciones</th>
               </tr>
-            -->
-          </tbody>
-          <tfoot>
-            <tr>
-              <td colspan="4" class="text-end fw-semibold">Total</td>
-              <td class="text-end">
-                <span id="cartTotalMonto" class="badge text-bg-success fs-6">$ 0</span>
-              </td>
-              <td></td>
-            </tr>
-          </tfoot>
-        </table>
-      </div>
+            </thead>
+            <tbody id="cartTableBody">
+              <!-- JS inyecta las filas del carrito aquí -->
+            </tbody>
+            <tfoot>
+              <tr>
+                <td colspan="4" class="text-end fw-semibold">Total</td>
+                <td class="text-end">
+                  <span id="cartTotalMonto" class="badge text-bg-success fs-6">$ 0</span>
+                </td>
+                <td></td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
 
-    <!-- Acciones (abajo, como en la figura) -->
-    <div class="d-flex justify-content-between gap-2">
-      <button id="btnVaciarCarrito" class="btn btn-outline-secondary">Limpiar</button>
-      <button id="btnComprarAhora" class="btn btn-success">Comprar ahora</button>
-    </div>
+        <!-- Acciones (abajo, como en la figura) -->
+        <div class="d-flex justify-content-between gap-2">
+          <button id="btnVaciarCarrito" class="btn btn-outline-secondary">Limpiar</button>
+          <button id="btnComprarAhora" class="btn btn-success">Comprar ahora</button>
+        </div>
+      </section>
+    </div> <!-- cierre row -->
 
-    <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        const btnComprar = document.getElementById("btnComprarAhora");
-        if (btnComprar) {
-          btnComprar.addEventListener("click", () => {
-            // Redirige a la página de checkout
-            window.location.href = "./checkout.html";
-          });
-        }
-      });
-    </script>
+  </main> 
 
-  <main
 
- 
-
-  <!-- ==================== SCRIPTS ==================== -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="../assets/js/script.js"></script>
-
-   <!-- ==================== FOOTER ==================== -->
+  <!-- ==================== FOOTER ==================== -->
   <footer class="footer">
     <div class="container">
       <div class="footer-top">
@@ -302,7 +250,21 @@
         <img src="../assets/image/logo.png" alt="Logo HuertoHogar">
       </div>
     </div>
-  </footer>
+  </footer>   
+  <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const btnComprar = document.getElementById("btnComprarAhora");
+        if (btnComprar) {
+          btnComprar.addEventListener("click", () => {
+            // Redirige a la página de checkout
+            window.location.href = "./checkout.html";
+          });
+        }
+      });
+    </script>
+      <!-- ==================== SCRIPTS ==================== -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../assets/js/script.js"></script>
 
 </body>
 </html>

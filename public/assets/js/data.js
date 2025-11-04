@@ -24,4 +24,5 @@ export const PRODUCTOS = [
 
   // Lácteos
   { id:'PL001', nombre:'Leche Entera 1L',     precio:1100, categoria:'Lácteos',             img:'../assets/image/leche.png' },
+  { id:'PL002', nombre:'Yougurt Artesanal',     precio:1000, categoria:'Lácteos',             img:'../assets/image/yougurt.png' },
 ];
