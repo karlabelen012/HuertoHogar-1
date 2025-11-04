@@ -1,13 +1,18 @@
 // assets/js/registro.js
 // ==========================================================
 // 🌿 Registro de usuarios - HuertoHogar
-// - Guarda usuario en localStorage (hh_users) vía Auth.register()
-// - Inicia sesión automática con Auth.login()
-// - Redirige:
-//     DUOC → perfilAdmin.html
-//     Gmail → perfil.html
-// - Valida dominio, teléfono, mayor de edad, etc.
 // ==========================================================
+
+// ====== IMPORTS (SIEMPRE ARRIBA) ======
+import { Auth } from './auth.js';
+import {
+  validateEmail,
+  validateMinLen,
+  validateRequired,
+  validatePhoneCL,
+  validateDomain,
+  validateAdult
+} from './validators.js';
 
 // ========== SELECTORES Y CONST ==========
 const IDS = {
@@ -25,17 +30,6 @@ const IDS = {
   fecha:     '#fechaNacimiento',    // fecha de nacimiento
   msg:       '#regMsg'              // div de mensajes (si no existe, usa alert)
 };
-
-// ====== IMPORTS ======
-import { Auth } from './auth.js';
-import {
-  validateEmail,
-  validateMinLen,
-  validateRequired,
-  validatePhoneCL,
-  validateDomain,
-  validateAdult
-} from './validators.js';
 
 // ====== HELPERS ======
 const pick = sel =>
@@ -118,23 +112,24 @@ document.addEventListener('DOMContentLoaded', () => {
     // REGISTRO E INICIO DE SESIÓN
     // ==========================================================
     try {
-      // 1️⃣ Registrar usuario (se guarda en hh_users con rol inferido)
+      // 1️⃣ Registrar usuario
       const nuevo = Auth.register(data);
 
-      // 2️⃣ Iniciar sesión inmediatamente
+      // 2️⃣ Iniciar sesión
       const loggedUser = Auth.login(nuevo.email, data.password);
 
       // 3️⃣ Mensaje
       show(`Registro exitoso. ¡Bienvenida/o, ${loggedUser.nombre}!`, 'success');
 
-      // 4️⃣ Redirigir según rol (ya viene en loggedUser.rol)
+      // 4️⃣ Redirigir según rol
       const target =
         loggedUser.rol === 'admin'
-          ? '../page/perfilAdmin.html'
-          : '../page/perfil.html';
+          ? './perfilAdmin.html'
+          : './perfilCliente.html';
 
       setTimeout(() => {
-        location.href = target;
+        // usar window.location para que ESLint no reclame
+        window.location.href = target;
       }, 700);
 
     } catch (err) {

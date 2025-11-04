@@ -4,7 +4,7 @@ import { Cart, syncBadge } from './cart.js';
 
 const clp = n => n.toLocaleString('es-CL', { style:'currency', currency:'CLP', maximumFractionDigits:0 });
 
-const qs   = new URLSearchParams(location.search);
+const qs   = new URLSearchParams(window.location.search);
 const term = (qs.get('q') || '').trim().toLowerCase();
 
 let items = PRODUCTOS.slice();

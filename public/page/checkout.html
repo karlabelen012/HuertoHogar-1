@@ -26,27 +26,32 @@
 </head>
 
 <body>
-  <!-- ======= TOPBAR ======= -->
+    <!-- ======= TOPBAR: logo + buscador + botones + carrito ======= -->
   <header class="border-bottom">
     <div class="bg-white">
       <div class="container py-2">
         <div class="row align-items-center g-2">
+          
+          <!-- Logo a la izquierda -->
           <div class="col-6 col-md-2 d-flex align-items-center">
-            <a href="./index.html" class="d-inline-flex align-items-center text-decoration-none">
+            <a href="../index.html" class="d-inline-flex align-items-center text-decoration-none">
               <img src="../assets/image/logo.png" alt="Huerto Hogar" class="me-2" style="width:auto;height:55px;object-fit:contain;">
             </a>
           </div>
 
+          <!-- Buscador centrado -->
           <div class="col-12 col-md-6 d-flex justify-content-md-center">
-            <form class="d-flex w-100" style="max-width:420px" action="./productos.html">
+            <form class="d-flex w-100" style="max-width: 420px;" action="./productos.html">
               <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Buscar" name="q">
               <button class="btn btn-outline-success" type="submit">Buscar</button>
             </form>
           </div>
 
+          <!-- Botones a la derecha -->
           <div class="col-6 col-md-4 d-flex justify-content-end align-items-center gap-2">
             <a class="btn btn-outline-primary btn-sm" href="./login.html">Iniciar Sesión</a>
             <a class="btn btn-primary btn-sm" href="./registro.html">Crear Cuenta</a>
+            <!-- Carrito en pastilla verde con monto -->
             <a class="btn btn-success btn-sm d-flex align-items-center" href="./carrito.html">
               <span class="me-1">🛒</span>
               Carrito <span class="ms-1" id="cartAmount">$0</span>
@@ -56,7 +61,7 @@
       </div>
     </div>
 
-    <!-- ======= NAVBAR ======= -->
+    <!-- ======= NAVBAR: Home activo + categorías ▼ + resto ======= -->
     <nav class="navbar navbar-expand-lg bg-white">
       <div class="container">
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
@@ -64,14 +69,20 @@
         </button>
         <div id="mainNav" class="collapse navbar-collapse">
           <ul class="navbar-nav mx-auto">
-            <li class="nav-item"><a class="nav-link active fw-semibold" aria-current="page" href="./index.html">Home</a></li>
+            <li class="nav-item">
+              <a class="nav-link active fw-semibold" aria-current="page" href="../index.html">Home</a>
+            </li>
 
+            <!-- Categorías: link + flecha (split dropdown) -->
             <li class="nav-item dropdown d-flex align-items-center nav-categories">
               <a class="nav-link" href="./productos.html">Productos</a>
               <a class="nav-link dropdown-toggle dropdown-toggle-split px-1"
-                 href="#" id="catToggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                 href="#" id="catToggle" role="button"
+                 data-bs-toggle="dropdown" aria-expanded="false">
                 <span class="visually-hidden">Abrir subcategorías</span>
               </a>
+
+              <!-- Subcategorías -->
               <ul class="dropdown-menu" aria-labelledby="catToggle">
                 <li><a class="dropdown-item" href="./categorias.html?c=Frutas%20Frescas">Frutas Frescas</a></li>
                 <li><a class="dropdown-item" href="./categorias.html?c=Verduras%20Org%C3%A1nicas">Verduras Orgánicas</a></li>
@@ -90,8 +101,10 @@
     </nav>
   </header>
 
-  <!-- =============== MAIN (Checkout) =============== -->
-  <main class="container py-5" style="max-width:900px;">
+
+  <!-- =============== MAIN  =============== -->
+  <main class="container py-5" style="background:url('../assets/image/textura-papel-blanco_1194-5416.jpg'); background-size:cover; background-attachment:fixed; border-radius:12px;">
+
     <div class="bg-white shadow-sm p-4 rounded-4 border">
 
       <!-- Volver al carrito -->
