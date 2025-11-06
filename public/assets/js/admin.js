@@ -1,189 +1,309 @@
-// assets/js/admin.js
+// ==========================================================
+// 🧩 HUERTO HOGAR - ADMIN PANEL COMPLETO
+// ==========================================================
 
-// ======= Datos de prueba para localStorage =======
-const LS_KEY = 'hh_admin_data_v1';
+// 🔹 Importar configuración base de Firebase
+import { db, auth } from "./firebase.js";
 
-function seedData() {
-  if (localStorage.getItem(LS_KEY)) return;
+// 🔹 Importar todas las funciones de Firestore desde el CDN
+import {
+  collection,
+  getDocs,
+  getDoc,
+  doc,
+  addDoc,
+  updateDoc,
+  deleteDoc
+} from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
 
-  const data = {
-    ordenes: [
-      { id: 1, cliente: 'María Pérez', fecha: '2025-10-01', total: 25990, estado: 'Pagada' },
-      { id: 2, cliente: 'Juan Soto', fecha: '2025-10-02', total: 17990, estado: 'En preparación' },
-      { id: 3, cliente: 'Huerto Hogar Cliente', fecha: '2025-10-03', total: 35990, estado: 'Enviada' },
-    ],
-    productos: [
-      { id: 'HH-001', nombre: 'Miel de abeja 1kg', categoria: 'Orgánicos', precio: 5990, stock: 28 },
-      { id: 'HH-002', nombre: 'Lechuga hidropónica', categoria: 'Verduras', precio: 1990, stock: 56 },
-      { id: 'HH-003', nombre: 'Frutillas 500gr', categoria: 'Frutas', precio: 2990, stock: 33 },
-      { id: 'HH-004', nombre: 'Yogurt artesanal', categoria: 'Lácteos', precio: 3490, stock: 14 },
-    ],
-    categorias: [
-      'Frutas',
-      'Verduras',
-      'Lácteos',
-      'Orgánicos',
-      'Semillas',
-    ],
-    usuarios: [
-      { nombre: 'Admin Principal', correo: 'admin@huertohogar.cl', rol: 'Super Admin', acceso: '08/10/2025 09:34' },
-      { nombre: 'Karla Herrera', correo: 'karla@huertohogar.cl', rol: 'Administrador', acceso: '08/10/2025 10:12' },
-      { nombre: 'Bryan Muñoz', correo: 'bryan@huertohogar.cl', rol: 'Vendedor', acceso: '08/10/2025 10:27' },
-    ],
-    perfil: {
-      nombres: 'Karla / Bryan / Admin',
-      apellidos: '',
-      correo: 'admin@huertohogar.cl',
-      telefono: '+56 9 1234 5678',
-      direccion: 'Calle 123, depto 45',
-      region: 'Región Metropolitana',
-      comuna: 'Maipú',
-      ultimoAcceso: '08/10/2025 09:34'
+const secciones = {
+  msg: document.getElementById("adminMsg"),
+  usuarios: document.getElementById("tblUsuarios"),
+  productos: document.getElementById("tblProductos"),
+  pedidos: document.getElementById("tblPedidos"),
+  ofertas: document.getElementById("tblOfertas"),
+  contactos: document.getElementById("tblContactos"),
+};
+
+const formProd = document.getElementById("formProducto");
+const formOferta = document.getElementById("formOferta");
+
+// Helper para formatear precios CLP
+const clp = n => Number(n || 0).toLocaleString("es-CL", { style: "currency", currency: "CLP", maximumFractionDigits: 0 });
+
+// ----------------------------------------------------------
+// 🔹 Verificar usuario administrador
+// ----------------------------------------------------------
+
+
+auth.onAuthStateChanged(async (user) => {
+  if (!user) {
+    secciones.msg.innerHTML = `
+      <div class="alert alert-warning">
+        Debes iniciar sesión como administrador.
+      </div>`;
+    return;
+  }
+
+  const ref = doc(db, "usuarios", user.uid);
+  const snap = await getDoc(ref);
+
+  if (!snap.exists() || snap.data().rol !== "admin") {
+    secciones.msg.innerHTML = `
+      <div class="alert alert-danger">
+        Acceso denegado. Solo administradores.
+      </div>`;
+    return;
+  }
+
+  secciones.msg.innerHTML = `
+    <div class="alert alert-success">
+      Bienvenido, administrador.
+    </div>`;
+
+  cargarTodo(); // continúa con tus funciones
+});
+
+// ----------------------------------------------------------
+// 📊 Cargar todas las colecciones
+// ----------------------------------------------------------
+async function cargarTodo() {
+  await Promise.all([
+    cargarUsuarios(),
+    cargarProductos(),
+    cargarPedidos(),
+    cargarOfertas(),
+    cargarContactos(),
+  ]);
+}
+
+// ----------------------------------------------------------
+// 👥 USUARIOS
+// ----------------------------------------------------------
+async function cargarUsuarios() {
+  const snap = await getDocs(collection(db, "usuarios"));
+  secciones.usuarios.innerHTML = snap.docs.map(d => {
+    const u = d.data();
+    return `
+      <tr>
+        <td>${u.nombre}</td>
+        <td>${u.correo}</td>
+        <td>${u.rol || "cliente"}</td>
+        <td>
+          <button class="btn btn-sm btn-warning" data-type="rol" data-id="${d.id}">Cambiar rol</button>
+          <button class="btn btn-sm btn-danger" data-type="del" data-id="${d.id}">Eliminar</button>
+        </td>
+      </tr>`;
+  }).join("");
+}
+
+secciones.usuarios?.addEventListener("click", async e => {
+  const btn = e.target.closest("button[data-type]");
+  if (!btn) return;
+  const id = btn.dataset.id;
+  const action = btn.dataset.type;
+
+  if (action === "rol") {
+    const ref = doc(db, "usuarios", id);
+    const snap = await getDoc(ref);
+    const u = snap.data();
+    const nuevoRol = u.rol === "admin" ? "cliente" : "admin";
+    await updateDoc(ref, { rol: nuevoRol });
+    alert(`Rol actualizado a ${nuevoRol}`);
+    cargarUsuarios();
+  } else if (action === "del") {
+    // eslint-disable-next-line no-restricted-globals
+    if (confirm("¿Eliminar usuario?")) {
+      await deleteDoc(doc(db, "usuarios", id));
+      alert("Usuario eliminado");
+      cargarUsuarios();
     }
+  }
+});
+
+// ----------------------------------------------------------
+// 🥦 PRODUCTOS
+// ----------------------------------------------------------
+async function cargarProductos() {
+  const snap = await getDocs(collection(db, "productos"));
+  secciones.productos.innerHTML = snap.docs.map(d => {
+    const p = d.data();
+    return `
+      <tr>
+        <td>${p.nombre}</td>
+        <td>${p.categoria}</td>
+        <td>${clp(p.precio)}</td>
+        <td>${p.stock || 0}</td>
+        <td>${p.descuento ? p.descuento * 100 + "%" : "-"}</td>
+        <td>
+          <button class="btn btn-sm btn-warning" data-type="edit" data-id="${d.id}">Editar</button>
+          <button class="btn btn-sm btn-danger" data-type="del" data-id="${d.id}">Eliminar</button>
+        </td>
+      </tr>`;
+  }).join("");
+}
+
+secciones.productos?.addEventListener("click", async e => {
+  const btn = e.target.closest("button[data-type]");
+  if (!btn) return;
+  const id = btn.dataset.id;
+  const act = btn.dataset.type;
+
+  if (act === "del") {
+    if (!window.confirm("¿Vaciar carrito?")) return;
+
+    await deleteDoc(doc(db, "productos", id));
+    cargarProductos();
+  } else if (act === "edit") {
+    const ref = doc(db, "productos", id);
+    const snap = await getDoc(ref);
+    if (!snap.exists()) return;
+    const p = snap.data();
+    formProd.id.value = id;
+    formProd.nombre.value = p.nombre;
+    formProd.categoria.value = p.categoria;
+    formProd.precio.value = p.precio;
+    formProd.stock.value = p.stock || 0;
+    formProd.descuento.value = p.descuento || 0;
+    formProd.img.value = p.img || "";
+    formProd.descripcion.value = p.descripcion || "";
+    formProd.scrollIntoView({ behavior: "smooth" });
+  }
+});
+
+formProd?.addEventListener("submit", async e => {
+  e.preventDefault();
+  const data = {
+    nombre: formProd.nombre.value,
+    categoria: formProd.categoria.value,
+    precio: Number(formProd.precio.value),
+    stock: Number(formProd.stock.value) || 0,
+    descuento: Number(formProd.descuento.value) || 0,
+    descripcion: formProd.descripcion.value,
+    img: formProd.img.value,
   };
+  try {
+    if (formProd.id.value) {
+      await updateDoc(doc(db, "productos", formProd.id.value), data);
+      alert("Producto actualizado");
+    } else {
+      await addDoc(collection(db, "productos"), data);
+      alert("Producto agregado");
+    }
+    formProd.reset();
+    cargarProductos();
+  } catch (err) {
+    console.error(err);
+    alert("Error guardando producto");
+  }
+});
 
-  localStorage.setItem(LS_KEY, JSON.stringify(data));
+// ----------------------------------------------------------
+// 🧾 PEDIDOS
+// ----------------------------------------------------------
+async function cargarPedidos() {
+  const snap = await getDocs(collection(db, "pedidos"));
+  secciones.pedidos.innerHTML = snap.docs.map(d => {
+    const p = d.data();
+    return `
+      <tr>
+        <td>${p.cliente}</td>
+        <td>${p.correo}</td>
+        <td>${p.estado}</td>
+        <td>${p.total}</td>
+        <td>
+          <select class="form-select form-select-sm estadoPedido" data-id="${d.id}">
+            <option ${p.estado === "En preparación" ? "selected" : ""}>En preparación</option>
+            <option ${p.estado === "Enviado" ? "selected" : ""}>Enviado</option>
+            <option ${p.estado === "Entregado" ? "selected" : ""}>Entregado</option>
+            <option ${p.estado === "Cancelado" ? "selected" : ""}>Cancelado</option>
+          </select>
+        </td>
+      </tr>`;
+  }).join("");
 }
 
-function readData() {
-  return JSON.parse(localStorage.getItem(LS_KEY) || '{}');
-}
-function writeData(data) {
-  localStorage.setItem(LS_KEY, JSON.stringify(data));
+secciones.pedidos?.addEventListener("change", async e => {
+  const sel = e.target.closest(".estadoPedido");
+  if (!sel) return;
+  await updateDoc(doc(db, "pedidos", sel.dataset.id), { estado: sel.value });
+  alert("Estado del pedido actualizado");
+});
+
+// ----------------------------------------------------------
+// 🎟️ OFERTAS
+// ----------------------------------------------------------
+async function cargarOfertas() {
+  const snap = await getDocs(collection(db, "ofertas"));
+  secciones.ofertas.innerHTML = snap.docs.map(d => {
+    const o = d.data();
+    return `
+      <tr>
+        <td>${o.titulo}</td>
+        <td>${o.codigo}</td>
+        <td>${o.descuento * 100}%</td>
+        <td>${o.activo ? "✅" : "❌"}</td>
+        <td>
+          <button class="btn btn-sm btn-warning" data-type="edit" data-id="${d.id}">Editar</button>
+          <button class="btn btn-sm btn-danger" data-type="del" data-id="${d.id}">Eliminar</button>
+        </td>
+      </tr>`;
+  }).join("");
 }
 
-// ======= Renderizar tablas =======
-function renderOrdenes() {
-  const data = readData();
-  const tbody = document.querySelector('#tblOrdenes');
-  if (!tbody) return;
-  tbody.innerHTML = (data.ordenes || []).map(o => `
-    <tr>
-      <td>${o.id}</td>
-      <td>${o.cliente}</td>
-      <td>${o.fecha}</td>
-      <td>$${o.total.toLocaleString('es-CL')}</td>
-      <td><span class="badge bg-success">${o.estado}</span></td>
-    </tr>
-  `).join('');
-}
-function renderProductos() {
-  const data = readData();
-  const tbody = document.querySelector('#tblProductos');
-  if (!tbody) return;
-  tbody.innerHTML = (data.productos || []).map(p => `
-    <tr>
-      <td>${p.id}</td>
-      <td>${p.nombre}</td>
-      <td>${p.categoria}</td>
-      <td>$${p.precio.toLocaleString('es-CL')}</td>
-      <td>${p.stock}</td>
-    </tr>
-  `).join('');
-}
-function renderCategorias() {
-  const data = readData();
-  const ul = document.querySelector('#lstCategorias');
-  if (!ul) return;
-  ul.innerHTML = (data.categorias || []).map(c => `
-    <li class="list-group-item d-flex justify-content-between align-items-center">
-      ${c}
-      <span class="badge bg-secondary rounded-pill">Activa</span>
-    </li>
-  `).join('');
-}
-function renderUsuarios() {
-  const data = readData();
-  const tbody = document.querySelector('#tblUsuarios');
-  if (!tbody) return;
-  tbody.innerHTML = (data.usuarios || []).map(u => `
-    <tr>
-      <td>${u.nombre}</td>
-      <td>${u.correo}</td>
-      <td>${u.rol}</td>
-      <td>${u.acceso}</td>
-    </tr>
-  `).join('');
-}
-function renderPerfil() {
-  const data = readData();
-  const p = data.perfil || {};
-  const $ = s => document.querySelector(s);
-  $('#perfilNombres') && ($('#perfilNombres').value = p.nombres || '');
-  $('#perfilApellidos') && ($('#perfilApellidos').value = p.apellidos || '');
-  $('#perfilCorreo') && ($('#perfilCorreo').value = p.correo || '');
-  $('#perfilTelefono') && ($('#perfilTelefono').value = p.telefono || '');
-  $('#perfilDireccion') && ($('#perfilDireccion').value = p.direccion || '');
-  $('#perfilUltimoAcceso') && ($('#perfilUltimoAcceso').textContent = p.ultimoAcceso || '');
-}
+secciones.ofertas?.addEventListener("click", async e => {
+  const btn = e.target.closest("button[data-type]");
+  if (!btn) return;
+  const id = btn.dataset.id;
+  const act = btn.dataset.type;
+  if (act === "del") {
+    await deleteDoc(doc(db, "ofertas", id));
+    cargarOfertas();
+  } else if (act === "edit") {
+    const snap = await getDoc(doc(db, "ofertas", id));
+    const o = snap.data();
+    formOferta.id.value = id;
+    formOferta.titulo.value = o.titulo;
+    formOferta.codigo.value = o.codigo;
+    formOferta.descuento.value = o.descuento;
+    formOferta.activo.checked = o.activo;
+    formOferta.scrollIntoView({ behavior: "smooth" });
+  }
+});
 
-// ======= Navegación entre vistas =======
-function setupNavigation() {
-  const menu = document.querySelectorAll('.hh-admin-item[data-view]');
-  const views = document.querySelectorAll('.hh-view');
-
-  menu.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const view = btn.dataset.view;
-
-      // activar botón
-      menu.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-
-      // mostrar vista
-      views.forEach(v => {
-        if (v.dataset.view === view) v.classList.remove('d-none');
-        else v.classList.add('d-none');
-      });
-    });
-  });
-}
-
-// ======= Logout =======
-function setupLogout() {
-  const btn1 = document.querySelector('#btnLogout');
-  const btn2 = document.querySelector('#perfilCerrar');
-
-  const doLogout = () => {
-    // si tienes otros keys de auth, los limpias aquí
-    // localStorage.removeItem('hh_auth');
-    // pero dejamos los datos del admin
-    window.location.href = '../login.html';
+formOferta?.addEventListener("submit", async e => {
+  e.preventDefault();
+  const data = {
+    titulo: formOferta.titulo.value,
+    codigo: formOferta.codigo.value,
+    descuento: Number(formOferta.descuento.value),
+    activo: formOferta.activo.checked,
   };
+  if (formOferta.id.value) {
+    await updateDoc(doc(db, "ofertas", formOferta.id.value), data);
+    alert("Oferta actualizada");
+  } else {
+    await addDoc(collection(db, "ofertas"), data);
+    alert("Oferta agregada");
+  }
+  formOferta.reset();
+  cargarOfertas();
+});
 
-  btn1 && btn1.addEventListener('click', doLogout);
-  btn2 && btn2.addEventListener('click', doLogout);
+// ----------------------------------------------------------
+// 💬 CONTACTOS
+// ----------------------------------------------------------
+async function cargarContactos() {
+  const snap = await getDocs(collection(db, "contactos"));
+  const lista = snap.docs.map(d => d.data());
+  secciones.contactos.innerHTML = lista.map(c => `
+    <tr>
+      <td>${c.nombre}</td>
+      <td>${c.correo}</td>
+      <td>${c.mensaje}</td>
+    </tr>`).join("");
+
+  // Reporte
+  const total = lista.length;
+  document.getElementById("reporteContactos").textContent = `Total mensajes: ${total}`;
 }
-
-// ======= Guardar perfil =======
-function setupPerfilForm() {
-  const form = document.querySelector('#formPerfil');
-  if (!form) return;
-  form.addEventListener('submit', e => {
-    e.preventDefault();
-    const data = readData();
-    data.perfil = {
-      nombres: document.querySelector('#perfilNombres').value,
-      apellidos: document.querySelector('#perfilApellidos').value,
-      correo: document.querySelector('#perfilCorreo').value,
-      telefono: document.querySelector('#perfilTelefono').value,
-      direccion: document.querySelector('#perfilDireccion').value,
-      region: document.querySelector('#perfilRegion').value,
-      comuna: document.querySelector('#perfilComuna').value,
-      ultimoAcceso: data.perfil?.ultimoAcceso || new Date().toLocaleString('es-CL')
-    };
-    writeData(data);
-    alert('Perfil actualizado ✅');
-  });
-}
-
-// ======= INIT =======
-seedData();
-renderOrdenes();
-renderProductos();
-renderCategorias();
-renderUsuarios();
-renderPerfil();
-setupNavigation();
-setupLogout();
-setupPerfilForm();

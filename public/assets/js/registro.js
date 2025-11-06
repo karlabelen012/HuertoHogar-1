@@ -12,23 +12,24 @@ import {
   setDoc,
 } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
 
-// 👇 OJO: tiene que ser apiKey (K mayúscula), igual que en tu firebase.js
+// 🔑 Config de tu proyecto (CON LA API KEY NUEVA)
 const firebaseConfig = {
-  apiKey: "AIzaSyBgqQMt_O0193-SH7W6rhxNOPJgsTLzGWw",
+  apiKey: "AIzaSyBd4Axng1H3R8lolnkyfcACK-VEHbdweq4",   // 👈 NUEVA
   authDomain: "huertohogar-7c6dd.firebaseapp.com",
   projectId: "huertohogar-7c6dd",
   storageBucket: "huertohogar-7c6dd.appspot.com",
   messagingSenderId: "1056561014185",
-  appId: "1:1056561014185:web:2567db85cd53b5756d10b8",
-  measurementId: "G-TDQVPAJ40P",
+  appId: "1:1056561014185:web:2567bd85cd53b5756d10b8",
+  measurementId: "G-TDQVP4J40P",
 };
 
-
-console.log("🔥 registro.js usando apiKey:", firebaseConfig.apiKey);
-
+// Inicializar Firebase solo UNA VEZ en este archivo
 const app  = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db   = getFirestore(app);
+
+// 🔍 Log para verificar que está usando la key correcta
+console.log("🔥 registro.js usando apiKey:", auth.app.options.apiKey);
 
 // ----------------- Helpers -----------------
 const $ = (sel) => document.querySelector(sel);

@@ -1,28 +1,53 @@
-export const CATEGORIAS = [
-  { id: 'Frutas Frescas', img: '../assets/image/categoriafruta.png' },
-  { id: 'Verduras Orgánicas', img: '../assets/image/categoriaverduras.png' },
-  { id: 'Productos Orgánicos', img: '../assets/image/categoriaOrganicos.png' },
-  { id: 'Lácteos', img: '../assets/image/categorialacteos.png' }
-];
-
-
+// public/assets/js/data.js
 export const PRODUCTOS = [
-  // Frutas
-  { id:'FR001', nombre:'Manzanas Fuji',      precio:1200, categoria:'Frutas Frescas',      img:'../assets/image/manzanafuji.png' },
-  { id:'FR002', nombre:'Naranjas Valencia',  precio:1000, categoria:'Frutas Frescas',      img:'../assets/image/naranja.png' },
-  { id:'FR003', nombre:'Plátanos Cavendish', precio:800,  categoria:'Frutas Frescas',      img:'../assets/image/platano.png' },
-  { id:'FR004', nombre:'Uvas Verdes',        precio:1300, categoria:'Frutas Frescas',      img:'../assets/image/uvasverdes.png' },
-
-  // Verduras
-  { id:'VR001', nombre:'Zanahorias Orgánicas', precio:900,  categoria:'Verduras Orgánicas',  img:'../assets/image/zanahoria.png' },
-  { id:'VR002', nombre:'Espinacas Frescas',    precio:700,  categoria:'Verduras Orgánicas',  img:'../assets/image/espinaca.png' },
-  { id:'VR003', nombre:'Pimientos Tricolores', precio:1500, categoria:'Verduras Orgánicas',  img:'../assets/image/pimientos.png' },
-
-  // Orgánicos
-  { id:'PO001', nombre:'Miel Orgánica 500g',  precio:5000, categoria:'Productos Orgánicos', img:'../assets/image/miel.png' },
-  { id:'PO003', nombre:'Quinua Orgánica',     precio:4200, categoria:'Productos Orgánicos', img:'../assets/image/quinoa.png' },
-
-  // Lácteos
-  { id:'PL001', nombre:'Leche Entera 1L',     precio:1100, categoria:'Lácteos',             img:'../assets/image/leche.png' },
-  { id:'PL002', nombre:'Yougurt Artesanal',     precio:1000, categoria:'Lácteos',             img:'../assets/image/yougurt.png' },
+  {
+    id: 'p1',
+    activo: true,
+    categoria: 'Verduras Orgánicas',
+    nombre: 'Zanahorias Orgánicas',
+    descripcion: 'Zanahorias frescas sin pesticidas, listas para ensaladas.',
+    imagen: '../assets/image/zanahoria.png',
+    origen: 'Región del Ñuble',
+    oferta: false,
+    precio: 900,
+    stock: 40
+  },
+  {
+    id: 'p2',
+    activo: true,
+    categoria: 'Frutas Frescas',
+    nombre: 'Manzanas Rojas',
+    descripcion: 'Manzanas dulces de huertos locales.',
+    imagen: '../assets/image/manzanas.png',
+    origen: 'Región del Maule',
+    oferta: true,
+    precio: 1200,
+    precioAnterior: 1500,
+    stock: 30
+  },
+  {
+    id: 'p3',
+    activo: true,
+    categoria: 'Lácteos',
+    nombre: 'Yogurt Artesanal',
+    descripcion: 'Yogurt natural sin azúcar.',
+    imagen: '../assets/image/yogurt.png',
+    origen: 'Región de Los Lagos',
+    oferta: false,
+    precio: 1800,
+    stock: 25
+  },
+  {
+    id: 'p4',
+    activo: true,
+    categoria: 'Productos Orgánicos',
+    nombre: 'Miel Orgánica',
+    descripcion: 'Miel pura 100% natural, cosechada en bosques nativos.',
+    imagen: '../assets/image/miel.png',
+    origen: 'Región del Biobío',
+    oferta: true,
+    precio: 3500,
+    precioAnterior: 4200,
+    stock: 20
+  }
 ];

@@ -1,226 +1,244 @@
-// =================== Huerto Hogar - CARRITO.JS ===================
-// Maneja el carrito (localStorage) y lo muestra en carrito.html
+// ==========================================================
+// 🛒 HUERTO HOGAR - CART.JS (LOCALSTORAGE + OFERTAS)
+// ==========================================================
+import { db } from "./firebase.js";
 
-import { PRODUCTOS } from './data.js';
+import { doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+import { validarCodigo } from "./oferta.js";
 
-const KEY = 'hh_cart';
+const CART_KEY = "hh_cart";
 
-// Formato CLP
-const clp = n => Number(n || 0).toLocaleString('es-CL', {
-  style: 'currency',
-  currency: 'CLP',
-  maximumFractionDigits: 0
-});
-
-// ---------- helpers de almacenamiento ----------
-function read() {
-  try { return JSON.parse(localStorage.getItem(KEY)) || []; }
-  catch { return []; }
-}
-
-function write(items) {
-  localStorage.setItem(KEY, JSON.stringify(items));
-  window.dispatchEvent(new CustomEvent('cart:changed'));
-  syncBadge();
-}
-
-// =================== API PRINCIPAL ===================
-export const Cart = {
-  items: () => read(),
-  total: () => read().reduce((acc, it) => acc + it.precio * it.cantidad, 0),
-
-  // Añadir producto al carrito
-  add: (product, qty = 1) => {
-    const items = read();
-    const i = items.findIndex(x => x.id === product.id);
-    if (i >= 0) items[i].cantidad += qty;
-    else items.push({
-      id: product.id,
-      nombre: product.nombre,
-      precio: product.precio,
-      img: product.img,
-      cantidad: qty
-    });
-    write(items);
-  },
-
-  // Eliminar producto completo
-  remove: (id) => {
-    write(read().filter(x => x.id !== id));
-  },
-
-  // Cambiar cantidad
-  setQty: (id, qty) => {
-    const items = read().map(x =>
-      x.id === id ? { ...x, cantidad: Math.max(1, qty) } : x
-    );
-    write(items);
-  },
-
-  // Vaciar todo el carrito
-  clear: () => write([]),
-};
-
-// =================== BADGE DEL HEADER ===================
-export function syncBadge() {
-  const el = document.getElementById('cartAmount');
-  if (!el) return;
-  const total = Cart.total();
-  el.textContent = clp(total);
-}
-
-window.addEventListener('DOMContentLoaded', syncBadge);
-window.addEventListener('cart:changed', syncBadge);
-
-// =================== VISTA carrito.html ===================
-document.addEventListener('DOMContentLoaded', () => {
-  const tableBody = document.getElementById('cartTableBody');
-  const totalEl   = document.getElementById('cartTotalMonto');
-  const btnVaciar = document.getElementById('btnVaciarCarrito');
-
-  const gridLista = document.getElementById('gridProductosCarrito');
-
-  // ---------- RENDER LISTA DE PRODUCTOS (columna izquierda) ----------
-  function renderListaProductos() {
-    if (!gridLista) return;
-
-    // Puedes filtrar o tomar solo algunos. Aquí tomo los primeros 8.
-    const sample = PRODUCTOS.slice(0, 8);
-
-    gridLista.innerHTML = sample.map(p => `
-      <article class="col-6">
-        <div class="card h-100 shadow-sm">
-          <div class="ratio ratio-16x9 bg-light">
-            <img src="${p.img}" class="object-fit-cover" alt="${p.nombre}">
-          </div>
-          <div class="card-body p-2">
-            <h6 class="card-title mb-1 text-truncate">${p.nombre}</h6>
-            <div class="d-flex align-items-center justify-content-between">
-              <span class="fw-bold text-success">${clp(p.precio)}</span>
-              <small class="text-muted">Stock disponible</small>
-            </div>
-            <button class="btn btn-success btn-sm w-100 mt-2" data-add="${p.id}">
-              Añadir
-            </button>
-          </div>
-        </div>
-      </article>
-    `).join('');
-  }
-
-  // Click en botón "Añadir" de la lista izquierda
-  gridLista?.addEventListener('click', (e) => {
-    const btn = e.target.closest('button[data-add]');
-    if (!btn) return;
-    const id = btn.dataset.add;
-    const prod = PRODUCTOS.find(p => p.id === id);
-    if (!prod) return;
-
-    Cart.add(prod, 1);   // agrega al carrito
-    renderCarrito();     // refresca tabla derecha
-    btn.textContent = 'Añadido ✓';
-    setTimeout(() => btn.textContent = 'Añadir', 900);
+const clp = (n) =>
+  Number(n || 0).toLocaleString("es-CL", {
+    style: "currency",
+    currency: "CLP",
+    maximumFractionDigits: 0,
   });
 
-  // ---------- RENDER TABLA DEL CARRITO (columna derecha) ----------
-  if (!tableBody) {
-    // Si no estamos en carrito.html, no seguimos.
-    return;
+function readCart() {
+  try {
+    return JSON.parse(localStorage.getItem(CART_KEY) || "[]");
+  } catch {
+    return [];
   }
+}
 
-  function renderCarrito() {
-    const items = read();
+function writeCart(items) {
+  localStorage.setItem(CART_KEY, JSON.stringify(items || []));
+  window.dispatchEvent(new Event("storage"));
+}
 
-    if (!items.length) {
-      tableBody.innerHTML = `
-        <tr>
-          <td colspan="6" class="text-center text-muted py-4">
-            Tu carrito está vacío 🛒
-          </td>
-        </tr>`;
-      if (totalEl) totalEl.textContent = clp(0);
+// ----------------------------------------------------------
+// 🔹 Export: actualizar badge de carrito
+// ----------------------------------------------------------
+export function syncBadge() {
+  const items = readCart();
+  const total = items.reduce(
+    (acc, it) =>
+      acc +
+      (Number(it.precioFinal ?? it.precio) || 0) * Number(it.cantidad || 1),
+    0
+  );
+
+  const badge =
+    document.querySelector("[data-cart-total]") ||
+    document.getElementById("cartTotal");
+  if (badge) {
+    badge.textContent = clp(total);
+  }
+}
+
+// ----------------------------------------------------------
+// 🔹 Export: agregar producto al carrito
+// ----------------------------------------------------------
+export async function addToCart(idProducto) {
+  try {
+    const ref = doc(db, "productos", idProducto);
+    const snap = await getDoc(ref);
+    if (!snap.exists()) {
+      alert("Producto no encontrado");
       return;
     }
 
-    tableBody.innerHTML = items.map(it => `
-      <tr>
-        <td>
-          <img src="${it.img}" alt="${it.nombre}"
-               class="rounded" style="width:60px;height:60px;object-fit:cover">
-        </td>
-        <td>${it.nombre}</td>
-        <td class="text-end">${clp(it.precio)}</td>
-        <td class="text-center">
-          <div class="btn-group btn-group-sm" role="group">
-            <button class="btn btn-outline-secondary" data-dec="${it.id}">−</button>
-            <input type="number" value="${it.cantidad}" min="1"
-                   class="form-control text-center mx-1"
-                   style="width:56px" data-qty="${it.id}">
-            <button class="btn btn-outline-secondary" data-inc="${it.id}">+</button>
-          </div>
-        </td>
-        <td class="text-end">${clp(it.precio * it.cantidad)}</td>
-        <td class="text-center">
-          <button class="btn btn-outline-danger btn-sm" data-del="${it.id}">
-            Eliminar
-          </button>
-        </td>
-      </tr>
-    `).join('');
+    const p = snap.data();
+    const desc = Number(p.porcentajeDescuento || p.descuento || 0);
+    const precioFinal = desc ? p.precio * (1 - desc) : p.precio;
 
-    const total = items.reduce((acc, it) => acc + it.precio * it.cantidad, 0);
-    if (totalEl) totalEl.textContent = clp(total);
+    const cart = readCart();
+    const idx = cart.findIndex((i) => i.id === idProducto);
+
+    if (idx >= 0) {
+      cart[idx].cantidad += 1;
+    } else {
+      cart.push({
+        id: idProducto,
+        nombre: p.nombre,
+        precio: p.precio,
+        precioFinal,
+        imagen: p.imagen || p.img || "",
+        cantidad: 1,
+      });
+    }
+
+    writeCart(cart);
+    syncBadge();
+    alert(`✅ ${p.nombre} agregado al carrito`);
+  } catch (err) {
+    console.error("Error agregando al carrito:", err);
+    alert("No se pudo agregar al carrito.");
+  }
+}
+
+// ----------------------------------------------------------
+// 🧾 Render de carrito.html
+// ----------------------------------------------------------
+function renderCartPage() {
+  const tbody =
+    document.getElementById("tbodyCarrito") ||
+    document.querySelector("#tablaCarrito tbody");
+  const totalEl =
+    document.getElementById("totalCarrito") ||
+    document.querySelector("[data-total-carrito]");
+
+  if (!tbody || !totalEl) {
+    // No estamos en carrito.html
+    return;
   }
 
-  // Botones +  -  Eliminar  dentro de la tabla
-  tableBody.addEventListener('click', e => {
-    const btn = e.target.closest('button');
-    if (!btn) return;
+  const items = readCart();
+  if (!items.length) {
+    tbody.innerHTML =
+      '<tr><td colspan="5" class="text-center">Tu carrito está vacío.</td></tr>';
+    totalEl.textContent = clp(0);
+    return;
+  }
 
-    const id = btn.dataset.dec || btn.dataset.inc || btn.dataset.del;
-    if (!id) return;
+  let total = 0;
+  tbody.innerHTML = items
+    .map((i, idx) => {
+      const subtotal = Number(i.precioFinal ?? i.precio) * i.cantidad;
+      total += subtotal;
+      return `
+      <tr data-index="${idx}">
+        <td><img src="${i.imagen}" alt="${i.nombre}" style="width:60px;height:60px;object-fit:cover;"></td>
+        <td>${i.nombre}</td>
+        <td>${clp(i.precioFinal ?? i.precio)}</td>
+        <td>
+          <input type="number" min="1" value="${i.cantidad}" class="form-control form-control-sm qty-input">
+        </td>
+        <td class="subtotal">${clp(subtotal)}</td>
+        <td>
+          <button class="btn btn-sm btn-outline-danger btn-remove">✕</button>
+        </td>
+      </tr>`;
+    })
+    .join("");
 
-    const items = read();
-    const i = items.findIndex(x => x.id === id);
-    if (i === -1) return;
+  totalEl.textContent = clp(total);
+  syncBadge();
+}
 
-    if (btn.dataset.dec) items[i].cantidad = Math.max(1, items[i].cantidad - 1);
-    if (btn.dataset.inc) items[i].cantidad += 1;
-    if (btn.dataset.del) items.splice(i, 1);
+// ----------------------------------------------------------
+// 🔹 Eventos en carrito (cambiar cantidad / eliminar)
+// ----------------------------------------------------------
+function attachCartEvents() {
+  const tbody =
+    document.getElementById("tbodyCarrito") ||
+    document.querySelector("#tablaCarrito tbody");
+  const totalEl =
+    document.getElementById("totalCarrito") ||
+    document.querySelector("[data-total-carrito]");
+  if (!tbody || !totalEl) return;
 
-    write(items);
-    renderCarrito();
+  tbody.addEventListener("input", (e) => {
+    const row = e.target.closest("tr[data-index]");
+    if (!row) return;
+
+    const idx = Number(row.dataset.index);
+    const cart = readCart();
+    if (!cart[idx]) return;
+
+    if (e.target.classList.contains("qty-input")) {
+      const nuevaCant = Math.max(1, Number(e.target.value || 1));
+      cart[idx].cantidad = nuevaCant;
+      writeCart(cart);
+      // Recalcular subtotal y total
+      const precio = Number(cart[idx].precioFinal ?? cart[idx].precio);
+      const subtotal = precio * nuevaCant;
+      row.querySelector(".subtotal").textContent = clp(subtotal);
+
+      const total = cart.reduce(
+        (acc, it) =>
+          acc +
+          (Number(it.precioFinal ?? it.precio) || 0) *
+            Number(it.cantidad || 1),
+        0
+      );
+      totalEl.textContent = clp(total);
+      syncBadge();
+    }
   });
 
-  // Cambio manual de cantidad en el input number
-  tableBody.addEventListener('change', e => {
-    if (!e.target.matches('input[data-qty]')) return;
-    const id = e.target.dataset.qty;
-    const val = Math.max(1, parseInt(e.target.value || '1', 10));
-    Cart.setQty(id, val);
-    renderCarrito();
+  tbody.addEventListener("click", (e) => {
+    const row = e.target.closest("tr[data-index]");
+    if (!row) return;
+
+    if (e.target.classList.contains("btn-remove")) {
+      const idx = Number(row.dataset.index);
+      const cart = readCart();
+      cart.splice(idx, 1);
+      writeCart(cart);
+      renderCartPage();
+    }
   });
 
-  // Botón "Limpiar"
-  btnVaciar?.addEventListener('click', () => {
-    Cart.clear();
-    renderCarrito();
-  });
+  // Botón Vaciar carrito
+  const btnVaciar = document.getElementById("btnVaciarCarrito");
+  if (btnVaciar) {
+    btnVaciar.addEventListener("click", () => {
+      if (!window.confirm("¿Vaciar carrito?")) return;
 
-  // Render inicial
-  renderListaProductos(); // izquierda
-  renderCarrito();        // derecha
-
-
-  // --- Botón "Comprar ahora" → ir a checkout ---
-  const btnComprar = document.getElementById('btnComprarAhora');
-  if (btnComprar) {
-    btnComprar.addEventListener('click', () => {
-      window.location.href = './checkout.html'; // misma carpeta que carrito.html
+      writeCart([]);
+      renderCartPage();
     });
   }
 
-  // Render inicial
-  renderListaProductos(); // izquierda
-  renderCarrito();        // derecha
+  // Botón Aplicar código de descuento en carrito
+  const inputCodigo =
+    document.getElementById("codigoCarrito") ||
+    document.getElementById("codigoDescuento");
+  const btnCodigo =
+    document.getElementById("btnCodigoCarrito") ||
+    document.getElementById("btnAplicarCodigo");
+
+  if (btnCodigo && inputCodigo) {
+    btnCodigo.addEventListener("click", async () => {
+      const code = inputCodigo.value.trim();
+      if (!code) return alert("Ingresa un código");
+
+      const desc = await validarCodigo(code); // porcentaje (0.1 = 10%)
+      if (!desc) return alert("Código inválido o inactivo");
+
+      const cart = readCart();
+      const totalOriginal = cart.reduce(
+        (acc, it) =>
+          acc +
+          (Number(it.precioFinal ?? it.precio) || 0) *
+            Number(it.cantidad || 1),
+        0
+      );
+      const nuevoTotal = totalOriginal * (1 - desc);
+      totalEl.textContent = clp(nuevoTotal);
+      alert(`🎉 Descuento aplicado de ${desc * 100}%`);
+    });
+  }
+}
+
+// ----------------------------------------------------------
+// 🔚 Inicialización
+// ----------------------------------------------------------
+document.addEventListener("DOMContentLoaded", () => {
+  renderCartPage();
+  attachCartEvents();
+  syncBadge();
 });

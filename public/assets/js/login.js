@@ -1,5 +1,5 @@
-
-import { Auth } from './auth.js'; 
+// public/assets/js/login.js
+import { Auth } from './auth.js';
 
 // ========== CONST ==========
 const IDS = {
@@ -9,7 +9,7 @@ const IDS = {
   msg:   '#loginMsg'
 };
 
-// Selectores rápidos
+// Selectores rápidos (primer elemento que exista)
 const pick = (sel) =>
   sel
     .split(',')
@@ -17,18 +17,18 @@ const pick = (sel) =>
     .map(document.querySelector.bind(document))
     .find(Boolean);
 
-// Regex para detectar dominio DUOC (admin)
+// Regex para detectar dominio DUOC (para rol admin por dominio)
 const DUOC_REGEX = /@(duoc\.cl|duocuc\.cl|profesor\.duoc\.cl|duocpro\.cl)$/i;
 
 document.addEventListener('DOMContentLoaded', () => {
-  const form = pick(IDS.form);
+  const form   = pick(IDS.form);
   if (!form) return;
 
   const emailEl = pick(IDS.email);
   const passEl  = pick(IDS.pass);
   const msgBox  = pick(IDS.msg);
 
-  // Muestra mensaje (alerta o cuadro)
+  // Mostrar mensaje en cuadro o alerta
   const show = (t, type = 'danger') => {
     if (!msgBox) {
       alert((type === 'success' ? '✅ ' : '⚠️ ') + t);
@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
     msgBox.hidden = false;
   };
 
-  form.addEventListener('submit', (e) => {
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
     const email = emailEl?.value?.trim() || '';
@@ -51,37 +51,51 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     try {
-      // Login (Auth se encarga de validar y guardar usuario base)
-      const user = Auth.login(email, pass);
+      // Login: Auth se encarga de validar con Firebase / LocalStorage, etc.
+      const user = await Auth.login(email, pass);
 
-      // Determinar rol según dominio del correo
-      const isAdmin = DUOC_REGEX.test(email);   // duoc.cl, duocuc.cl, etc.
-      const rol = isAdmin ? 'admin' : 'cliente';
+      if (!user) {
+        show('No existe una cuenta asociada a este correo.', 'danger');
+        return;
+      }
 
-      // Guardar rol junto con el usuario en la sesión (localStorage)
-      const userData = { ...user, rol };
+      // Si viene rol desde la BD, se respeta; si no, se calcula por dominio.
+      const rolDetectado = DUOC_REGEX.test(email) ? 'admin' : 'cliente';
+      const rol = user.rol || rolDetectado;
+
+      const userData = { ...user, email, correo: email, rol };
+
+      // Guardar sesión para todo el sitio (HTML + React)
       localStorage.setItem('hh_auth', JSON.stringify(userData));
 
       show('Inicio de sesión correcto. Redirigiendo…', 'success');
 
-      // 🔀 Redirección:
-      //  - correos DUOC  → admin
-      //  - Gmail u otros → perfilCliente
-      const target =
-        rol === 'admin'
-          ? './perfilAdmin.html'
-          : './perfilCliente.html';
-
-      // avisar a la navbar u otros scripts
+      // Avisar a navbar / otros scripts
       window.dispatchEvent(
         new CustomEvent('auth:changed', { detail: { user: userData } })
       );
+
+      // Redirección:
+      //  - admin (dominio DUOC o rol admin) → perfilAdmin.html
+      //  - resto → perfilCliente.html
+      const isAdmin = rol === 'admin';
+      const target = isAdmin
+        ? './perfilAdmin.html'
+        : './perfilCliente.html';
 
       setTimeout(() => {
         window.location.href = target;
       }, 800);
     } catch (err) {
-      show(err?.message || '❌ No se pudo iniciar sesión. Verifica tus datos.');
+      // Mensajes coherentes con reglas del caso
+      const msg =
+        err?.code === 'auth/user-not-found'
+          ? 'No existe una cuenta con este correo.'
+          : err?.code === 'auth/wrong-password'
+          ? 'Contraseña incorrecta.'
+          : err?.message || '❌ No se pudo iniciar sesión. Verifica tus datos.';
+
+      show(msg, 'danger');
     }
   });
 });

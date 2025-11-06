@@ -1,56 +1,54 @@
 /* ==========================================================
    🌿 HUERTOHOGAR - CONEXIÓN LOCAL DE FUENTES
-   ==========================================================
-   Este archivo carga las fuentes descargadas (.ttf)
-   desde la carpeta /assets/fonts/ para usarlas sin Internet.
-   - Montserrat → texto general (moderna y legible)
-   - Playfair Display → títulos (elegante y clásica)
    ========================================================== */
 
-/* ------------------ MONTSERRAT ------------------ */
-/*Montserrat: Una fuente sans-serif moderna y limpia para texto general,*/
-/* Regular */
+/* ------------------ MONTSERRAT (variable) ------------------ */
+/* Archivo real: Montserrat-VariableFont_wght.ttf */
 @font-face {
   font-family: "Montserrat";
-  src: url("./Montserrat-Regular.ttf") format("truetype");
-  font-weight: 400;
+  src: url("./Montserrat-VariableFont_wght.ttf") format("truetype");
+  font-weight: 100 900;      /* rango de pesos para variable font */
   font-style: normal;
+  font-display: swap;
 }
 
-/* Italic (opcional) */
+/* Italic */
 @font-face {
   font-family: "Montserrat";
   src: url("./Montserrat-Italic-VariableFont_wght.ttf") format("truetype");
-  font-weight: 400;
+  font-weight: 100 900;
   font-style: italic;
+  font-display: swap;
 }
 
-/* ------------------ PLAYFAIR DISPLAY ------------------ */
-/*Playfair Display: Una fuente serif elegante y clásica para encabezados y títulos*/
-/* Regular */
+/* ------------------ PLAYFAIR DISPLAY (variable) ------------------ */
+/* Archivo real: PlayfairDisplay-VariableFont_wght.ttf */
 @font-face {
   font-family: "Playfair Display";
   src: url("./PlayfairDisplay-VariableFont_wght.ttf") format("truetype");
-  font-weight: 400;
+  font-weight: 100 900;
   font-style: normal;
+  font-display: swap;
 }
 
 /* Italic */
 @font-face {
   font-family: "Playfair Display";
   src: url("./PlayfairDisplay-Italic-VariableFont_wght.ttf") format("truetype");
-  font-weight: 400;
+  font-weight: 100 900;
   font-style: italic;
+  font-display: swap;
 }
 
 /* ------------------ APLICACIÓN GENERAL ------------------ */
-/* Montserrat será la fuente base de toda la web */
+
+/* Montserrat → base del sitio */
 body {
   font-family: "Montserrat", sans-serif;
   font-weight: 400;
 }
 
-/* Playfair Display se aplica en títulos y encabezados */
+/* Playfair Display → títulos */
 h1, h2, h3, h4, h5 {
   font-family: "Playfair Display", serif;
   font-weight: 400;

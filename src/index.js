@@ -1,5 +1,7 @@
 import { addUser } from './services/firestoreService';
-import { validarRun, validarCorreo, esMayorEdad } from './utils/scripts.js';
+
+import { validarRun, validarCorreo, esMayorEdad } from "./utils/scripts.js";
+
 
 
 

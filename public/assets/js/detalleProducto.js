@@ -1,7 +1,7 @@
 import { PRODUCTOS } from './data.js';
 import { Cart } from './cart.js';
 
-const qs = new URLSearchParams(window.AnimationEffectlocation.search);
+const qs = new URLSearchParams(window.location.search);
 const id = qs.get('id');
 const p = PRODUCTOS.find(x => x.id === id);
 if(!p) { /* podrías redirigir a productos */ }

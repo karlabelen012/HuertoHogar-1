@@ -1,537 +1,291 @@
-// (Opcional) intenta usar tu módulo de carrito si lo tienes.
-let Cart = null;
-try {
-  const mod = await import('./cart.js');
-  Cart = mod?.Cart || null;
-} catch (_) {}
+// ==========================================================
+// 🌿 HUERTO HOGAR - CHECKOUT COMPLETO (sin scripts en HTML)
+// ==========================================================
 
-// ----------------- Utils -----------------
-const $  = (s) => document.querySelector(s);
-const $$ = (s) => document.querySelectorAll(s);
+import { db } from "./firebase.js";  // 👈 solo usamos db
+
+import {
+  addDoc,
+  collection,
+  updateDoc,
+  doc,
+  serverTimestamp,
+} from "https://www.gstatic.com/firebasejs/10.12.3/firebase-firestore.js";
+
+const $ = (s) => document.querySelector(s);
+// ❗ AQUÍ VIENE EL CAMBIO IMPORTANTE DEL CARRITO:
+const CART_KEY = "hh_cart";   // 👈 antes tenías "carrito", por eso estaba vacío
+
+// -------------------- MONEDA --------------------
 const clp = (n) =>
-  Number(n || 0).toLocaleString('es-CL', {
-    style: 'currency',
-    currency: 'CLP',
-    maximumFractionDigits: 0
+  Number(n || 0).toLocaleString("es-CL", {
+    style: "currency",
+    currency: "CLP",
+    maximumFractionDigits: 0,
   });
 
-const StorageCart = {
-  key: 'hh_cart',
-  get() {
-    try {
-      return JSON.parse(localStorage.getItem(this.key) || '[]');
-    } catch {
-      return [];
-    }
-  },
-  set(items) {
-    localStorage.setItem(this.key, JSON.stringify(items || []));
-    window.dispatchEvent(new Event('storage'));
+// -------------------- CARRITO --------------------
+function getCart() {
+  try {
+    return JSON.parse(localStorage.getItem(CART_KEY)) || [];
+  } catch {
+    return [];
   }
-};
-
-// ----------------- Normalización carrito -----------------
-function getItems() {
-  if (Cart?.items) return Cart.items();
-  if (Array.isArray(window.carritoGlobal)) return window.carritoGlobal;
-  return StorageCart.get();
-}
-function setItems(items) {
-  if (Cart?.setAll) return Cart.setAll(items);
-  if (Array.isArray(window.carritoGlobal)) window.carritoGlobal = items;
-  StorageCart.set(items);
-}
-function setQty(id, qty) {
-  qty = Math.max(1, parseInt(qty || 1, 10));
-  if (Cart?.setQty) return Cart.setQty(id, qty);
-  const items = getItems().map((it) =>
-    it.id === id ? { ...it, cantidad: qty } : it
-  );
-  setItems(items);
-}
-function removeItem(id) {
-  if (Cart?.remove) return Cart.remove(id);
-  const items = getItems().filter((it) => it.id !== id);
-  setItems(items);
 }
 function clearCart() {
-  if (Cart?.clear) return Cart.clear();
-  setItems([]);
-}
-function getTotal() {
-  if (Cart?.total) return Cart.total();
-  return getItems().reduce(
-    (acc, it) => acc + Number(it.precio) * Number(it.cantidad || 1),
-    0
-  );
-}
-function refreshBadge() {
-  const el = $('#cartAmount');
-  if (el) el.textContent = clp(getTotal());
+  localStorage.removeItem(CART_KEY);
 }
 
-// ----------------- DOM principal checkout -----------------
-const tbody   = $('#tbodyCarrito');
-const totalEl = $('#txtTotal');
-const btnPay  = $('#btnPagar');
-const paymentSection = document.getElementById('paymentSection');
+// -------------------- RENDER TABLA --------------------
+function renderCheckout() {
+  const tbody = $("#tbodyCarrito");
+  const totalTxt = $("#txtTotal");
+  const btnPagar = $("#btnPagar");
+  const cart = getCart();
 
-// ----------------- Render en checkout.html -----------------
-function renderCheckoutTable() {
-  const items = getItems();
-  if (!tbody) return;
+  if (!tbody || !totalTxt || !btnPagar) return;
 
-  if (!items.length) {
-    tbody.innerHTML = `
-      <tr>
-        <td colspan="6" class="text-center text-muted py-4">
-          Tu carrito está vacío 🛒
-        </td>
-      </tr>`;
-  } else {
-    tbody.innerHTML = items
-      .map((it) => {
-        const cant = Number(it.cantidad || 1);
-        const sub  = cant * Number(it.precio || 0);
-        return `
-          <tr data-id="${it.id}">
-            <td>
-              <img src="${it.img || ''}" alt="${it.nombre || ''}"
-                   class="rounded" style="width:60px;height:60px;object-fit:cover;">
-            </td>
-            <td>${it.nombre || ''}</td>
-            <td class="text-end">${clp(it.precio)}</td>
-            <td class="text-center">
-              <div class="input-group input-group-sm" style="max-width:160px;margin:auto;">
-                <button class="btn btn-outline-secondary btn-minus" type="button">−</button>
-                <input type="number" min="1" class="form-control text-center qty" value="${cant}">
-                <button class="btn btn-outline-secondary btn-plus" type="button">+</button>
-              </div>
-            </td>
-            <td class="text-end subtotal">${clp(sub)}</td>
-            <td class="text-end">
-              <button class="btn btn-link text-danger p-0 btn-remove" title="Eliminar">✕</button>
-            </td>
-          </tr>
-        `;
-      })
-      .join('');
-  }
-
-  const total = getTotal();
-  if (totalEl) totalEl.textContent = `Total a pagar: ${clp(total)}`;
-  if (btnPay)
-    btnPay.textContent = payFormInjected
-      ? `Confirmar pago ${clp(total)}`
-      : `Pagar ahora ${clp(total)}`;
-  refreshBadge();
-}
-
-// Eventos tabla (checkout.html)
-tbody?.addEventListener('click', (e) => {
-  const tr = e.target.closest('tr[data-id]');
-  if (!tr) return;
-  const id = tr.dataset.id;
-
-  if (e.target.classList.contains('btn-remove')) {
-    removeItem(id);
-    renderCheckoutTable();
+  if (!cart.length) {
+    tbody.innerHTML =
+      "<tr><td colspan='6' class='text-center text-muted py-3'>No hay productos en el carrito 🛒</td></tr>";
+    totalTxt.textContent = "Total a pagar: $0";
+    btnPagar.disabled = true;
     return;
   }
+
+  tbody.innerHTML = cart
+    .map(
+      (p) => `
+      <tr>
+        <td><img src="${p.imagen ||
+          p.img}" style="width:60px;height:60px;object-fit:cover" class="rounded"></td>
+        <td>${p.nombre}</td>
+        <td class="text-end">${clp(p.precio)}</td>
+        <td class="text-center">${p.cantidad}</td>
+        <td class="text-end">${clp(p.precio * p.cantidad)}</td>
+        <td></td>
+      </tr>`
+    )
+    .join("");
+
+  const total = cart.reduce((acc, p) => acc + p.precio * p.cantidad, 0);
+  totalTxt.textContent = `Total a pagar: ${clp(total)}`;
+  btnPagar.textContent = `Pagar ahora ${clp(total)}`;
+}
+
+// -------------------- VALIDACIONES --------------------
+function validarCliente() {
+  const nombre = $("#inpNombre")?.value.trim();
+  const apellidos = $("#inpApellidos")?.value.trim();
+  const correo = $("#inpCorreo")?.value.trim();
+  const calle = $("#inpCalle")?.value.trim();
+  const region = $("#region")?.value;
+  const comuna = $("#comuna")?.value;
 
   if (
-    e.target.classList.contains('btn-plus') ||
-    e.target.classList.contains('btn-minus')
+    !nombre ||
+    !apellidos ||
+    !correo.includes("@") ||
+    !calle ||
+    !region ||
+    !comuna
   ) {
-    const input = tr.querySelector('input.qty');
-    let v = parseInt(input.value || '1', 10);
-    v = e.target.classList.contains('btn-plus')
-      ? v + 1
-      : Math.max(1, v - 1);
-    input.value = v;
-    setQty(id, v);
-    renderCheckoutTable();
-  }
-});
-tbody?.addEventListener('change', (e) => {
-  if (!e.target.classList.contains('qty')) return;
-  const tr = e.target.closest('tr[data-id]');
-  const id = tr.dataset.id;
-  const v = Math.max(1, parseInt(e.target.value || '1', 10));
-  e.target.value = v;
-  setQty(id, v);
-  renderCheckoutTable();
-});
-
-// ----------------- Autofill de usuario -----------------
-function readUser() {
-  try {
-    const u1 = JSON.parse(localStorage.getItem('hh_user') || 'null');
-    if (u1) return u1;
-    const auth = JSON.parse(localStorage.getItem('hh_auth') || 'null');
-    if (auth?.user) return auth.user;
-  } catch {}
-  return null;
-}
-function autofillUser() {
-  const u = readUser();
-  if (!u) return;
-  const set = (sel, val) => {
-    const el = $(sel);
-    if (el && val) el.value = val;
-  };
-
-  set('#inpNombre', u.nombre);
-  set('#inpApellidos', u.apellidos);
-  set('#inpCorreo', u.email);
-  set('#inpCalle', u.calle || u.direccion);
-  set('#inpDepto', u.depto);
-
-  if (u.region && $('#selRegion')) $('#selRegion').value = u.region;
-  if (u.comuna && $('#selComuna')) $('#selComuna').value = u.comuna;
-  const ind = u.indicaciones || u.referencias;
-  if (ind && $('#txtIndicaciones')) $('#txtIndicaciones').value = ind;
-}
-
-// ----------------- Validaciones formulario usuario -----------------
-function markInvalid(el, msg = '') {
-  if (!el) return;
-  el.classList.add('is-invalid');
-  let fb = el.parentElement?.querySelector('.invalid-feedback');
-  if (!fb) {
-    fb = document.createElement('div');
-    fb.className = 'invalid-feedback';
-    el.parentElement?.appendChild(fb);
-  }
-  fb.textContent = msg || 'Campo requerido';
-}
-function clearInvalid(sel) {
-  $$(sel).forEach((el) => {
-    el.classList.remove('is-invalid');
-    const fb = el.parentElement?.querySelector('.invalid-feedback');
-    if (fb) fb.textContent = '';
-  });
-}
-function validateUserForm() {
-  clearInvalid('input, select, textarea');
-
-  const nombre    = $('#inpNombre');
-  const apellidos = $('#inpApellidos');
-  const correo    = $('#inpCorreo');
-  const calle     = $('#inpCalle');
-  const region    = $('#selRegion');
-  const comuna    = $('#selComuna');
-
-  let ok = true;
-
-  if (!nombre?.value.trim())    { markInvalid(nombre); ok = false; }
-  if (!apellidos?.value.trim()) { markInvalid(apellidos); ok = false; }
-
-  const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(correo?.value || '');
-  if (!emailOk) { markInvalid(correo, 'Correo no válido'); ok = false; }
-
-  if (!calle?.value.trim())     { markInvalid(calle); ok = false; }
-  if (!region?.value?.trim())   { markInvalid(region); ok = false; }
-  if (!comuna?.value?.trim())   { markInvalid(comuna); ok = false; }
-
-  if (!ok) {
-    const first = document.querySelector('.is-invalid');
-    first?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-  }
-  return ok;
-}
-
-// ----------------- UI del pago -----------------
-let payFormInjected = false;
-
-// ----------------- Validación de tarjeta -----------------
-function luhnValid(numStr) {
-  const s = numStr.replace(/\s+/g, '');
-  if (!/^\d{13,19}$/.test(s)) return false;
-  let sum = 0,
-    alt = false;
-  for (let i = s.length - 1; i >= 0; i--) {
-    let n = +s[i];
-    if (alt) {
-      n *= 2;
-      if (n > 9) n -= 9;
-    }
-    sum += n;
-    alt = !alt;
-  }
-  return sum % 10 === 0;
-}
-function expiryValid(mmYY) {
-  if (!/^\d{2}\/\d{2}$/.test(mmYY)) return false;
-  const [mm, yy] = mmYY.split('/').map((x) => +x);
-  if (mm < 1 || mm > 12) return false;
-  const year = 2000 + yy;
-  const now = new Date();
-  const exp = new Date(year, mm, 0, 23, 59, 59);
-  return exp >= new Date(now.getFullYear(), now.getMonth(), 1);
-}
-
-// ✅ ÚNICA versión de ensurePaymentForm (combina ambas)
-function ensurePaymentForm() {
-  if (payFormInjected) return;
-
-  // 1) Si ya existe sección de pago en el HTML (con id="paymentSection")
-  if (paymentSection) {
-    paymentSection.classList.remove('d-none');
-    payFormInjected = true;
-
-    const num = document.getElementById('cardNumber');
-    const exp =
-      document.getElementById('cardExp') ||
-      document.getElementById('cardExpiry');
-    const cvv =
-      document.getElementById('cardCvv') ||
-      document.getElementById('cardCVV');
-
-    num?.addEventListener('input', () => {
-      const digits = num.value.replace(/\D/g, '').slice(0, 16);
-      num.value = digits.replace(/(\d{4})(?=\d)/g, '$1 ');
-    });
-    exp?.addEventListener('input', () => {
-      const digits = exp.value.replace(/\D/g, '').slice(0, 4);
-      exp.value =
-        digits.length <= 2
-          ? digits
-          : digits.slice(0, 2) + '/' + digits.slice(2);
-    });
-    cvv?.addEventListener('input', () => {
-      cvv.value = cvv.value.replace(/\D/g, '').slice(0, 4);
-    });
-
-    if (btnPay) btnPay.textContent = `Confirmar pago ${clp(getTotal())}`;
-    paymentSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    return;
-  }
-
-  // 2) Si no existe en el HTML, la creamos debajo del total
-  const totalWrap = totalEl?.parentElement;
-  const section = document.createElement('section');
-  section.className = 'mt-5';
-  section.innerHTML = `
-    <h5 class="fw-bold">Pago con tarjeta</h5>
-    <p class="text-muted">Ingresa los datos de tu tarjeta para completar la compra.</p>
-    <div class="row g-3">
-      <div class="col-md-6">
-        <label class="form-label small">Titular de la tarjeta*</label>
-        <input type="text" id="cardName" class="form-control" placeholder="Nombre como aparece en la tarjeta">
-      </div>
-      <div class="col-md-6">
-        <label class="form-label small">Número de tarjeta*</label>
-        <input type="text" id="cardNumber" inputmode="numeric" maxlength="19"
-               class="form-control" placeholder="XXXX XXXX XXXX XXXX">
-      </div>
-      <div class="col-md-4">
-        <label class="form-label small">Vencimiento* (MM/AA)</label>
-        <input type="text" id="cardExpiry" class="form-control" placeholder="MM/AA" maxlength="5">
-      </div>
-      <div class="col-md-4">
-        <label class="form-label small">CVV*</label>
-        <input type="password" id="cardCVV" class="form-control" maxlength="4"
-               inputmode="numeric" placeholder="***">
-      </div>
-    </div>
-  `;
-  totalWrap?.after(section);
-  payFormInjected = true;
-
-  const num = section.querySelector('#cardNumber');
-  const exp = section.querySelector('#cardExpiry');
-  const cvv = section.querySelector('#cardCVV');
-
-  num?.addEventListener('input', () => {
-    const digits = num.value.replace(/\D/g, '').slice(0, 16);
-    num.value = digits.replace(/(\d{4})(?=\d)/g, '$1 ');
-  });
-  exp?.addEventListener('input', () => {
-    const digits = exp.value.replace(/\D/g, '').slice(0, 4);
-    exp.value =
-      digits.length <= 2 ? digits : digits.slice(0, 2) + '/' + digits.slice(2);
-  });
-  cvv?.addEventListener('input', () => {
-    cvv.value = cvv.value.replace(/\D/g, '').slice(0, 4);
-  });
-
-  if (btnPay) btnPay.textContent = `Confirmar pago ${clp(getTotal())}`;
-  section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-}
-
-// ✅ ÚNICA versión de validatePayment (acepta todos los IDs)
-function validatePayment() {
-  clearInvalid('#cardName, #cardNumber, #cardExpiry, #cardExp, #cardCVV, #cardCvv');
-
-  const name = document.getElementById('cardName');
-  const num  = document.getElementById('cardNumber');
-  const exp  =
-    document.getElementById('cardExp') ||
-    document.getElementById('cardExpiry');
-  const cvv  =
-    document.getElementById('cardCvv') ||
-    document.getElementById('cardCVV');
-
-  let ok = true;
-
-  if (!name?.value.trim()) {
-    markInvalid(name);
-    ok = false;
-  }
-
-  const rawNum = (num?.value || '').replace(/\s+/g, '');
-  if (!luhnValid(rawNum)) {
-    markInvalid(num, 'Número de tarjeta no válido');
-    ok = false;
-  }
-
-  if (!expiryValid(exp?.value || '')) {
-    markInvalid(exp, 'Fecha inválida o expirada');
-    ok = false;
-  }
-
-  if (!/^\d{3,4}$/.test(cvv?.value || '')) {
-    markInvalid(cvv, 'CVV inválido');
-    ok = false;
-  }
-
-  if (!ok) {
-    saveOrderSnapshot('ERROR');
-    window.location.href = './pagoError.html';
+    alert("⚠️ Completa todos los campos obligatorios.");
     return false;
   }
   return true;
 }
 
-// ----------------- Snapshot de orden -----------------
-function buildUserFromForm() {
-  return {
-    nombre: $('#inpNombre')?.value?.trim() || '',
-    apellidos: $('#inpApellidos')?.value?.trim() || '',
-    email: $('#inpCorreo')?.value?.trim() || '',
-    calle: $('#inpCalle')?.value?.trim() || '',
-    depto: $('#inpDepto')?.value?.trim() || '',
-    region: $('#selRegion')?.value || '',
-    comuna: $('#selComuna')?.value || '',
-    indicaciones: $('#txtIndicaciones')?.value?.trim() || ''
-  };
-}
-function genOrderNumber() {
-  const n = Date.now().toString().slice(-9);
-  return `#${n}`;
-}
-function saveOrderSnapshot(status = 'OK') {
-  const formUser = buildUserFromForm(); // datos escritos en checkout
-  const current  = readUser();          // usuario logueado (hh_user / hh_auth)
+function validarTarjeta() {
+  const num = $("#cardNumber")?.value.replace(/\s+/g, "");
+  const exp = $("#cardExp")?.value.trim();
+  const cvv = $("#cardCvv")?.value.trim();
 
-  const order = {
-    id: genOrderNumber(),
-    status,
-    userId: current?.id || null,
-    email: formUser.email || current?.email || '',
-    user: formUser,
-    items: getItems(),
-    total: getTotal(),
-    when: new Date().toISOString()
-  };
-
-  localStorage.setItem('hh_last_order', JSON.stringify(order));
-
-  let all = [];
-  try {
-    all = JSON.parse(localStorage.getItem('hh_orders') || '[]');
-  } catch {}
-  all.push(order);
-  localStorage.setItem('hh_orders', JSON.stringify(all));
-
-  return order;
-}
-function readOrderSnapshot() {
-  try {
-    return JSON.parse(localStorage.getItem('hh_last_order') || 'null');
-  } catch {
-    return null;
+  if (!num || num.length !== 16) {
+    alert("Número de tarjeta inválido");
+    return false;
   }
+  if (!/^\d{2}\/\d{2}$/.test(exp)) {
+    alert("Formato de vencimiento inválido (MM/AA)");
+    return false;
+  }
+  const [mm, aa] = exp.split("/").map(Number);
+  const hoy = new Date();
+  const valido =
+    aa + 2000 > hoy.getFullYear() ||
+    (aa + 2000 === hoy.getFullYear() && mm >= hoy.getMonth() + 1);
+  if (!valido) {
+    alert("Tarjeta vencida");
+    return false;
+  }
+  if (!cvv || cvv.length !== 3) {
+    alert("CVV inválido");
+    return false;
+  }
+  return true;
 }
 
-// ----------------- Render de pagoCorrecto / pagoError -----------------
-function renderResultPage(isError) {
-  const data = readOrderSnapshot();
+// -------------------- GUARDAR PEDIDO --------------------
+async function guardarPedido(data) {
+  const ref = await addDoc(collection(db, "pedidos"), data);
+  await updateDoc(doc(db, "pedidos", ref.id), { idPedido: ref.id });
+  return ref.id;
+}
+
+// -------------------- PAGO --------------------
+async function procesarPago() {
+  if (!validarCliente()) return;
+  if (!validarTarjeta()) {
+    localStorage.setItem("estadoPago", "error");
+    window.location.href = "./pagoError.html";
+    return;
+  }
+
+  const carrito = getCart();
+  if (!carrito.length) {
+    alert("Carrito vacío.");
+    return;
+  }
+
+  const total = carrito.reduce((acc, p) => acc + p.precio * p.cantidad, 0);
+
+  const orden = {
+    numeroOrden:
+      "ORD" + Date.now().toString().slice(-6) + Math.floor(Math.random() * 90),
+    fecha: new Date(),
+    fechaServidor: serverTimestamp(),
+    cliente: {
+      nombre: $("#inpNombre").value.trim(),
+      apellidos: $("#inpApellidos").value.trim(),
+      correo: $("#inpCorreo").value.trim(),
+    },
+    direccion: {
+      calle: $("#inpCalle").value.trim(),
+      departamento: $("#inpDepto").value.trim(),
+      region: $("#region").value,
+      comuna: $("#comuna").value,
+      indicaciones: $("#txtIndicaciones").value.trim(),
+    },
+    productos: carrito,
+    total,
+    estado: "pendiente",
+    metodoPago: "tarjeta",
+  };
+
+  // Simulación de aprobación/rechazo (para pruebas)
+  const exito = Math.random() > 0.15;
+  const id = await guardarPedido(orden);
+  orden.idPedido = id;
+  orden.pagoExitoso = exito;
+
+  localStorage.setItem("ultimaCompra", JSON.stringify(orden));
+  clearCart();
+
+  localStorage.setItem("estadoPago", exito ? "ok" : "error");
+  window.location.href = exito ? "./pagoCorrecto.html" : "./pagoError.html";
+}
+
+// -------------------- RENDER DETALLE (OK/ERROR) --------------------
+function renderResultadoPago() {
+  const estado = localStorage.getItem("estadoPago");
+  const data = JSON.parse(localStorage.getItem("ultimaCompra") || "null");
   if (!data) return;
 
-  const h   = $('#resultTitle');
-  const nro = $('#orderNumber');
-  if (h) {
-    h.textContent = isError
-      ? 'No se pudo realizar el pago.'
-      : 'Se ha realizado la compra.';
-  }
-  if (nro) nro.textContent = data.id;
+  const isOk = estado === "ok";
+  const page = window.location.pathname.split("/").pop();
 
-  const set = (sel, val) => {
-    const el = $(sel);
-    if (el) el.value = val || '';
-  };
-  set('#inpNombre',    data.user?.nombre);
-  set('#inpApellidos', data.user?.apellidos);
-  set('#inpCorreo',    data.user?.email);
-  set('#inpCalle',     data.user?.calle);
-  set('#inpDepto',     data.user?.depto);
-  if ($('#selRegion')) $('#selRegion').value = data.user?.region || '';
-  if ($('#selComuna')) $('#selComuna').value = data.user?.comuna || '';
-  set('#txtIndicaciones', data.user?.indicaciones);
+  if (
+    (isOk && page !== "pagoCorrecto.html") ||
+    (!isOk && page !== "pagoError.html")
+  )
+    return;
 
-  const tbodyRes = $('#tbodyResumen');
-  if (tbodyRes) {
-    tbodyRes.innerHTML = (data.items || [])
+  const c = data.cliente || {};
+  const d = data.direccion || {};
+  const productos = data.productos || [];
+
+  // Carga campos generales si existen
+  [
+    ["#orderId", data.idPedido || "—"],
+    ["#orderCode", data.numeroOrden || "—"],
+    ["#orderNumber", data.numeroOrden || "—"],
+    ["#totalOk", clp(data.total)],
+    ["#txtTotal", `Total pagado: ${clp(data.total)}`],
+  ].forEach(([sel, val]) => {
+    const el = document.querySelector(sel);
+    if (el) el.textContent = val;
+  });
+
+  // Datos cliente (si hay inputs)
+  [
+    ["#cNombre", c.nombre],
+    ["#cApellidos", c.apellidos],
+    ["#cCorreo", c.correo],
+    ["#cCalle", d.calle],
+    ["#cDepto", d.departamento],
+    ["#cRegion", d.region],
+    ["#cComuna", d.comuna],
+    ["#cInd", d.indicaciones],
+    ["#inpNombre", c.nombre],
+    ["#inpApellidos", c.apellidos],
+    ["#inpCorreo", c.correo],
+    ["#inpCalle", d.calle],
+    ["#inpDepto", d.departamento],
+    ["#txtIndicaciones", d.indicaciones],
+    ["#region", d.region],
+    ["#comuna", d.comuna],
+  ].forEach(([sel, val]) => {
+    const el = document.querySelector(sel);
+    if (el && val !== undefined) el.value = val;
+  });
+
+  // Render productos
+  const tb = document.querySelector("#tbodyOk, #tbodyResumen");
+  if (tb)
+    tb.innerHTML = productos
       .map(
-        (it) => `
-        <tr>
-          <td>
-            <div class="rounded bg-light"
-                 style="width:60px;height:60px;background-image:url('${it.img || ''}');
-                        background-size:cover;background-position:center;"></div>
-          </td>
-          <td>${it.nombre || ''}</td>
-          <td class="text-end">${clp(it.precio)}</td>
-          <td class="text-center">${it.cantidad || 1}</td>
-          <td class="text-end">${clp((it.cantidad || 1) * Number(it.precio || 0))}</td>
-        </tr>
-      `
+        (p) => `
+      <tr>
+        <td><img src="${p.imagen ||
+          p.img}" style="width:60px;height:60px;object-fit:cover" class="rounded"></td>
+        <td>${p.nombre}</td>
+        <td class="text-end">${clp(p.precio)}</td>
+        <td class="text-center">${p.cantidad}</td>
+        <td class="text-end">${clp(p.precio * p.cantidad)}</td>
+      </tr>`
       )
-      .join('');
-  }
+      .join("");
 
-  const totalTxt = $('#txtTotal');
-  if (totalTxt) totalTxt.textContent = `Total pagado: ${clp(data.total)}`;
+  // Botones específicos
+  const btnPDF = document.querySelector("#btnPDF");
+  const btnEmail = document.querySelector("#btnEmail");
+  const btnVolver = document.querySelector("#btnVolverPagar");
 
-  $('#btnVolverPagar')?.addEventListener('click', () => {
-    window.location.href = './checkout.html';
-  });
-  $('#btnImprimir')?.addEventListener('click', () => window.print());
-  $('#btnEnviarEmail')?.addEventListener('click', () => {
-    alert('📧 (demo) Boleta enviada a ' + (data.user?.email || 'tu correo'));
-  });
+  if (btnPDF)
+    btnPDF.addEventListener("click", () => window.print());
+
+  if (btnEmail)
+    btnEmail.addEventListener("click", () =>
+      alert(`📧 Boleta enviada a ${c.correo}`)
+    );
+
+  if (btnVolver)
+    btnVolver.addEventListener("click", () => {
+      window.location.href = "./checkout.html";
+    });
 }
 
-// ----------------- Sincronización -----------------
-document.addEventListener('visibilitychange', () => {
-  if (!document.hidden) renderCheckoutTable();
-});
-window.addEventListener('storage', () => renderCheckoutTable());
+// -------------------- INIT --------------------
+document.addEventListener("DOMContentLoaded", () => {
+  const file = window.location.pathname.split("/").pop();
 
-// ----------------- Init (checkout.html / resultado) -----------------
-document.addEventListener('DOMContentLoaded', () => {
-  if (tbody) {
-    autofillUser();
-    renderCheckoutTable();
+  if (file === "checkout.html") {
+    renderCheckout();
+    const btn = $("#btnPagar");
+    if (btn) btn.addEventListener("click", procesarPago);
   }
 
-  const path = window.location.pathname;
-  if (path.endsWith('pagoCorrecto.html')) {
-    renderResultPage(false);
-  } else if (path.endsWith('pagoError.html')) {
-    renderResultPage(true);
+  if (file === "pagoCorrecto.html" || file === "pagoError.html") {
+    renderResultadoPago();
   }
 });
