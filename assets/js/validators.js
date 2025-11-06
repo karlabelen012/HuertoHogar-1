@@ -20,8 +20,11 @@ export const validatePhoneCL = v =>
   REGEX.phoneCL.test(String(v || '').trim());
 
 // ========== DOMINIO PERMITIDO ==========
-export const validateDomain = email =>
-  REGEX.domainAllowed.test(String(email || '').trim());
+// en vez de export, la cuelgas en window
+window.esCorreoValido = function (correo) {
+  const regex = /^[\w.-]+@(gmail\.com|duoc\.cl|profesor\.duoc\.cl)$/i;
+  return regex.test(correo);
+};
 
 // ========== MAYOR DE EDAD ==========
 /**
