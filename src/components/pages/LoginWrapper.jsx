@@ -12,7 +12,7 @@ const LoginWrapper = () => {
     if (usuario) {
       setUser(usuario); // Actualizar contexto
       // Redirigir a la página correspondiente según el rol
-      history.push(usuario.rol === "admin" ? "/perfil-admin" : "/perfil-cliente");
+      history.push(usuario.rol === "admin" ? "/perfilAdmin" : "/perfilCliente");
     }
   }, [setUser, history]); // Solo se ejecuta una vez al montar el componente
 
