@@ -2,10 +2,6 @@ import { addUser } from './services/firestoreService';
 import { validarRun, validarCorreo, esMayorEdad } from './utils/scripts.js';
 
 
-function esPaginaEstatica() {
-  return window.location.pathname.includes('.html') || 
-         window.location.pathname.includes('/assets/');
-}
 
 // Espera que el DOM esté listo
 document.addEventListener("DOMContentLoaded", () => {
