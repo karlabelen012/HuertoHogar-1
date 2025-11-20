@@ -22,6 +22,7 @@ const clp = n =>
 // ----------------------------------------------------------
 // 🔹 Cargar productos desde Firestore
 // ----------------------------------------------------------
+
 async function cargarProductos() {
   if (!grid) return;
 
